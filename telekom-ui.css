@@ -1,7 +1,7 @@
 :root { --telekom-magenta:#e20074; --telekom-magenta-dark:#b0005a; --telekom-gray-100:#f5f5f5; --telekom-gray-200:#e3e3e3; --telekom-gray-900:#222; --white:#fff; }
 body{margin:0;font-family:Segoe UI,Arial;background:var(--telekom-gray-100);} 
 .topnav{background:var(--telekom-magenta);color:#fff;padding:12px 20px;font-weight:600;font-size:20px;}
-.sidebar{position:fixed;left:0;top:60px;width:260px;height:100%;background:#fff;border-right:3px solid var(--telekom-magenta);padding-top:20px;box-shadow:0 0 10px rgba(226,0,116,0.15);} 
+.sidebar{position:fixed;left:0;top:60px;width:320px;height:100%;background:#fff;border-right:3px solid var(--telekom-magenta);padding-top:20px;box-shadow:0 0 10px rgba(226,0,116,0.15);} 
 .sidebar a{display:block;padding:12px 20px;color:var(--telekom-magenta-dark);font-weight:600;text-decoration:none;border-left:5px solid transparent;} 
 .sidebar a:hover{background:var(--telekom-gray-200);border-left:5px solid var(--telekom-magenta);} 
 .main-content{margin-left:280px;padding:30px;} 

@@ -11,3 +11,32 @@ h1{border-bottom:4px solid var(--telekom-magenta);padding-bottom:10px;color:var(
 .github-button:hover{background:var(--telekom-magenta-dark);transform:translateY(-3px);} 
 @media(max-width:900px){.sidebar{width:200px;}.main-content{margin-left:220px;}} 
 @media(max-width:700px){.sidebar{display:none;}.main-content{margin-left:20px;}}
+/* SEARCH BOX */
+.search-input {
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    border: 2px solid var(--telekom-magenta);
+    border-radius: 6px;
+    font-size: 14px;
+    display: block;
+}
+
+/* SEARCH RESULTS */
+.search-results {
+    margin-top: 10px;
+}
+
+.search-item {
+    background: var(--telekom-gray-200);
+    padding: 10px;
+    margin: 8px 0;
+    border-left: 4px solid var(--telekom-magenta);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-item:hover {
+    background: var(--telekom-magenta);
+    color: white;
+}

@@ -22,3 +22,27 @@
     transform: translateY(-3px);
     box-shadow: 0px 6px 14px rgba(226, 0, 116, 0.55);
 }
+/* --- Large Telekom Magenta Button --- */
+.btn-container {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.github-button {
+    background: var(--telekom-magenta);
+    color: white;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0px 4px 10px rgba(226, 0, 116, 0.35);
+    transition: 0.2s ease-in-out;
+}
+
+.github-button:hover {
+    background: var(--telekom-magenta-dark);
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 14px rgba(226, 0, 116, 0.55);
+}

@@ -62,15 +62,15 @@ function runSearch(query) {
 <script>
 let kbData = [];
 
-// Betöltjük a JSON fájlokat
+// JSON betöltés
 async function loadData() {
-    try {
-        const sources = [
-            'MASTER_RAG_FULL.json',
-            'MASTER_entities.json',
-            'MASTER_relations.json'
-        ];
+    const sources = [
+        'MASTER_RAG_FULL.json',
+        'MASTER_entities.json',
+        'MASTER_relations.json'
+    ];
 
+    try {
         for (let src of sources) {
             const res = await fetch(src);
             if (res.ok) {
@@ -78,7 +78,7 @@ async function loadData() {
             }
         }
     } catch (e) {
-        console.warn("Nem sikerült betölteni a JSON adatokat:", e);
+        console.warn("JSON betöltési hiba:", e);
     }
 }
 
@@ -89,7 +89,7 @@ function highlightText(text, query) {
     return text.replace(regex, match => `<span class="highlight">${match}</span>`);
 }
 
-// Kereső logika
+// Keresés
 function runSearch(query) {
     const box = document.getElementById("searchResults");
 
@@ -104,7 +104,20 @@ function runSearch(query) {
         JSON.stringify(item).toLowerCase().includes(q)
     ).slice(0, 20);
 
+    box.innerHTML = matches.map(m => {
+        const raw = JSON.stringify(m).substring(0,150);
+        const highlighted = highlightText(raw, query);
+        return `
+            <div class="search-item">
+                <strong>${m.chunk_id || m.entity || "Találat"}</strong><br>
+                <small>${highlighted}...</small>
+            </div>
+        `;
+    }).join("");
+}
 
+// Indítás
+loadData();
 </script>
 
  .search-results {

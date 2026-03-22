@@ -57,7 +57,53 @@ function runSearch(query) {
         </div>`
     ).join("");
 }
+<script>
+let kbData = [];
 
+// Betöltjük a JSON fájlokat
+async function loadData() {
+    try {
+        const sources = [
+            'MASTER_RAG_FULL.json',
+            'MASTER_entities.json',
+            'MASTER_relations.json'
+        ];
+
+        for (let src of sources) {
+            const res = await fetch(src);
+            if (res.ok) {
+                kbData = kbData.concat(await res.json());
+            }
+        }
+    } catch (e) {
+        console.warn("Nem sikerült betölteni a JSON adatokat:", e);
+    }
+}
+
+// Highlight függvény (kiemeli a találatot)
+function highlightText(text, query) {
+    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const regex = new RegExp(escaped, "gi");
+    return text.replace(regex, match => `<span class="highlight">${match}</span>`);
+}
+
+// Kereső logika
+function runSearch(query) {
+    const box = document.getElementById("searchResults");
+
+    if (!query || query.length < 2) {
+        box.innerHTML = "";
+        return;
+    }
+
+    const q = query.toLowerCase();
+
+    // Fuzzy szűrés
+    const matches = kbData.filter(item =>
+        JSON.stringify(item).toLowerCase().includes(q)
+    ).slice(0, 20);
+
+    // Highlight beleépítése
 loadData();
 </script>
 </body></html>

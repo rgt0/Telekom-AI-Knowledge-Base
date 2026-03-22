@@ -38,7 +38,7 @@ body {
     position: fixed;
     left: 0;
     top: 60px;
-    width: 300px;               /* ✅ Szélesítve, hogy a találatok látszódjanak */
+    width: 300px;
     height: 100%;
     background: #fff;
     border-right: 3px solid var(--telekom-magenta);
@@ -61,10 +61,10 @@ body {
 }
 
 /* ───────────────────────────────────────────
-   FŐ TARTALMI TERÜLET
+   FŐ TARTALOM
 ──────────────────────────────────────────── */
 .main-content {
-    margin-left: 350px;         /* ✅ igazítva a szélesebb sidebarhoz */
+    margin-left: 350px;
     padding: 30px;
 }
 
@@ -75,7 +75,7 @@ h1 {
 }
 
 /* ───────────────────────────────────────────
-   NAGY TELEKOM GOMB
+   GITHUB GOMB
 ──────────────────────────────────────────── */
 .btn-container {
     text-align: left;
@@ -114,11 +114,11 @@ h1 {
 }
 
 /* ───────────────────────────────────────────
-   KERESÉSI TALÁLATOK DOBOZA
+   KERESÉSI TALÁLATOK
 ──────────────────────────────────────────── */
 .search-results {
     margin-top: 10px;
-    max-height: 400px;          /* ✅ Görgethető találati lista */
+    max-height: 400px;
     overflow-y: auto;
     padding-left: 10px;
     padding-right: 10px;
@@ -150,7 +150,7 @@ h1 {
 }
 
 /* ───────────────────────────────────────────
-   RESZPONZÍV NÉZET
+   RESZPONZÍV
 ──────────────────────────────────────────── */
 @media(max-width: 900px) {
     .sidebar { width: 250px; }

@@ -58,6 +58,7 @@ function runSearch(query) {
         </div>`
     ).join("");
 }
+
 <script>
 let kbData = [];
 
@@ -81,7 +82,7 @@ async function loadData() {
     }
 }
 
-// Highlight függvény (kiemeli a találatot)
+// Highlight
 function highlightText(text, query) {
     const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const regex = new RegExp(escaped, "gi");
@@ -99,14 +100,27 @@ function runSearch(query) {
 
     const q = query.toLowerCase();
 
-    // Fuzzy szűrés
     const matches = kbData.filter(item =>
         JSON.stringify(item).toLowerCase().includes(q)
     ).slice(0, 20);
 
-    // Highlight beleépítése
+    box.innerHTML = matches.map(m => {
+        const raw = JSON.stringify(m).substring(0,150);
+        const highlighted = highlightText(raw, query);
+
+        return `
+            <div class="search-item">
+                <strong>${m.chunk_id || m.entity || "Találat"}</strong><br>
+                <small>${highlighted}...</small>
+            </div>
+        `;
+    }).join("");
+}
+
+// Indítás
 loadData();
 </script>
+
  .search-results {
     margin-top: 10px;
     max-height: 400px;

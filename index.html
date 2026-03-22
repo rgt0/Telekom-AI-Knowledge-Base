@@ -104,27 +104,29 @@ function runSearch(query) {
         JSON.stringify(item).toLowerCase().includes(q)
     ).slice(0, 20);
 
-    box.innerHTML = matches.map(m => {
-        const raw = JSON.stringify(m).substring(0,150);
-        const highlighted = highlightText(raw, query);
 
-        return `
-            <div class="search-item">
-                <strong>${m.chunk_id || m.entity || "Találat"}</strong><br>
-                <small>${highlighted}...</small>
-            </div>
-        `;
-    }).join("");
-}
-
-// Indítás
-loadData();
 </script>
 
  .search-results {
     margin-top: 10px;
     max-height: 400px;
-    overflow-y: auto;
+    overflow-y: // highlight + kimenet beillesztése
+box.innerHTML = matches.map(m => {
+    const raw = JSON.stringify(m).substring(0,150);
+    const highlighted = highlightText(raw, query);
+
+    return `
+        <div class="search-item">
+            <strong>${m.chunk_id || m.entity || "Találat"}</strong><br>
+            <small>${highlighted}...</small>
+        </div>
+    `;
+}).join("");
+}  // ← ez HIÁNYZOTT!
+
+// Indítás
+loadData();
+</script>;
     padding-left: 10px;
     padding-right: 10px;
 }

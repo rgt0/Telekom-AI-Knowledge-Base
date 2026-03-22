@@ -38,7 +38,7 @@ body {
     position: fixed;
     left: 0;
     top: 60px;
-    width: 320px;               /* ✅ Szélesítve, hogy a találatok látszódjanak */
+    width: 300px;               /* ✅ Szélesítve, hogy a találatok látszódjanak */
     height: 100%;
     background: #fff;
     border-right: 3px solid var(--telekom-magenta);

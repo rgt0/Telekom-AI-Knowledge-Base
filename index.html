@@ -20,4 +20,44 @@
     <h1>Üdvözöl a Telekom AI Knowledge Base Portál</h1>
     <p>Válassz a bal oldali menüből modulokat vagy dokumentációs nézetet.</p>
 </div>
+    <script>
+let kbData = [];
+
+async function loadData() {
+    try {
+        const sources = [
+            'MASTER_RAG_FULL.json',
+            'MASTER_entities.json',
+            'MASTER_relations.json'
+        ];
+
+        for (let src of sources) {
+            const r = await fetch(src);
+            if (r.ok) kbData = kbData.concat(await r.json());
+        }
+    } catch(e) { console.warn("JSON load error:", e); }
+}
+
+function runSearch(query) {
+    const box = document.getElementById("searchResults");
+    if (!query || query.length < 2) {
+        box.innerHTML = "";
+        return;
+    }
+
+    const q = query.toLowerCase();
+    const matches = kbData.filter(i =>
+        JSON.stringify(i).toLowerCase().includes(q)
+    ).slice(0, 20);
+
+    box.innerHTML = matches.map(m => 
+        `<div class='search-item'>
+            <strong>${m.chunk_id || m.entity || 'Találat'}</strong><br>
+            <small>${JSON.stringify(m).substring(0,150)}...</small>
+        </div>`
+    ).join("");
+}
+
+loadData();
+</script>
 </body></html>

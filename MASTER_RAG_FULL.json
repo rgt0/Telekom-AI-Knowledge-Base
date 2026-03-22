@@ -1,11 +1,551 @@
 [
   {
     "chunk_id": "CH_001",
-    "text": "AI rendszer bevezetése...",
+    "text": "Ez egy teszt RAG szöveg a(z) 1. elemhez.",
+    "section": "0.1",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword1"
+    ],
+    "use_case": "UC2"
+  },
+  {
+    "chunk_id": "CH_002",
+    "text": "Ez egy teszt RAG szöveg a(z) 2. elemhez.",
+    "section": "0.2",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword2"
+    ],
+    "use_case": "UC3"
+  },
+  {
+    "chunk_id": "CH_003",
+    "text": "Ez egy teszt RAG szöveg a(z) 3. elemhez.",
+    "section": "0.3",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword3"
+    ],
+    "use_case": "UC4"
+  },
+  {
+    "chunk_id": "CH_004",
+    "text": "Ez egy teszt RAG szöveg a(z) 4. elemhez.",
+    "section": "0.4",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword4"
+    ],
+    "use_case": "UC5"
+  },
+  {
+    "chunk_id": "CH_005",
+    "text": "Ez egy teszt RAG szöveg a(z) 5. elemhez.",
+    "section": "0.5",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword5"
+    ],
+    "use_case": "UC1"
+  },
+  {
+    "chunk_id": "CH_006",
+    "text": "Ez egy teszt RAG szöveg a(z) 6. elemhez.",
+    "section": "0.6",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword6"
+    ],
+    "use_case": "UC2"
+  },
+  {
+    "chunk_id": "CH_007",
+    "text": "Ez egy teszt RAG szöveg a(z) 7. elemhez.",
+    "section": "0.7",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword7"
+    ],
+    "use_case": "UC3"
+  },
+  {
+    "chunk_id": "CH_008",
+    "text": "Ez egy teszt RAG szöveg a(z) 8. elemhez.",
+    "section": "0.8",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword8"
+    ],
+    "use_case": "UC4"
+  },
+  {
+    "chunk_id": "CH_009",
+    "text": "Ez egy teszt RAG szöveg a(z) 9. elemhez.",
+    "section": "0.9",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword9"
+    ],
+    "use_case": "UC5"
+  },
+  {
+    "chunk_id": "CH_010",
+    "text": "Ez egy teszt RAG szöveg a(z) 10. elemhez.",
+    "section": "1.0",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword10"
+    ],
+    "use_case": "UC1"
+  },
+  {
+    "chunk_id": "CH_011",
+    "text": "Ez egy teszt RAG szöveg a(z) 11. elemhez.",
     "section": "1.1",
     "keywords": [
       "AI",
-      "RAG"
+      "RAG",
+      "keyword11"
+    ],
+    "use_case": "UC2"
+  },
+  {
+    "chunk_id": "CH_012",
+    "text": "Ez egy teszt RAG szöveg a(z) 12. elemhez.",
+    "section": "1.2",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword12"
+    ],
+    "use_case": "UC3"
+  },
+  {
+    "chunk_id": "CH_013",
+    "text": "Ez egy teszt RAG szöveg a(z) 13. elemhez.",
+    "section": "1.3",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword13"
+    ],
+    "use_case": "UC4"
+  },
+  {
+    "chunk_id": "CH_014",
+    "text": "Ez egy teszt RAG szöveg a(z) 14. elemhez.",
+    "section": "1.4",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword14"
+    ],
+    "use_case": "UC5"
+  },
+  {
+    "chunk_id": "CH_015",
+    "text": "Ez egy teszt RAG szöveg a(z) 15. elemhez.",
+    "section": "1.5",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword15"
+    ],
+    "use_case": "UC1"
+  },
+  {
+    "chunk_id": "CH_016",
+    "text": "Ez egy teszt RAG szöveg a(z) 16. elemhez.",
+    "section": "1.6",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword16"
+    ],
+    "use_case": "UC2"
+  },
+  {
+    "chunk_id": "CH_017",
+    "text": "Ez egy teszt RAG szöveg a(z) 17. elemhez.",
+    "section": "1.7",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword17"
+    ],
+    "use_case": "UC3"
+  },
+  {
+    "chunk_id": "CH_018",
+    "text": "Ez egy teszt RAG szöveg a(z) 18. elemhez.",
+    "section": "1.8",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword18"
+    ],
+    "use_case": "UC4"
+  },
+  {
+    "chunk_id": "CH_019",
+    "text": "Ez egy teszt RAG szöveg a(z) 19. elemhez.",
+    "section": "1.9",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword19"
+    ],
+    "use_case": "UC5"
+  },
+  {
+    "chunk_id": "CH_020",
+    "text": "Ez egy teszt RAG szöveg a(z) 20. elemhez.",
+    "section": "2.0",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword20"
+    ],
+    "use_case": "UC1"
+  },
+  {
+    "chunk_id": "CH_021",
+    "text": "Ez egy teszt RAG szöveg a(z) 21. elemhez.",
+    "section": "2.1",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword21"
+    ],
+    "use_case": "UC2"
+  },
+  {
+    "chunk_id": "CH_022",
+    "text": "Ez egy teszt RAG szöveg a(z) 22. elemhez.",
+    "section": "2.2",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword22"
+    ],
+    "use_case": "UC3"
+  },
+  {
+    "chunk_id": "CH_023",
+    "text": "Ez egy teszt RAG szöveg a(z) 23. elemhez.",
+    "section": "2.3",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword23"
+    ],
+    "use_case": "UC4"
+  },
+  {
+    "chunk_id": "CH_024",
+    "text": "Ez egy teszt RAG szöveg a(z) 24. elemhez.",
+    "section": "2.4",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword24"
+    ],
+    "use_case": "UC5"
+  },
+  {
+    "chunk_id": "CH_025",
+    "text": "Ez egy teszt RAG szöveg a(z) 25. elemhez.",
+    "section": "2.5",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword25"
+    ],
+    "use_case": "UC1"
+  },
+  {
+    "chunk_id": "CH_026",
+    "text": "Ez egy teszt RAG szöveg a(z) 26. elemhez.",
+    "section": "2.6",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword26"
+    ],
+    "use_case": "UC2"
+  },
+  {
+    "chunk_id": "CH_027",
+    "text": "Ez egy teszt RAG szöveg a(z) 27. elemhez.",
+    "section": "2.7",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword27"
+    ],
+    "use_case": "UC3"
+  },
+  {
+    "chunk_id": "CH_028",
+    "text": "Ez egy teszt RAG szöveg a(z) 28. elemhez.",
+    "section": "2.8",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword28"
+    ],
+    "use_case": "UC4"
+  },
+  {
+    "chunk_id": "CH_029",
+    "text": "Ez egy teszt RAG szöveg a(z) 29. elemhez.",
+    "section": "2.9",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword29"
+    ],
+    "use_case": "UC5"
+  },
+  {
+    "chunk_id": "CH_030",
+    "text": "Ez egy teszt RAG szöveg a(z) 30. elemhez.",
+    "section": "3.0",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword30"
+    ],
+    "use_case": "UC1"
+  },
+  {
+    "chunk_id": "CH_031",
+    "text": "Ez egy teszt RAG szöveg a(z) 31. elemhez.",
+    "section": "3.1",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword31"
+    ],
+    "use_case": "UC2"
+  },
+  {
+    "chunk_id": "CH_032",
+    "text": "Ez egy teszt RAG szöveg a(z) 32. elemhez.",
+    "section": "3.2",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword32"
+    ],
+    "use_case": "UC3"
+  },
+  {
+    "chunk_id": "CH_033",
+    "text": "Ez egy teszt RAG szöveg a(z) 33. elemhez.",
+    "section": "3.3",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword33"
+    ],
+    "use_case": "UC4"
+  },
+  {
+    "chunk_id": "CH_034",
+    "text": "Ez egy teszt RAG szöveg a(z) 34. elemhez.",
+    "section": "3.4",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword34"
+    ],
+    "use_case": "UC5"
+  },
+  {
+    "chunk_id": "CH_035",
+    "text": "Ez egy teszt RAG szöveg a(z) 35. elemhez.",
+    "section": "3.5",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword35"
+    ],
+    "use_case": "UC1"
+  },
+  {
+    "chunk_id": "CH_036",
+    "text": "Ez egy teszt RAG szöveg a(z) 36. elemhez.",
+    "section": "3.6",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword36"
+    ],
+    "use_case": "UC2"
+  },
+  {
+    "chunk_id": "CH_037",
+    "text": "Ez egy teszt RAG szöveg a(z) 37. elemhez.",
+    "section": "3.7",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword37"
+    ],
+    "use_case": "UC3"
+  },
+  {
+    "chunk_id": "CH_038",
+    "text": "Ez egy teszt RAG szöveg a(z) 38. elemhez.",
+    "section": "3.8",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword38"
+    ],
+    "use_case": "UC4"
+  },
+  {
+    "chunk_id": "CH_039",
+    "text": "Ez egy teszt RAG szöveg a(z) 39. elemhez.",
+    "section": "3.9",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword39"
+    ],
+    "use_case": "UC5"
+  },
+  {
+    "chunk_id": "CH_040",
+    "text": "Ez egy teszt RAG szöveg a(z) 40. elemhez.",
+    "section": "4.0",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword40"
+    ],
+    "use_case": "UC1"
+  },
+  {
+    "chunk_id": "CH_041",
+    "text": "Ez egy teszt RAG szöveg a(z) 41. elemhez.",
+    "section": "4.1",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword41"
+    ],
+    "use_case": "UC2"
+  },
+  {
+    "chunk_id": "CH_042",
+    "text": "Ez egy teszt RAG szöveg a(z) 42. elemhez.",
+    "section": "4.2",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword42"
+    ],
+    "use_case": "UC3"
+  },
+  {
+    "chunk_id": "CH_043",
+    "text": "Ez egy teszt RAG szöveg a(z) 43. elemhez.",
+    "section": "4.3",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword43"
+    ],
+    "use_case": "UC4"
+  },
+  {
+    "chunk_id": "CH_044",
+    "text": "Ez egy teszt RAG szöveg a(z) 44. elemhez.",
+    "section": "4.4",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword44"
+    ],
+    "use_case": "UC5"
+  },
+  {
+    "chunk_id": "CH_045",
+    "text": "Ez egy teszt RAG szöveg a(z) 45. elemhez.",
+    "section": "4.5",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword45"
+    ],
+    "use_case": "UC1"
+  },
+  {
+    "chunk_id": "CH_046",
+    "text": "Ez egy teszt RAG szöveg a(z) 46. elemhez.",
+    "section": "4.6",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword46"
+    ],
+    "use_case": "UC2"
+  },
+  {
+    "chunk_id": "CH_047",
+    "text": "Ez egy teszt RAG szöveg a(z) 47. elemhez.",
+    "section": "4.7",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword47"
+    ],
+    "use_case": "UC3"
+  },
+  {
+    "chunk_id": "CH_048",
+    "text": "Ez egy teszt RAG szöveg a(z) 48. elemhez.",
+    "section": "4.8",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword48"
+    ],
+    "use_case": "UC4"
+  },
+  {
+    "chunk_id": "CH_049",
+    "text": "Ez egy teszt RAG szöveg a(z) 49. elemhez.",
+    "section": "4.9",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword49"
+    ],
+    "use_case": "UC5"
+  },
+  {
+    "chunk_id": "CH_050",
+    "text": "Ez egy teszt RAG szöveg a(z) 50. elemhez.",
+    "section": "5.0",
+    "keywords": [
+      "AI",
+      "RAG",
+      "keyword50"
     ],
     "use_case": "UC1"
   }

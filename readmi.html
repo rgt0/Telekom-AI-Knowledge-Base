@@ -1,55 +1,70 @@
-<!DOCTYPE html><html lang='hu'>
-<head><meta charset='UTF-8'><title>Telekom AI KB Dokumentáció</title>
-<link rel='stylesheet' href='telekom-ui.css'></head>
-<body>
-<div class='topnav'>Telekom AI KB – Dokumentáció</div>
-<div class='sidebar'>
-    
-<input type="text" id="searchBox" placeholder="Keresés..." class="search-input" oninput="runSearch(this.value)">
-<div id="searchResults" class="search-results"></div>
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>T-AI-KB Dokumentáció</title>
+    telekom-ui.css
+</head>
 
-    <a href='index.html'>Főoldal</a>
-    <a href='readmi.html'>Dokumentáció</a>
-    <a href='https://github.com/rgt0/Telekom-AI-Knowledge-Base' target='_blank'>GitHub Repo</a>
+<body>
+
+<div class="topnav">
+    T‑AI‑KB – Dokumentáció
 </div>
-<div class='main-content'>
-    <div class='btn-container'>
-      <a href='https://github.com/rgt0/Telekom-AI-Knowledge-Base' class='github-button' target='_blank'>Vissza a GitHub oldalra</a>
+
+<div class="sidebar">
+    <input type="text"
+           id="searchBox"
+           placeholder="Keresés..."
+           class="search-input"
+           oninput="runSearch(this.value)">
+
+    <div id="searchResults" class="search-results"></div>
+
+    index.htmlFőoldal</a>
+    readmi.htmlDokumentáció</a>
+    https://github.com/rgt0/Telekom-AI-Knowledge-Base
+</div>
+
+<div class="main-content">
+    <div class="btn-container">
+        https://github.com/rgt0/Telekom-AI-Knowledge-Base
     </div>
-    <h1>Telekom AI Knowledge Base – Alternatív HTML dokumentáció</h1>
+
+    <h1>T‑AI‑KB – Dokumentáció</h1>
     <p>Itt jön a teljes tartalom…</p>
+
 </div>
-    <script>
+
+<script>
+/* Ugyanaz a működő script, mint az indexben */
+
 let kbData = [];
 
-// Betöltjük a JSON fájlokat
 async function loadData() {
-    try {
-        const sources = [
-            'MASTER_RAG_FULL.json',
-            'MASTER_entities.json',
-            'MASTER_relations.json'
-        ];
+    const sources = [
+        'MASTER_RAG_FULL.json',
+        'MASTER_entities.json',
+        'MASTER_relations.json'
+    ];
 
+    try {
         for (let src of sources) {
             const res = await fetch(src);
-            if (res.ok) {
-                kbData = kbData.concat(await res.json());
-            }
+            if (res.ok) kbData = kbData.concat(await res.json());
         }
     } catch (e) {
-        console.warn("Nem sikerült betölteni a JSON adatokat:", e);
+        console.warn("JSON betöltési hiba:", e);
     }
 }
 
-// Highlight függvény (kiemeli a találatot)
 function highlightText(text, query) {
     const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const regex = new RegExp(escaped, "gi");
-    return text.replace(regex, match => `<span class="highlight">${match}</span>`);
+    return text.replace(regex,
+        m => `<span class="highlight">${m}</span>`);
 }
 
-// Kereső logika
 function runSearch(query) {
     const box = document.getElementById("searchResults");
 
@@ -60,10 +75,25 @@ function runSearch(query) {
 
     const q = query.toLowerCase();
 
-    // Fuzzy szűrés
     const matches = kbData.filter(item =>
         JSON.stringify(item).toLowerCase().includes(q)
     ).slice(0, 20);
 
-    // Highlight beleépítése
-</body></html>
+    box.innerHTML = matches.map(m => {
+        const raw = JSON.stringify(m).substring(0, 150);
+        const highlighted = highlightText(raw, query);
+
+        return `
+            <div class="search-item">
+                <strong>${m.chunk_id || m.entity || "Találat"}</strong><br>
+                <small>${highlighted}...</small>
+            </div>
+        `;
+    }).join("");
+}
+
+loadData();
+</script>
+
+</body>
+</html>

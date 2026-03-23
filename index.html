@@ -139,15 +139,64 @@ box.innerHTML = matches.map(m => {
 
 // Indítás
 loadData();
-</script>;
-    padding-left: 10px;
-    padding-right: 10px;
+
+<script>
+let kbData = [];
+
+// JSON betöltés
+async function loadData() {
+    const sources = [
+        'MASTER_RAG_FULL.json',
+        'MASTER_entities.json',
+        'MASTER_relations.json'
+    ];
+
+    try {
+        for (let src of sources) {
+            const res = await fetch(src);
+            if (res.ok) kbData = kbData.concat(await res.json());
+        }
+    } catch (e) {
+        console.warn("JSON betöltési hiba:", e);
+    }
 }
- .highlight {
-    background-color: var(--telekom-magenta);
-    color: white;
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-weight: 700;
+
+// Highlight
+function highlightText(text, query) {
+    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const regex = new RegExp(escaped, "gi");
+    return text.replace(regex, m => `<span class="highlight">${m}</span>`);
 }
+
+// Keresés
+function runSearch(query) {
+    const box = document.getElementById("searchResults");
+
+    if (!query || query.length < 2) {
+        box.innerHTML = "";
+        return;
+    }
+
+    const q = query.toLowerCase();
+
+    const matches = kbData.filter(item =>
+        JSON.stringify(item).toLowerCase().includes(q)
+    ).slice(0, 20);
+
+    box.innerHTML = matches.map(m => {
+        const raw = JSON.stringify(m).substring(0, 150);
+        const highlighted = highlightText(raw, query);
+        return `
+            <div class="search-item">
+                <strong>${m.chunk_id || m.entity || "Találat"}</strong><br>
+                <small>${highlighted}...</small>
+            </div>
+        `;
+    }).join("");
+}
+
+loadData();
+</script>
+
+
 </body></html>

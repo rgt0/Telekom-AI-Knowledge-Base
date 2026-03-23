@@ -1,144 +1,47 @@
-<!DOCTYPE html><html lang='hu'>
-<head><meta charset='UTF-8'><title>Telekom AI KB Portal</title>
-<link rel='stylesheet' href='telekom-ui.css'></head>
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>T-AI-KB</title>
+    telekom-ui.css
+</head>
+
 <body>
-<div class='topnav'>Telekom AI Knowledge Base – Portál</div>
-<div class='sidebar'>
- 
-<input type="text" id="searchBox" placeholder="Keresés..." class="search-input" oninput="runSearch(this.value)">
-<div id="searchResults" class="search-results"></div>
- <!-- Menüpontok -->      
-    <a href='index.html'> Főoldal</a>
-    <a href='readmi.html'>Dokumentáció</a>
-    <a href='https://github.com/rgt0/Telekom-AI-Knowledge-Base' target='_blank'>GitHub Repo</a>
+
+<!-- Felső sáv -->
+<div class="topnav">
+    T‑AI‑KB
 </div>
-<div class='main-content'>
-    <div class='btn-container'>
-    <a href="https://github.com/rgt0/Telekom-AI-Knowledge-Base" class="github-button" target="_blank">
-      Vissza a GitHub oldalra
-    </a>
+
+<!-- Oldalsáv -->
+<div class="sidebar">
+
+    <input type="text"
+           id="searchBox"
+           placeholder="Keresés..."
+           class="search-input"
+           oninput="runSearch(this.value)">
+
+    <div id="searchResults" class="search-results"></div>
+
+    index.htmlFőoldal</a>
+    readmi.htmlDokumentáció</a>
+    https://github.com/rgt0/Telekom-AI-Knowledge-Base
+</div>
+
+<!-- Fő tartalom -->
+<div class="main-content">
+
+    <div class="btn-container">
+        https://github.com/rgt0/Telekom-AI-Knowledge-Base
+            Vissza a GitHub oldalra
+        </a>
     </div>
-    <h1>Üdvözöl a Telekom AI Knowledge Base Portál</h1>
+
+    <h1>T‑AI‑KB – Portál</h1>
     <p>Válassz a bal oldali menüből modulokat vagy dokumentációs nézetet.</p>
+
 </div>
-    <script>
-let kbData = [];
-
-async function loadData() {
-    try {
-        const sources = [
-            'MASTER_RAG_FULL.json',
-            'MASTER_entities.json',
-            'MASTER_relations.json'
-        ];
-
-        for (let src of sources) {
-            const r = await fetch(src);
-            if (r.ok) kbData = kbData.concat(await r.json());
-        }
-    } catch(e) { console.warn("JSON load error:", e); }
-}
-
-function runSearch(query) {
-    const box = document.getElementById("searchResults");
-    if (!query || query.length < 2) {
-        box.innerHTML = "";
-        return;
-    }
-
-    const q = query.toLowerCase();
-    const matches = kbData.filter(i =>
-        JSON.stringify(i).toLowerCase().includes(q)
-    ).slice(0, 20);
-
-    box.innerHTML = matches.map(m => 
-        `<div class='search-item'>
-            <strong>${m.chunk_id || m.entity || 'Találat'}</strong><br>
-            <small>${JSON.stringify(m).substring(0,150)}...</small>
-        </div>`
-    ).join("");
-}
-
-<script>
-let kbData = [];
-
-// JSON betöltés
-async function loadData() {
-    const sources = [
-        'MASTER_RAG_FULL.json',
-        'MASTER_entities.json',
-        'MASTER_relations.json'
-    ];
-
-    try {
-        for (let src of sources) {
-            const res = await fetch(src);
-            if (res.ok) {
-                kbData = kbData.concat(await res.json());
-            }
-        }
-    } catch (e) {
-        console.warn("JSON betöltési hiba:", e);
-    }
-}
-
-// Highlight
-function highlightText(text, query) {
-    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const regex = new RegExp(escaped, "gi");
-    return text.replace(regex, match => `<span class="highlight">${match}</span>`);
-}
-
-// Keresés
-function runSearch(query) {
-    const box = document.getElementById("searchResults");
-
-    if (!query || query.length < 2) {
-        box.innerHTML = "";
-        return;
-    }
-
-    const q = query.toLowerCase();
-
-    const matches = kbData.filter(item =>
-        JSON.stringify(item).toLowerCase().includes(q)
-    ).slice(0, 20);
-
-    box.innerHTML = matches.map(m => {
-        const raw = JSON.stringify(m).substring(0,150);
-        const highlighted = highlightText(raw, query);
-        return `
-            <div class="search-item">
-                <strong>${m.chunk_id || m.entity || "Találat"}</strong><br>
-                <small>${highlighted}...</small>
-            </div>
-        `;
-    }).join("");
-}
-
-// Indítás
-loadData();
-</script>
-
- .search-results {
-    margin-top: 10px;
-    max-height: 400px;
-    overflow-y: // highlight + kimenet beillesztése
-box.innerHTML = matches.map(m => {
-    const raw = JSON.stringify(m).substring(0,150);
-    const highlighted = highlightText(raw, query);
-
-    return `
-        <div class="search-item">
-            <strong>${m.chunk_id || m.entity || "Találat"}</strong><br>
-            <small>${highlighted}...</small>
-        </div>
-    `;
-}).join("");
-}  // ← ez HIÁNYZOTT!
-
-// Indítás
-loadData();
 
 <script>
 let kbData = [];
@@ -165,7 +68,8 @@ async function loadData() {
 function highlightText(text, query) {
     const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const regex = new RegExp(escaped, "gi");
-    return text.replace(regex, m => `<span class="highlight">${m}</span>`);
+    return text.replace(regex,
+        m => `<span class="highlight">${m}</span>`);
 }
 
 // Keresés
@@ -186,6 +90,7 @@ function runSearch(query) {
     box.innerHTML = matches.map(m => {
         const raw = JSON.stringify(m).substring(0, 150);
         const highlighted = highlightText(raw, query);
+
         return `
             <div class="search-item">
                 <strong>${m.chunk_id || m.entity || "Találat"}</strong><br>
@@ -195,8 +100,9 @@ function runSearch(query) {
     }).join("");
 }
 
+// Indítás
 loadData();
 </script>
 
-
-</body></html>
+</body>
+</html>

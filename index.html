@@ -8,40 +8,50 @@
 
 <body>
 
-<!-- Felső sáv -->
-<div class="topnav">
-    T‑AI‑KB
-</div>
-
-<!-- Oldalsáv -->
-<div class="sidebar">
-
-    <input type="text"
-           id="searchBox"
-           placeholder="Keresés..."
-           class="search-input"
-           oninput="runSearch(this.value)">
-
-    <div id="searchResults" class="search-results"></div>
-
-    index.htmlFőoldal</a>
-    readmi.htmlDokumentáció</a>
-    https://github.com/rgt0/Telekom-AI-Knowledge-Base
-</div>
-
-<!-- Fő tartalom -->
-<div class="main-content">
-
-    <div class="btn-container">
-        https://github.com/rgt0/Telekom-AI-Knowledge-Base
-            Vissza a GitHub oldalra
-        </a>
+    <!-- Felső sáv -->
+    <div class="topnav">
+        T‑AI‑KB
     </div>
 
-    <h1>T‑AI‑KB – Portál</h1>
-    <p>Válassz a bal oldali menüből modulokat vagy dokumentációs nézetet.</p>
+    <!-- Oldalsáv + fő tartalom konténer -->
+    <div class="layout">
 
-</div>
+        <!-- Oldalsáv -->
+        <div class="sidebar">
+
+            <input type="text"
+                   id="searchBox"
+                   placeholder="Keresés..."
+                   class="search-input"
+                   oninput="runSearch(this.value)">
+
+            <div id="searchResults" class="search-results"></div>
+
+            <nav class="menu">
+                <a href="index.html">Főoldal</a>
+                <a href="readmi.html">Dokumentáció</a>
+                <a href="https://github.com/rgt0/Telekom-AI-Knowledge-Base" target="_blank">
+                    GitHub repo
+                </a>
+            </nav>
+
+        </div>
+
+        <!-- Fő tartalom -->
+        <div class="main-content">
+
+            <div class="btn-container">
+                <a href="https://github.com/rgt0/Telekom-AI-Knowledge-Base" target="_blank">
+                    Vissza a GitHub oldalra
+                </a>
+            </div>
+
+            <h1>T‑AI‑KB – Portál</h1>
+            <p>Válassz a bal oldali menüből modulokat vagy dokumentációs nézetet.</p>
+
+        </div>
+
+    </div>
 
 <script>
 let kbData = [];
@@ -105,4 +115,5 @@ loadData();
 </script>
 
 </body>
+
 </html>

@@ -8,185 +8,145 @@
 
 <body>
 
-    <!-- Felső sáv -->
+    <!-- Felső Telekom fejléc -->
     <div class="topnav">
         T‑AI‑KB
     </div>
 
-<!-- NAVBAR – Közvetlenül a topnav után -->
-<nav class="navbar">
-    <a href="#ai-alapok">AI‑Alapok</a>
-    <a href="#prompt-engineering">Prompt Engineering</a>
-    <a href="#sandbox">AI Sandbox</a>
-    <a href="#explain-engine">AIM/C Explain Engine</a>
-    <a href="#eszközök">Eszközök</a>
-    <a href="#tudastar">Tudástár</a>
-    <a href="#rag">RAG</a>
-    <a href="#itf">ITF‑Adatlap</a>
-    <a href="#iranyelvek">Irányelvek</a>
-</nav>
-
-<style>
-    .navbar {
-        width: 100%;
-        background: #ffffff;
-        border-bottom: 1px solid #e2e2e2;
-        padding: 10px 0;
-        text-align: center;
-        position: sticky;
-        top: 48px;
-        z-index: 999;
-    }
-    .navbar a {
-        margin: 0 14px;
-        text-decoration: none;
-        color: #0050b3;
-        font-weight: 600;
-        font-size: 16px;
-    }
-    .navbar a:hover {
-        color: #bb0031;
-    }
-    @media (max-width: 768px) {
-        .navbar a {
-            display: block;
-            padding: 8px 0;
-            margin: 0;
-        }
-    }
-</style>
-<!-- TARTALOM KEZDETE – IDE JÖN AZ ÖSSZES LANDING PAGE BLOKK -->
-<h1>Telekom AI Knowledge Base</h1>
-
-<h2 id="ai-alapok">AI‑Alapok</h2>
-<p>… ide jön az AI‑bevezető szöveg …</p>
-
-<h2 id="prompt-engineering">Prompt Engineering</h2>
-<p>… prompt minták, struktúrák, anti-hallucination …</p>
-
-<h2 id="sandbox">AI Sandbox</h2>
-<p>… hogyan nyisd meg a Colab notebookokat …</p>
-
-<h2 id="explain-engine">AIM/C Explain Engine</h2>
-<p>… v0.x magyarázatok, PERFORM-fa, narratíva …</p>
-
-<h2 id="eszközök">Eszközök & Workflow-ok</h2>
-<p>… GitHub + Colab használati útmutató …</p>
-
-<h2 id="tudastar">Tudástár</h2>
-<p>… glosszárium, kifejezések, MF/AI fogalmak …</p>
-
-<h2 id="rag">RAG</h2>
-<p>… embedding, vector store, keresési pipeline …</p>
-
-<h2 id="itf">ITF – AI‑Processable Adatlap</h2>
-<p>… privát projekt összefoglaló, mit jelent, mire jó …</p>
-
-<h2 id="iranyelvek">Telekom AI Irányelvek</h2>
-<p>… Responsible AI, vállalati szabályozások …</p>
-    <!-- Oldalsáv + fő tartalom konténer -->
-    <div class="layout">
-
-        <!-- Oldalsáv -->
-        <div class="sidebar">
-
-            <input type="text"
-                   id="searchBox"
-                   placeholder="Keresés..."
-                   class="search-input"
-                   oninput="runSearch(this.value)">
-
-            <div id="searchResults" class="search-results"></div>
-
-          
-<nav class="menu">
-    <a href="index.html">Főoldal</a>
-    <a href="readmi.html">Dokumentáció</a>
-    <a href="https://github.com/rgt0/Telekom-AI-Knowledge-Base" target="_blank">GitHub repo</a>
-</nav>
-
-
-        </div>
-
-        <!-- Fő tartalom -->
-        <div class="main-content">
-
-           
-<div class="btn-container">
-    <a href="https://github.com/rgt0/Telekom-AI-Knowledge-Base" target="_blank">
-        Vissza a GitHub oldalra
-    </a>
-</div>
-
-
-            <h1>T‑AI‑KB – Portál</h1>
-            <p>Válassz a bal oldali menüből modulokat vagy dokumentációs nézetet.</p>
-
-        </div>
-
+    <!-- Oldalsó menü (Telekom-UI kezeli automatikusan) -->
+    <div class="sidebar">
+        <input type="text" placeholder="Keresés...">
+        <a href="#">Főoldal</a>
+        <a href="#">Dokumentáció</a>
+        <a href="#">GitHub repo</a>
     </div>
 
-<script>
-let kbData = [];
+    <!-- FŐ TARTALOM – MINDENT IDE TESZÜNK -->
+    <main>
 
-// JSON betöltés
-async function loadData() {
-    const sources = [
-        'MASTER_RAG_FULL.json',
-        'MASTER_entities.json',
-        'MASTER_relations.json'
-    ];
+        <!-- ✅ NAVBAR (topnav UTÁN, main ELEJÉN) -->
+        <nav class="navbar">
+            #ai-alapokAI‑Alapok</a>
+            #prompt-engineeringPrompt Engineering</a>
+            #sandboxAI Sandbox</a>
+            #explain-engineAIM/C Explain Engine</a>
+            #eszközökEszközök</a>
+            #tudastarTudástár</a>
+            #ragRAG</a>
+            #itfITF‑Adatlap</a>
+            #iranyelvekIrányelvek</a>
+        </nav>
 
-    try {
-        for (let src of sources) {
-            const res = await fetch(src);
-            if (res.ok) kbData = kbData.concat(await res.json());
-        }
-    } catch (e) {
-        console.warn("JSON betöltési hiba:", e);
-    }
-}
+        <!-- ✅ NAVBAR STÍLUS -->
+        <style>
+            .navbar {
+                width: 100%;
+                background: #ffffff;
+                border-bottom: 1px solid #e2e2e2;
+                padding: 12px 0;
+                text-align: center;
+                position: sticky;
+                top: 48px;
+                z-index: 999;
+            }
+            .navbar a {
+                margin: 0 14px;
+                text-decoration: none;
+                color: #0050b3;
+                font-weight: 600;
+                font-size: 16px;
+            }
+            .navbar a:hover {
+                color: #bb0031;
+            }
+            @media (max-width: 768px) {
+                .navbar a {
+                    display: block;
+                    padding: 8px 0;
+                    margin: 0;
+                }
+            }
+        </style>
 
-// Highlight
-function highlightText(text, query) {
-    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const regex = new RegExp(escaped, "gi");
-    return text.replace(regex,
-        m => `<span class="highlight">${m}</span>`);
-}
 
-// Keresés
-function runSearch(query) {
-    const box = document.getElementById("searchResults");
+        <!-- ✅ LANDING PAGE TARTALOM + ID-K -->
+        <h1>T-AI-KB – Portál</h1>
+        <p>Válassz a fenti navigációs sávból vagy a bal oldali menüből.</p>
 
-    if (!query || query.length < 2) {
-        box.innerHTML = "";
-        return;
-    }
+        <hr>
 
-    const q = query.toLowerCase();
 
-    const matches = kbData.filter(item =>
-        JSON.stringify(item).toLowerCase().includes(q)
-    ).slice(0, 20);
+        <!-- ====================== -->
+        <!-- AI ALAPOK -->
+        <!-- ====================== -->
+        <h2 id="ai-alapok">AI‑Alapok</h2>
+        <p>Bevezető az MI, ML, LLM fogalmaiba…</p>
 
-    box.innerHTML = matches.map(m => {
-        const raw = JSON.stringify(m).substring(0, 150);
-        const highlighted = highlightText(raw, query);
 
-        return `
-            <div class="search-item">
-                <strong>${m.chunk_id || m.entity || "Találat"}</strong><br>
-                <small>${highlighted}...</small>
-            </div>
-        `;
-    }).join("");
-}
+        <!-- ======================= -->
+        <!-- PROMPT ENGINEERING -->
+        <!-- ======================= -->
+        <h2 id="prompt-engineering">Prompt Engineering</h2>
+        <p>Strukturált prompt minták, jó/rossz példák…</p>
 
-// Indítás
-loadData();
-</script>
+
+        <!-- ======================= -->
+        <!-- AI SANDBOX -->
+        <!-- ======================= -->
+        <h2 id="sandbox">AI Sandbox</h2>
+        <p>Google Colab használata, notebook futtatás…</p>
+
+
+        <!-- ======================= -->
+        <!-- AIM/C EXPLAIN ENGINE -->
+        <!-- ======================= -->
+        <h2 id="explain-engine">AIM/C Explain Engine</h2>
+        <p>
+            COBOL top‑down magyarázó módszertan: szekciófelismerés, PERFORM-fa, IO‑detektálás, narratíva.
+            v0.1 → v0.2 → v0.3 notebookok itt elérhetők.
+        </p>
+
+
+        <!-- ======================= -->
+        <!-- ESZKÖZÖK -->
+        <!-- ======================= -->
+        <h2 id="eszközök">Eszközök & Workflow-ok</h2>
+        <p>GitHub, Google Colab, notebook szerkesztés, projektstruktúra…</p>
+
+
+        <!-- ======================= -->
+        <!-- TUDÁSTÁR -->
+        <!-- ======================= -->
+        <h2 id="tudastar">Tudástár</h2>
+        <p>AI + MF glosszárium, fogalommagyarázatok…</p>
+
+
+        <!-- ======================= -->
+        <!-- RAG -->
+        <!-- ======================= -->
+        <h2 id="rag">RAG – Retrieval Augmented Generation</h2>
+        <p>Embedding, vector store, dokumentumkeresés…</p>
+
+
+        <!-- ======================= -->
+        <!-- ITF ADATLAP -->
+        <!-- ======================= -->
+        <h2 id="itf">ITF – AI‑Processable Adatlap</h2>
+        <p>
+            Projektadat-szerkezetek, minőségbiztosítás,
+            AI-processzálhatóság alapelvei. (Privát projekt.)
+        </p>
+
+
+        <!-- ======================= -->
+        <!-- IRÁNYELVEK -->
+        <!-- ======================= -->
+        <h2 id="iranyelvek">Telekom AI Irányelvek</h2>
+        <p>
+            Responsible AI, adathasználati szabályok, belső ajánlások…
+        </p>
+
+    </main>
 
 </body>
-
 </html>

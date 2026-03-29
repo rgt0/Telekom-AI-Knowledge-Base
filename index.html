@@ -13,28 +13,28 @@
         T‑AI‑KB
     </div>
 
-    <!-- Bal oldali menü (Telekom-UI kezeli) -->
+    <!-- Bal oldali menü -->
     <div class="sidebar">
         <input type="text" placeholder="Keresés...">
-        #">Főoldal</a>
-        #">Dokumentáció</a>
-        #">GitHub repo</a>
+        <a href="#">Főoldal</a>
+        <a href="#">Dokumentáció</a>
+        <a href="https://github.com/rgt0/aimc-internal-sandbox" target="_blank">GitHub repo</a>
     </div>
 
-    <!-- ✅ FŐ TARTALOM – MINDENT IDE TESZÜNK -->
+    <!-- FŐ TARTALOM -->
     <main>
 
-        <!-- ✅ NAVBAR CSUPÁN <main> ELEJÉN (EZ FONTOS!) -->
+        <!-- ✅ NAVBAR (MŰKÖDŐ VERZIÓ) -->
         <nav class="navbar">
-            #ai-alapokAI‑Alapok</a>
-            #prompt-engineeringPrompt Engineering</a>
-            #sandboxAI Sandbox</a>
-            #explain-engineAIM/C Explain Engine</a>
-            #eszközökEszközök</a>
-            #tudastarTudástár</a>
-            #ragRAG</a>
-            #itfITF‑Adatlap</a>
-            #iranyelvekIrányelvek</a>
+            <a href="#ai-alapok">AI‑Alapok</a>
+            <a href="#prompt-engineering">Prompt Engineering</a>
+            <a href="#sandbox">AI Sandbox</a>
+            <a href="#explain-engine">AIM/C Explain Engine</a>
+            <a href="#eszkozok">Eszközök</a>
+            <a href="#tudastar">Tudástár</a>
+            <a href="#rag">RAG</a>
+            <a href="#itf">ITF‑Adatlap</a>
+            <a href="#iranyelvek">Irányelvek</a>
         </nav>
 
         <!-- ✅ NAVBAR CSS -->
@@ -46,7 +46,7 @@
                 padding: 12px 0;
                 text-align: center;
                 position: sticky;
-                top: 48px;
+                top: 48px; /* topnav alatt */
                 z-index: 999;
             }
             .navbar a {
@@ -68,40 +68,49 @@
             }
         </style>
 
-        <!-- ✅ LANDING PAGE -->
-        <h1>T-AI-KB – Portál</h1>
-        <p>Válassz a felső navigációs sávból vagy a bal oldali menüből modulokat vagy dokumentációt.</p>
+        <!-- ✅ TARTALMI BLOKKOK (ID-k a NAVBAR-hoz) -->
 
+        <h1>T-AI-KB – Portál</h1>
+        <p>Válassz a felső navigációból vagy a bal oldali menüből.</p>
         <hr>
 
-        <!-- =================================================== -->
         <!-- AI-ALAPOK -->
-        <!-- =================================================== -->
         <h2 id="ai-alapok">AI‑Alapok</h2>
-        <p>Bevezető az alapfogalmakhoz…</p>
+        <p>Bevezető az AI fogalmakhoz…</p>
 
-        <!-- =================================================== -->
         <!-- PROMPT ENGINEERING -->
-        <!-- =================================================== -->
         <h2 id="prompt-engineering">Prompt Engineering</h2>
-        <p>Jó/rossz promptok, best practice-ek…</p>
+        <p>Strukturált prompt technikák…</p>
 
-        <!-- =================================================== -->
         <!-- AI SANDBOX -->
-        <!-- =================================================== -->
         <h2 id="sandbox">AI Sandbox</h2>
-        <p>Google Colab notebook futtatás, sandbox workshop…</p>
+        <p>Colab notebook futtatási útmutató…</p>
 
-        <!-- =================================================== -->
         <!-- AIM/C EXPLAIN ENGINE -->
-        <!-- =================================================== -->
         <h2 id="explain-engine">AIM/C Explain Engine</h2>
-        <p>
-            COBOL szekció-felismerés, PERFORM-fa, IO-detektálás, narratíva.
-            v0.1 → v0.2 → v0.3 notebookok itt elérhetők.
-        </p>
+        <p>COBOL Explain Engine v0.1 → v0.3…</p>
 
-        <!-- =================================================== -->
         <!-- ESZKÖZÖK -->
-        <!-- =================================================== -->
-        <h2 id="eszközök">Eszközök & Workflow-ok</h2>
+        <h2 id="eszkozok">Eszközök & Workflow-ok</h2>
+        <p>Colab, GitHub, notebook workflow…</p>
+
+        <!-- TUDÁSTÁR -->
+        <h2 id="tudastar">Tudástár</h2>
+        <p>Fogalomtár, definíciók…</p>
+
+        <!-- RAG -->
+        <h2 id="rag">RAG – Retrieval Augmented Generation</h2>
+        <p>Vector store, embedding, keresés…</p>
+
+        <!-- ITF-ADATLAP -->
+        <h2 id="itf">ITF – AI‑Processable Adatlap</h2>
+        <p>Minőségi mezők, validáció…</p>
+
+        <!-- IRÁNYELVEK -->
+        <h2 id="iranyelvek">Telekom AI Irányelvek</h2>
+        <p>Responsible AI…</p>
+
+    </main>
+
+</body>
+</html>

@@ -16,28 +16,28 @@
     <!-- Bal oldali menü -->
     <div class="sidebar">
         <input type="text" placeholder="Keresés...">
-        <a href="#">Főoldal</a>
-        <a href="#">Dokumentáció</a>
-        <a href="https://github.com/rgt0/aimc-internal-sandbox" target="_blank">GitHub repo</a>
+        #
+        #
+        #">GitHub repo</a>
     </div>
 
     <!-- FŐ TARTALOM -->
     <main>
 
-        <!-- ✅ NAVBAR (MŰKÖDŐ VERZIÓ) -->
+        <!-- NAVBAR -->
         <nav class="navbar">
-            <a href="#ai-alapok">AI‑Alapok</a>
-            <a href="#prompt-engineering">Prompt Engineering</a>
-            <a href="#sandbox">AI Sandbox</a>
-            <a href="#explain-engine">AIM/C Explain Engine</a>
-            <a href="#eszkozok">Eszközök</a>
-            <a href="#tudastar">Tudástár</a>
-            <a href="#rag">RAG</a>
-            <a href="#itf">ITF‑Adatlap</a>
-            <a href="#iranyelvek">Irányelvek</a>
+            #ai-alapok">AI‑Alapok</a>
+            #prompt-engineering">Prompt Engineering</a>
+            #sandbox">AI Sandbox</a>
+            #explain-engine">AIM/C Explain Engine</a>
+            #eszkozok">Eszközök</a>
+            #tudastar">Tudástár</a>
+            #rag">RAG</a>
+            #itf">ITF‑Adatlap</a>
+            #iranyelvek">Irányelvek</a>
         </nav>
 
-        <!-- ✅ NAVBAR CSS -->
+        <!-- NAVBAR CSS -->
         <style>
             .navbar {
                 width: 100%;
@@ -46,7 +46,7 @@
                 padding: 12px 0;
                 text-align: center;
                 position: sticky;
-                top: 48px; /* topnav alatt */
+                top: 48px;
                 z-index: 999;
             }
             .navbar a {
@@ -68,224 +68,49 @@
             }
         </style>
 
-        <!-- ✅ TARTALMI BLOKKOK (ID-k a NAVBAR-hoz) -->
+        <!-- ========================================= -->
+        <!--             LANDING PAGE CONTENT          -->
+        <!-- ========================================= -->
 
         <h1>T-AI-KB – Portál</h1>
-        <p>Válassz a felső navigációból vagy a bal oldali menüből.</p>
+        <p>Válassz a felső navigációs sávból vagy a bal oldali menüből.</p>
         <hr>
 
-        <!-- AI-ALAPOK -->
+        <!-- AI ALAPOK -->
         <h2 id="ai-alapok">AI‑Alapok</h2>
-        <p>Bevezető az AI fogalmakhoz…</p>
-
-  <p>
-   Az <strong>AI (Artificial Intelligence)</strong> olyan technológiák és módszerek gyűjtőfogalma, amelyek célja, 
-    hogy a számítógépek képesek legyenek olyan feladatokra, amelyeket korábban csak emberek tudtak elvégezni:
-     mintázatfelismerés, döntéshozás, nyelvi megértés, problémamegoldás. </p>
-
-<h3>Mi az a Machine Learning (ML)?</h3>
-<p>
-A <strong>gépi tanulás</strong> az AI egyik területe. Ahelyett, hogy valaki minden szabályt kézzel programozna, 
-a modell példákból tanulja meg, hogyan kell egy problémát megoldani.
-<br>
-Tipikus ML feladatok:
-<ul>
-  <li>osztályozás (pl. spam–nem spam)</li>
-  <li>predikció (pl. értékbecslés)</li>
-  <li>minta- és anomáliadetektálás</li>
-</ul>
-</p>
-
-<h3>Mi az a Large Language Model (LLM)?</h3>
-<p>
-Az <strong>LLM</strong> egy olyan nyelvi modell, amely óriási mennyiségű szövegből tanult, és képes:
-<ul>
-  <li>szöveget értelmezni</li>
-  <li>szöveget generálni</li>
-  <li>összefoglalni</li>
-  <li>struktúrált kimeneteket előállítani</li>
-  <li>magyarázni és érvelni</li>
-</ul>
-</p>
-
-<h3>Fontos fogalmak (nagyon röviden)</h3>
-<ul>
-  <li><strong>Token:</strong> a modell „szavacskái” (szó, szótag, jelsorozat). A modell ezekkel dolgozik.</li>
-  <li><strong>Context window:</strong> egyszerre hány tokent képes a modell figyelembe venni.</li>
-  <li><strong>Embedding:</strong> szöveg számsor (vektor) formában – kulcs a hasonlóságkereséshez.</li>
-  <li><strong>Attention:</strong> mechanizmus, amely meghatározza, mire „figyel” a modell.</li>
-  <li><strong>Hallucination:</strong> amikor az LLM magabiztosan téves információt ad.</li>
-</ul>
-
-<h3>Miért fontos ez a Telekom számára?</h3>
-<p>
-A nagy nyelvi modellek nagy előnye, hogy képesek:
-<ul>
-  <li>komplex dokumentumokat gyorsan és érthetően összefoglalni</li>
-  <li>régi rendszerekről (pl. MF/COBOL) érthető magyarázatot adni</li>
-  <li>technikai tudást továbbadni (AI‑Mentor szerep)</li>
-  <li>folyamatokat és adatlapokat előkészíteni (ITF)</li>
-  <li>automatikusan struktúrálni a tartalmat (chunking, extraction)</li>
-</ul>
-Ezért lett az AI kulcstechnológia a modernizációban, oktatásban, dokumentációs folyamatokban és belső hatékonyságnövelésben.
-</p>
-<h3>Hogyan kezdj bele?</h3>
-<p>
-1) Nézd át az alap AI fogalmakat. <br>
-2) Próbáld ki az egyik sandbox notebookot (Google Colab). <br>
-3) Nézd meg a prompt-mintákat. <br>
-4) Ha érdekel a COBOL/MF világ, látogasd meg az AIM/C Explain Engine fejezetet. <br>
-5) Ha projekten dolgozol, az ITF–Adatlap rész segít a strukturált AI alapkészletben. <br>
-</p>
-
-<hr>
-<p><em>Ez a fejezet az AI-alapok gyors és biztonságos áttekintését adja, minden Telekom egyéni szerepkör számára.</em></p>
+        <p>Bevezető az AI világába…</p>
 
         <!-- PROMPT ENGINEERING -->
         <h2 id="prompt-engineering">Prompt Engineering</h2>
+        <p>Itt találhatók a prompt minták és módszerek…</p>
 
-<p>
-A <strong>Prompt Engineering</strong> az a gyakorlat, amely során azt határozzuk meg, hogyan adjunk 
-egy nagy nyelvi modellnek (LLM) pontos, strukturált, félreérthetetlen utasítást annak érdekében, 
-hogy kiszámítható, minőségi és reprodukálható választ kapjunk.
-</p>
-
-<h3>Miért fontos?</h3>
-<p>
-Egy LLM válasza nagymértékben függ attól, hogyan fogalmazzuk meg a kérést. 
-A jó prompt:
-<ul>
-  <li>minimalizálja a kétségeket és a félreérthetőséget</li>
-  <li>csökkenti a „hallucináció” esélyét</li>
-  <li>segít strukturált, következetes kimeneteket előállítani</li>
-  <li>növeli az AI‑alapú munkafolyamatok megbízhatóságát</li>
-</ul>
-</p>
-
-<h3>Alapfogalmak</h3>
-<ul>
-  <li><strong>System prompt:</strong> meghatározza az AI szerepét („You are a COBOL explain engine…”) </li>
-  <li><strong>Instruction:</strong> a feladat pontos leírása („Magyarázd el a kód működését lépésről lépésre…”) </li>
-  <li><strong>Context:</strong> háttérinformációk, korábbi példák, mintaadatok </li>
-  <li><strong>Output format:</strong> milyen formátumban kérjük a választ (lista, táblázat, JSON, blokkdiagram) </li>
-  <li><strong>Guardrails:</strong> tiltások, pontosítások, amihez a modellnek tartania kell magát </li>
-</ul>
-
-<h3>A jó prompt szerkezete</h3>
-<p>Egy jól megírt prompt tipikus felépítése:</p>
-
-<pre>
-[SZEREPKÖR] 
-   Pl.: "You are an AI that explains COBOL programs top-down."
-
-[FELADAT]
-   Pl.: "Magyarázd el a program logikáját lépésekre bontva."
-
-[KONTEXTUS]
-   Pl.: "A kód egy batch feldolgozási lépést valósít meg..."
-
-[MEGKÖTÉSEK]
-   Pl.: "Ne találj ki nem létező fájlokat. Ha nem tudod, válaszolj: NEED_MORE_CONTEXT."
-
-[KIMENETI FORMÁTUM]
-   Pl.: "A választ 5 pontba rendezve add meg."
-</pre>
-
-<h3>Jó és rossz példák</h3>
-
-<p><strong>Rossz prompt:</strong><br>
-„Magyarázd el ezt a COBOL programot."  
-– túl általános, nem struktúrált.</p>
-
-<p><strong>Jó prompt:</strong><br>
-„Magyarázd el a következő COBOL program működését.  
-A magyarázat tartalmazza:
-<ul>
-  <li>a program célját</li>
-  <li>a fő logikai szakaszokat</li>
-  <li>a PERFORM hívások sorrendjét</li>
-  <li>az I/O műveletek szerepét</li>
-</ul>
-Ha bizonytalan vagy, válaszolj: <em>NEED_MORE_CONTEXT</em>.”
-</p>
-
-<h3>Tipikus hibák, amelyeket érdemes elkerülni</h3>
-<ul>
-  <li>túl rövid, homályos utasítás</li>
-  <li>nincs megadva a kontextus</li>
-  <li>nincs kimeneti formátum</li>
-  <li>nincsenek megkötések (pl. anti‑hallucinációs elvek)</li>
-  <li>a modell „feladata” nincs definiálva</li>
-</ul>
-
-<h3>Anti‑hallucináció technikák</h3>
-<ul>
-  <li>„Ha bizonytalan vagy, válaszolj: NEED_MORE_CONTEXT.”</li>
-  <li>„Csak a bemenetben szereplő elemeket használd.”</li>
-  <li>„Semmit se találj ki — amit nem tudsz, írd le.”</li>
-  <li>„A válasz végén jelöld, ha volt olyan rész, amely bizonytalan.”</li>
-</ul>
-
-<h3>Prompt sablon AIM/C‑hez</h3>
-<pre>
-SYSTEM:
-You are an MF/COBOL explain engine.
-
-TASK:
-Explain the program top-down.
-
-CONTEXT:
-- Input: COBOL program
-- Detect: sections, PERFORM tree, IO, WS-variables
-
-OUTPUT FORMAT:
-1. Purpose
-2. Main phases
-3. Control flow (PERFORM tree)
-4. IO logic
-5. Summary
-
-GUARDRAILS:
-- Do not invent files.
-- If missing context: NEED_MORE_CONTEXT.
-</pre>
-
-<h3>Hogyan érdemes gyakorolni?</h3>
-<ul>
-  <li>próbálj ki több verziót ugyanarra a feladatra</li>
-  <li>futtasd a sandbox notebookokban (Google Colab)</li>
-  <li>használj sablonos promptokat</li>
-  <li>figyeld meg, melyik megfogalmazás hozza a legkonzisztensebb eredményt</li>
-</ul>
-
-<p><em>Ez a rész az AI‑Mentor szerepkör és az LLM‑alapú rendszerek biztonságos, következetes használatát támogatja.</em></p>
         <!-- AI SANDBOX -->
         <h2 id="sandbox">AI Sandbox</h2>
-        <p>Colab notebook futtatási útmutató…</p>
+        <p>Colab notebookok futtatása, sandbox workshop…</p>
 
         <!-- AIM/C EXPLAIN ENGINE -->
         <h2 id="explain-engine">AIM/C Explain Engine</h2>
-        <p>COBOL Explain Engine v0.1 → v0.3…</p>
+        <p>COBOL Explain Engine v0.1 → v0.3 notebookok…</p>
 
         <!-- ESZKÖZÖK -->
         <h2 id="eszkozok">Eszközök & Workflow-ok</h2>
-        <p>Colab, GitHub, notebook workflow…</p>
+        <p>GitHub, Colab, fejlesztői eszközök…</p>
 
         <!-- TUDÁSTÁR -->
         <h2 id="tudastar">Tudástár</h2>
-        <p>Fogalomtár, definíciók…</p>
+        <p>AI és MF fogalomtár…</p>
 
         <!-- RAG -->
         <h2 id="rag">RAG – Retrieval Augmented Generation</h2>
-        <p>Vector store, embedding, keresés…</p>
+        <p>Embedding, vector store, keresés…</p>
 
-        <!-- ITF-ADATLAP -->
+        <!-- ITF -->
         <h2 id="itf">ITF – AI‑Processable Adatlap</h2>
-        <p>Minőségi mezők, validáció…</p>
+        <p>Adatlap struktúrák, minőségbiztosítás…</p>
 
         <!-- IRÁNYELVEK -->
         <h2 id="iranyelvek">Telekom AI Irányelvek</h2>
-        <p>Responsible AI…</p>
+        <p>Responsible AI szabályzatok…</p>
 
     </main>
 

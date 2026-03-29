@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>T-AI-KB</title>
+
+    <!-- Telekom UI CSS -->
     <link rel="stylesheet" href="https://rgt0.github.io/Telekom-AI-Knowledge-Base/telekom-ui.css">
 </head>
 
@@ -14,31 +16,38 @@
         T‑AI‑KB
     </div>
 
-    <!-- Bal oldali menü -->
+    <!-- Oldalsó menü -->
     <div class="sidebar">
         <input type="text" placeholder="Keresés...">
 
-        <a href="#fooldal">Főoldal</a>
-        <a href="#dokumentacio">Dokumentáció</a>
+        <a href="index.html">Főoldal</a>
+        <a href="ai-alapok.html">AI‑Alapok</a>
+        <a href="prompt-engineering.html">Prompt Engineering</a>
+        <a href="ai-sandbox.html">AI Sandbox</a>
+        <a href="explain-engine.html">AIM/C Explain Engine</a>
+        <a href="eszkozok.html">Eszközök</a>
+        <a href="tudastar.html">Tudástár</a>
+        <a href="rag.html">RAG</a>
+        <a href="itf.html">ITF‑Adatlap</a>
+        <a href="iranyelvek.html">Irányelvek</a>
         <a href="https://github.com/rgt0/Telekom-AI-Knowledge-Base">GitHub repo</a>
     </div>
 
-    <!-- FŐTARTALOM -->
+    <!-- Fő tartalom -->
     <main>
 
-        <!-- NAVBAR (HTML ENTITY formában → NEM torzul) -->
+        <!-- NAVBAR – tökéletes, működő multipage verzió -->
         <nav class="navbar">
-
-            <a href="#ai-alapok">AI‑Alapok</a>
-            <a href="#prompt-engineering">Prompt Engineering</a>
-            <a href="#sandbox">AI Sandbox</a>
-            <a href="#explain-engine">AIM/C Explain Engine</a>
-            <a href="#eszkozok">Eszközök</a>
-            <a href="#tudastar">Tudástár</a>
-            <a href="#rag">RAG</a>
-            <a href="#itf">ITF‑Adatlap</a>
-            <a href="#iranyelvek">Irányelvek</a>
-
+            <a href="index.html">Kezdőlap</a>
+            <a href="ai-alapok.html">AI‑Alapok</a>
+            <a href="prompt-engineering.html">Prompt Engineering</a>
+            <a href="ai-sandbox.html">AI Sandbox</a>
+            <a href="explain-engine.html">AIM/C Explain Engine</a>
+            <a href="eszkozok.html">Eszközök</a>
+            <a href="tudastar.html">Tudástár</a>
+            <a href="rag.html">RAG</a>
+            <a href="itf.html">ITF‑Adatlap</a>
+            <a href="iranyelvek.html">Irányelvek</a>
         </nav>
 
         <!-- NAVBAR CSS -->
@@ -53,6 +62,7 @@
                 top: 48px;
                 z-index: 999;
             }
+
             .navbar a {
                 margin: 0 14px;
                 text-decoration: none;
@@ -60,49 +70,26 @@
                 font-weight: 600;
                 font-size: 16px;
             }
+
             .navbar a:hover {
                 color: #bb0031;
             }
+
             @media(max-width: 768px) {
                 .navbar a {
                     display: block;
                     padding: 8px 0;
-                    margin: 0;
                 }
             }
         </style>
 
-        <!-- TARTALOM BLOKKOK -->
+        <!-- Landing page tartalom -->
         <h1>T‑AI‑KB – Portál</h1>
-        <p>Válassz a felső NAVBAR-ból vagy a bal oldali menüből.</p>
+        <p>Üdvözlünk a Telekom AI tudásportálon!  
+           A fenti NAVBAR-ból vagy a bal oldali menüből választhatsz témát.</p>
         <hr>
 
-        <h2 id="ai-alapok">AI‑Alapok</h2>
-        <p>Ide kerül az AI‑Alapok tartalom…</p>
-
-        <h2 id="prompt-engineering">Prompt Engineering</h2>
-        <p>Ide kerül a Prompt Engineering tartalom…</p>
-
-        <h2 id="sandbox">AI Sandbox</h2>
-        <p>Ide kerül az AI Sandbox tartalom…</p>
-
-        <h2 id="explain-engine">AIM/C Explain Engine</h2>
-        <p>Ide kerül az Explain Engine tartalom…</p>
-
-        <h2 id="eszkozok">Eszközök & Workflow-ok</h2>
-        <p>Ide kerül ez a rész…</p>
-
-        <h2 id="tudastar">Tudástár</h2>
-        <p>Fogalomtár…</p>
-
-        <h2 id="rag">RAG – Retrieval Augmented Generation</h2>
-        <p>RAG infók…</p>
-
-        <h2 id="itf">ITF – AI‑Processable Adatlap</h2>
-        <p>ITF leírás…</p>
-
-        <h2 id="iranyelvek">Telekom AI Irányelvek</h2>
-        <p>Responsible AI…</p>
+        <p>Ez a kezdőoldal. A részletes tartalmak a külön HTML‑oldalakban találhatók.</p>
 
     </main>
 

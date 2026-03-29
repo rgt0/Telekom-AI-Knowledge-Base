@@ -1,26 +1,19 @@
 <!DOCTYPE html>
 <html lang="hu">
-
 <head>
     <meta charset="UTF-8">
     <title>T-AI-KB</title>
-
-    <!-- Telekom UI CSS -->
-    <link rel="stylesheet" href="https://rgt0.github.io/Telekom-AI-Knowledge-Base/telekom-ui.css">
+    <link rel="stylesheet" href="telekom-ui.css">
 </head>
 
 <body>
 
-    <!-- Felső Telekom fejléc -->
-    <div class="topnav">
-        T‑AI‑KB
-    </div>
+    <div class="topnav">T‑AI‑KB</div>
 
-    <!-- Oldalsó menü -->
     <div class="sidebar">
         <input type="text" placeholder="Keresés...">
 
-        <a href="index.html">Főoldal</a>
+        <a href="index.html" class="active">Főoldal</a>
         <a href="ai-alapok.html">AI‑Alapok</a>
         <a href="prompt-engineering.html">Prompt Engineering</a>
         <a href="ai-sandbox.html">AI Sandbox</a>
@@ -33,12 +26,10 @@
         <a href="https://github.com/rgt0/Telekom-AI-Knowledge-Base">GitHub repo</a>
     </div>
 
-    <!-- Fő tartalom -->
     <main>
 
-        <!-- NAVBAR – tökéletes, működő multipage verzió -->
         <nav class="navbar">
-            <a href="index.html">Kezdőlap</a>
+            <a href="index.html" class="active">Kezdőlap</a>
             <a href="ai-alapok.html">AI‑Alapok</a>
             <a href="prompt-engineering.html">Prompt Engineering</a>
             <a href="ai-sandbox.html">AI Sandbox</a>
@@ -50,46 +41,8 @@
             <a href="iranyelvek.html">Irányelvek</a>
         </nav>
 
-        <!-- NAVBAR CSS -->
-        <style>
-            .navbar {
-                width: 100%;
-                background: #ffffff;
-                border-bottom: 1px solid #e2e2e2;
-                padding: 12px 0;
-                text-align: center;
-                position: sticky;
-                top: 48px;
-                z-index: 999;
-            }
-
-            .navbar a {
-                margin: 0 14px;
-                text-decoration: none;
-                color: #0050b3;
-                font-weight: 600;
-                font-size: 16px;
-            }
-
-            .navbar a:hover {
-                color: #bb0031;
-            }
-
-            @media(max-width: 768px) {
-                .navbar a {
-                    display: block;
-                    padding: 8px 0;
-                }
-            }
-        </style>
-
-        <!-- Landing page tartalom -->
         <h1>T‑AI‑KB – Portál</h1>
-        <p>Üdvözlünk a Telekom AI tudásportálon!  
-           A fenti NAVBAR-ból vagy a bal oldali menüből választhatsz témát.</p>
-        <hr>
-
-        <p>Ez a kezdőoldal. A részletes tartalmak a külön HTML‑oldalakban találhatók.</p>
+        <p>Üdvözlünk a Telekom AI tudásportálon. Válassz a NAVBAR‑ból vagy a sidebarból.</p>
 
     </main>
 

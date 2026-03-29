@@ -130,14 +130,136 @@ A nagy nyelvi modellek nagy előnye, hogy képesek:
 </ul>
 Ezért lett az AI kulcstechnológia a modernizációban, oktatásban, dokumentációs folyamatokban és belső hatékonyságnövelésben.
 </p>
-
 <h3>Hogyan kezdj bele?</h3>
 <p>
+1) Nézd át az alap AI fogalmakat. <br>
+2) Próbáld ki az egyik sandbox notebookot (Google Colab). <br>
+3) Nézd meg a prompt-mintákat. <br>
+4) Ha érdekel a COBOL/MF világ, látogasd meg az AIM/C Explain Engine fejezetet. <br>
+5) Ha projekten dolgozol, az ITF–Adatlap rész segít a strukturált AI alapkészletben. <br>
+</p>
+
+<hr>
+<p><em>Ez a fejezet az AI-alapok gyors és biztonságos áttekintését adja, minden Telekom egyéni szerepkör számára.</em></p>
 
         <!-- PROMPT ENGINEERING -->
         <h2 id="prompt-engineering">Prompt Engineering</h2>
-        <p>Strukturált prompt technikák…</p>
 
+<p>
+A <strong>Prompt Engineering</strong> az a gyakorlat, amely során azt határozzuk meg, hogyan adjunk 
+egy nagy nyelvi modellnek (LLM) pontos, strukturált, félreérthetetlen utasítást annak érdekében, 
+hogy kiszámítható, minőségi és reprodukálható választ kapjunk.
+</p>
+
+<h3>Miért fontos?</h3>
+<p>
+Egy LLM válasza nagymértékben függ attól, hogyan fogalmazzuk meg a kérést. 
+A jó prompt:
+<ul>
+  <li>minimalizálja a kétségeket és a félreérthetőséget</li>
+  <li>csökkenti a „hallucináció” esélyét</li>
+  <li>segít strukturált, következetes kimeneteket előállítani</li>
+  <li>növeli az AI‑alapú munkafolyamatok megbízhatóságát</li>
+</ul>
+</p>
+
+<h3>Alapfogalmak</h3>
+<ul>
+  <li><strong>System prompt:</strong> meghatározza az AI szerepét („You are a COBOL explain engine…”) </li>
+  <li><strong>Instruction:</strong> a feladat pontos leírása („Magyarázd el a kód működését lépésről lépésre…”) </li>
+  <li><strong>Context:</strong> háttérinformációk, korábbi példák, mintaadatok </li>
+  <li><strong>Output format:</strong> milyen formátumban kérjük a választ (lista, táblázat, JSON, blokkdiagram) </li>
+  <li><strong>Guardrails:</strong> tiltások, pontosítások, amihez a modellnek tartania kell magát </li>
+</ul>
+
+<h3>A jó prompt szerkezete</h3>
+<p>Egy jól megírt prompt tipikus felépítése:</p>
+
+<pre>
+[SZEREPKÖR] 
+   Pl.: "You are an AI that explains COBOL programs top-down."
+
+[FELADAT]
+   Pl.: "Magyarázd el a program logikáját lépésekre bontva."
+
+[KONTEXTUS]
+   Pl.: "A kód egy batch feldolgozási lépést valósít meg..."
+
+[MEGKÖTÉSEK]
+   Pl.: "Ne találj ki nem létező fájlokat. Ha nem tudod, válaszolj: NEED_MORE_CONTEXT."
+
+[KIMENETI FORMÁTUM]
+   Pl.: "A választ 5 pontba rendezve add meg."
+</pre>
+
+<h3>Jó és rossz példák</h3>
+
+<p><strong>Rossz prompt:</strong><br>
+„Magyarázd el ezt a COBOL programot."  
+– túl általános, nem struktúrált.</p>
+
+<p><strong>Jó prompt:</strong><br>
+„Magyarázd el a következő COBOL program működését.  
+A magyarázat tartalmazza:
+<ul>
+  <li>a program célját</li>
+  <li>a fő logikai szakaszokat</li>
+  <li>a PERFORM hívások sorrendjét</li>
+  <li>az I/O műveletek szerepét</li>
+</ul>
+Ha bizonytalan vagy, válaszolj: <em>NEED_MORE_CONTEXT</em>.”
+</p>
+
+<h3>Tipikus hibák, amelyeket érdemes elkerülni</h3>
+<ul>
+  <li>túl rövid, homályos utasítás</li>
+  <li>nincs megadva a kontextus</li>
+  <li>nincs kimeneti formátum</li>
+  <li>nincsenek megkötések (pl. anti‑hallucinációs elvek)</li>
+  <li>a modell „feladata” nincs definiálva</li>
+</ul>
+
+<h3>Anti‑hallucináció technikák</h3>
+<ul>
+  <li>„Ha bizonytalan vagy, válaszolj: NEED_MORE_CONTEXT.”</li>
+  <li>„Csak a bemenetben szereplő elemeket használd.”</li>
+  <li>„Semmit se találj ki — amit nem tudsz, írd le.”</li>
+  <li>„A válasz végén jelöld, ha volt olyan rész, amely bizonytalan.”</li>
+</ul>
+
+<h3>Prompt sablon AIM/C‑hez</h3>
+<pre>
+SYSTEM:
+You are an MF/COBOL explain engine.
+
+TASK:
+Explain the program top-down.
+
+CONTEXT:
+- Input: COBOL program
+- Detect: sections, PERFORM tree, IO, WS-variables
+
+OUTPUT FORMAT:
+1. Purpose
+2. Main phases
+3. Control flow (PERFORM tree)
+4. IO logic
+5. Summary
+
+GUARDRAILS:
+- Do not invent files.
+- If missing context: NEED_MORE_CONTEXT.
+</pre>
+
+<h3>Hogyan érdemes gyakorolni?</h3>
+<ul>
+  <li>próbálj ki több verziót ugyanarra a feladatra</li>
+  <li>futtasd a sandbox notebookokban (Google Colab)</li>
+  <li>használj sablonos promptokat</li>
+  <li>figyeld meg, melyik megfogalmazás hozza a legkonzisztensebb eredményt</li>
+</ul>
+
+<p><em>Ez a rész az AI‑Mentor szerepkör és az LLM‑alapú rendszerek biztonságos, következetes használatát támogatja.</em></p>
         <!-- AI SANDBOX -->
         <h2 id="sandbox">AI Sandbox</h2>
         <p>Colab notebook futtatási útmutató…</p>

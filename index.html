@@ -23,17 +23,20 @@
         <input id="searchBox" type="search" placeholder="Keresés…" autocomplete="off" />
       </div>
 
-      <nav class="sidebar__nav" id="sideNav" aria-label="Oldalsáv menü">
-        <a href="#home" data-page="home" class="is-active">Főoldal</a>
-        <a href="#ai-alapok" data-page="ai-alapok">AI‑Alapok</a>
-        <a href="#prompt-engineering" data-page="prompt-engineering">Prompt Engineering</a>
-        <a href="#ai-sandbox" data-page="ai-sandbox">AI Sandbox</a>
-        <a href="#aimc-explain-engine" data-page="aimc-explain-engine">AIM/C Explain Engine</a>
-        <a href="#eszkozok" data-page="eszkozok">Eszközök</a>
-        <a href="#tudastar" data-page="tudastar">Tudástár</a>
-        <a href="#rag" data-page="rag">RAG</a>
-        <a href="#itf-adatlap" data-page="itf-adatlap">ITF‑Adatlap</a>
-        <a href="#iranyelvek" data-page="iranyelvek">Irányelvek</a>
+      
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Tartalom</div>
+    <nav id="toc" class="toc" aria-label="Tartalomjegyzék">
+      <div class="toc__empty">Válassz egy oldalt…</div>
+   </nav>
+ </div>
+
+<div class="sidebar__section">
+  <div class="sidebar__section-title">Gyors linkek</div>
+  <nav class="sidebar__nav" aria-label="Gyors linkek">
+    <a href="https://github.com/rgt0/Telekom-AI-Knowledge-Base" target="_blank" rel="noopener">GitHub repo</a>
+  </nav>
+</div>
 
         <div class="nav-sep"></div>
 

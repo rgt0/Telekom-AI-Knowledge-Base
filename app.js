@@ -108,3 +108,45 @@ function scrollToPendingAnchor(pageKey) {
   if (!pendingPage || pendingPage !== pageKey || !pendingAnchor) return;
 
   sessionStorage.removeItem("pendingPage");
+  sessionStorage.removeItem("pendingAnchor");
+
+  setTimeout(() => {
+    const el = document.getElementById(pendingAnchor);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // opcionális: betöltés után oldalon belüli highlight
+    if (pendingQuery) {
+      sessionStorage.removeItem("pendingQuery");
+      const inPage = document.getElementById("inPageSearch");
+      if (inPage) {
+        inPage.value = pendingQuery;
+        inPage.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+    }
+  }, 60);
+}
+
+/* ---------- Mobil sidebar ---------- */
+function openSidebar(){
+  sidebar.classList.add("is-open");
+  overlay.hidden = false;
+  menuBtn.setAttribute("aria-expanded", "true");
+}
+function closeSidebar(){
+  sidebar.classList.remove("is-open");
+  overlay.hidden = true;
+  menuBtn.setAttribute("aria-expanded", "false");
+}
+menuBtn?.addEventListener("click", () => sidebar.classList.contains("is-open") ? closeSidebar() : openSidebar());
+overlay?.addEventListener("click", closeSidebar);
+
+window.addEventListener("hashchange", () => loadPage(getPageFromHash()));
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+/* indulás */
+loadPage(getPageFromHash());

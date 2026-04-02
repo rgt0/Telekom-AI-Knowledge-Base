@@ -123,6 +123,11 @@ body{
   flex-direction:column;
 }
 
+
+.content{
+  padding:18px;
+}
+
 /* TOPBAR */
 .topbar{
   position:sticky;

@@ -48,7 +48,7 @@ async function loadPage(pageKey) {
         <p>Nem sikerült betölteni: <code>${url}</code></p>
         <p><small>${String(e)}</small></p>
       </section>`;
-    toc.innerHTML = `<div class="toc__empty">Nincs tartalomjegyzék.</div>`;
+      if (toc)    toc.innerHTML = `<div class="toc__empty">Nincs tartalomjegyzék.</div>`;
   }
 }
 
@@ -60,6 +60,7 @@ function setActiveTopNav(pageKey) {
 
 /* ---------- TOC: Sidebar tartalomjegyzék (H2 + H3) ---------- */
 function buildTOC() {
+   if (!toc) return; // nincs TOC konténer, nincs mit építeni
   const headings = content.querySelectorAll("h2, h3");
   if (!headings.length) {
     toc.innerHTML = `<div class="toc__empty">Nincs cím a tartalomjegyzékhez.</div>`;

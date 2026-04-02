@@ -239,7 +239,11 @@ body{
   .sidebar.is-open{
     transform: translateX(0);
   }
-
+.search-hit__section{
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
   .icon-btn{ display:inline-flex; }
 
   .topnav{

@@ -1,125 +1,110 @@
-/* Telekom AI KB – minimal SPA routing (hash) */
-
-const pages = {
-  "home": `
-    <section class="card">
-      <span class="badge">Portál</span>
-      <h1>Telekom AI Knowledge Base</h1>
-      <p>Válassz a bal oldali menüből (sidebar) vagy a felső navigációból.</p>
-      <ul>
-        <li>Reszponzív sidebar + topnav</li>
-        <li>Hash-alapú navigáció (GitHub Pages kompatibilis)</li>
-        <li>Keresés a menüpontokra</li>
-      </ul>
-    </section>
-  `,
-  "ai-alapok": `
-    <section class="card">
-      <h2>AI‑Alapok</h2>
-      <p>Itt jönnek az alapfogalmak: LLM, embedding, token, kontextus, RAG, EIE…</p>
-    </section>
-  `,
-  "prompt-engineering": `
-    <section class="card">
-      <h2>Prompt Engineering</h2>
-      <p>Sablonok, példák, guardrail-ek, best practice-ek.</p>
-    </section>
-  `,
-  "ai-sandbox": `
-    <section class="card">
-      <h2>AI Sandbox</h2>
-      <p>Biztonságos tesztelési környezet: adatszabályok, logolás, mérések.</p>
-    </section>
-  `,
-  "aimc-explain-engine": `
-    <section class="card">
-      <h2>AIM/C Explain Engine</h2>
-      <p>Magyarázhatóság, döntéstámogatás, trace, források, auditálhatóság.</p>
-    </section>
-  `,
-  "eszkozok": `
-    <section class="card">
-      <h2>Eszközök</h2>
-      <p>Tooling: pipeline, konverterek, validátorok, indexer, stb.</p>
-    </section>
-  `,
-  "tudastar": `
-    <section class="card">
-      <h2>Tudástár</h2>
-      <p>Dokumentumcsomagok, metaadatok, chunkolás és verziózás.</p>
-    </section>
-  `,
-  "rag": `
-    <section class="card">
-      <h2>RAG</h2>
-      <p>Chunking + embedding + retrieval + válaszgenerálás – irányelvek és minták.</p>
-    </section>
-  `,
-  "itf-adatlap": `
-    <section class="card">
-      <h2>ITF‑Adatlap</h2>
-      <p>ITF sablon: cél, scope, adatforrások, megfelelőség, owner, SLA.</p>
-    </section>
-  `,
-  "iranyelvek": `
-    <section class="card">
-      <h2>Irányelvek</h2>
-      <p>Adatvédelem, compliance, prompt safety, minőségi kapuk.</p>
-    </section>
-  `
-};
-
 const content = document.getElementById("content");
+const toc = document.getElementById("toc");
 const menuBtn = document.getElementById("menuBtn");
 const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
-const searchBox = document.getElementById("searchBox");
 
 function getPageFromHash() {
   const hash = (location.hash || "#home").replace("#", "").trim();
-  return pages[hash] ? hash : "home";
+  return hash || "home";
 }
 
-function setActiveLinks(pageKey) {
-  document.querySelectorAll("[data-page]").forEach(a => {
+/* ---------- Slug helpers (EGYEZZEN a search.js-sel) ---------- */
+function slugify(s) {
+  return String(s).toLowerCase().trim()
+    .replace(/[^\w\u00C0-\u017F]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function uniqueSlugger() {
+  const map = new Map(); // base -> count
+  return (title) => {
+    const base = slugify(title);
+    const n = (map.get(base) || 0) + 1;
+    map.set(base, n);
+    return n === 1 ? base : `${base}-${n}`;
+  };
+}
+
+/* ---------- Betöltés külön HTML fragmentekből ---------- */
+async function loadPage(pageKey) {
+  const url = `./pages/${pageKey}.html`;
+  try {
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const html = await res.text();
+
+    content.innerHTML = html;
+    content.focus({ preventScroll: true });
+
+    setActiveTopNav(pageKey);
+    buildTOC();                 // H2/H3 -> TOC + id kiosztás
+    scrollToPendingAnchor(pageKey); // keresőből jövő ugrás
+    closeSidebar();
+  } catch (e) {
+    content.innerHTML = `
+      <section class="card">
+        <h2>Hiba</h2>
+        <p>Nem sikerült betölteni: <code>${url}</code></p>
+        <p><small>${String(e)}</small></p>
+      </section>`;
+    toc.innerHTML = `<div class="toc__empty">Nincs tartalomjegyzék.</div>`;
+  }
+}
+
+function setActiveTopNav(pageKey) {
+  document.querySelectorAll("#topNav a[data-page]").forEach(a => {
     a.classList.toggle("is-active", a.getAttribute("data-page") === pageKey);
   });
 }
 
-function render() {
-  const pageKey = getPageFromHash();
-  content.innerHTML = pages[pageKey];
-  setActiveLinks(pageKey);
-  content.focus({ preventScroll: true });
-  closeSidebar();
-}
+/* ---------- TOC: Sidebar tartalomjegyzék (H2 + H3) ---------- */
+function buildTOC() {
+  const headings = content.querySelectorAll("h2, h3");
+  if (!headings.length) {
+    toc.innerHTML = `<div class="toc__empty">Nincs cím a tartalomjegyzékhez.</div>`;
+    return;
+  }
 
-function openSidebar(){
-  sidebar.classList.add("is-open");
-  overlay.hidden = false;
-  menuBtn.setAttribute("aria-expanded", "true");
-}
-function closeSidebar(){
-  sidebar.classList.remove("is-open");
-  overlay.hidden = true;
-  menuBtn.setAttribute("aria-expanded", "false");
-}
+  const makeUnique = uniqueSlugger();
 
-menuBtn?.addEventListener("click", () => {
-  sidebar.classList.contains("is-open") ? closeSidebar() : openSidebar();
-});
-overlay?.addEventListener("click", closeSidebar);
-
-window.addEventListener("hashchange", render);
-
-/* Keresés: menüpontok szűrése (sidebar linkek) */
-searchBox?.addEventListener("input", (e) => {
-  const q = (e.target.value || "").toLowerCase();
-  document.querySelectorAll("#sideNav a[data-page]").forEach(a => {
-    const text = a.textContent.toLowerCase();
-    a.style.display = text.includes(q) ? "" : "none";
+  // 1) id-k kiosztása H2/H3-ra (deduplikációval)
+  headings.forEach(h => {
+    const title = (h.textContent || "").trim();
+    if (!title) return;
+    if (!h.id) h.id = makeUnique(title);
   });
-});
 
-render();
-``
+  // 2) TOC felépítés
+  const items = Array.from(headings).map(h => {
+    const level = h.tagName.toLowerCase(); // h2/h3
+    const cls = level === "h3" ? "toc__item toc__item--sub" : "toc__item";
+    const title = (h.textContent || "").trim();
+    return `
+      <a href="#" class="${cls}" data-scrollto="${h.id}">
+        ${escapeHtml(title)}
+      </a>`;
+  });
+
+  toc.innerHTML = items.join("");
+
+  // 3) TOC kattintás: smooth scroll
+  toc.querySelectorAll("a[data-scrollto]").forEach(a => {
+    a.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      const id = a.getAttribute("data-scrollto");
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+}
+
+/* ---------- Keresőből érkező: oldal betöltés után fejezetre ugrás ---------- */
+function scrollToPendingAnchor(pageKey) {
+  const pendingPage = sessionStorage.getItem("pendingPage");
+  const pendingAnchor = sessionStorage.getItem("pendingAnchor");
+  const pendingQuery = sessionStorage.getItem("pendingQuery"); // opcionális, in-page highlight
+
+  if (!pendingPage || pendingPage !== pageKey || !pendingAnchor) return;
+
+  sessionStorage.removeItem("pendingPage");

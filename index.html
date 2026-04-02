@@ -1,50 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <title>T-AI-KB</title>
-    <link rel="stylesheet" href="telekom-ui.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Telekom AI Knowledge Base</title>
+
+  <!-- ✅ JAVÍTÁS: helyes rel + href + relatív útvonal -->
+  <link rel="stylesheet" href="./telekom-ui.css" />
+
+  <!-- ✅ külön JS a navigációhoz és tartalomhoz -->
+  <script defer src="./app.js"></script>
 </head>
 
 <body>
+  <div class="layout">
 
-    <div class="topnav">T‑AI‑KB</div>
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar" aria-label="Oldalsáv">
+      <div class="sidebar__header">
+        <div class="brand">T‑AI‑KB</div>
+      </div>
 
-    <div class="sidebar">
-        <input type="text" placeholder="Keresés...">
+      <div class="sidebar__search">
+        <label class="sr-only" for="searchBox">Keresés</label>
+        <input id="searchBox" type="search" placeholder="Keresés…" autocomplete="off" />
+      </div>
 
-        <a href="index.html" class="active">Főoldal</a>
-        <a href="ai-alapok.html">AI‑Alapok</a>
-        <a href="prompt-engineering.html">Prompt Engineering</a>
-        <a href="ai-sandbox.html">AI Sandbox</a>
-        <a href="explain-engine.html">AIM/C Explain Engine</a>
-        <a href="eszkozok.html">Eszközök</a>
-        <a href="tudastar.html">Tudástár</a>
-        <a href="rag.html">RAG</a>
-        <a href="itf.html">ITF‑Adatlap</a>
-        <a href="iranyelvek.html">Irányelvek</a>
-        <a href="https://github.com/rgt0/Telekom-AI-Knowledge-Base">GitHub repo</a>
-    </div>
+      <nav class="sidebar__nav" id="sideNav" aria-label="Oldalsáv menü">
+        <a href="#home" data-page="home" class="is-active">Főoldal</a>
+        <a href="#ai-alapok" data-page="ai-alapok">AI‑Alapok</a>
+        <a href="#prompt-engineering" data-page="prompt-engineering">Prompt Engineering</a>
+        <a href="#ai-sandbox" data-page="ai-sandbox">AI Sandbox</a>
+        <a href="#aimc-explain-engine" data-page="aimc-explain-engine">AIM/C Explain Engine</a>
+        <a href="#eszkozok" data-page="eszkozok">Eszközök</a>
+        <a href="#tudastar" data-page="tudastar">Tudástár</a>
+        <a href="#rag" data-page="rag">RAG</a>
+        <a href="#itf-adatlap" data-page="itf-adatlap">ITF‑Adatlap</a>
+        <a href="#iranyelvek" data-page="iranyelvek">Irányelvek</a>
 
-    <main>
+        <div class="nav-sep"></div>
 
-        <nav class="navbar">
-            <a href="index.html" class="active">Kezdőlap</a>
-            <a href="ai-alapok.html">AI‑Alapok</a>
-            <a href="prompt-engineering.html">Prompt Engineering</a>
-            <a href="ai-sandbox.html">AI Sandbox</a>
-            <a href="explain-engine.html">AIM/C Explain Engine</a>
-            <a href="eszkozok.html">Eszközök</a>
-            <a href="tudastar.html">Tudástár</a>
-            <a href="rag.html">RAG</a>
-            <a href="itf.html">ITF‑Adatlap</a>
-            <a href="iranyelvek.html">Irányelvek</a>
+        <a href="https://github.com/rgt0/Telekom-AI-Knowledge-Base" target="_blank" rel="noopener">
+          GitHub repo
+        </a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <small>© 2026 Telekom AI Knowledge Base</small>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+
+      <!-- TOPBAR -->
+      <header class="topbar" aria-label="Felső navigáció">
+        <button class="icon-btn" id="menuBtn"
+                aria-label="Menü"
+                aria-controls="sidebar"
+                aria-expanded="false">
+          ☰
+        </button>
+
+        <div class="topbar__title">
+          Telekom AI Knowledge Base
+        </div>
+
+        <!-- ✅ JAVÍTÁS: topnav wrap + overflow kezelve CSS-ben -->
+        <nav class="topnav" id="topNav" aria-label="Fő navigáció">
+          <a href="#ai-alapok" data-page="ai-alapok">AI Alapok</a>
+          <a href="#prompt-engineering" data-page="prompt-engineering">Prompt Engineering</a>
+          <a href="#ai-sandbox" data-page="ai-sandbox">AI Sandbox</a>
+          <a href="#aimc-explain-engine" data-page="aimc-explain-engine">AIM/C Explain Engine</a>
+          <a href="#eszkozok" data-page="eszkozok">Eszközök</a>
+          <a href="#tudastar" data-page="tudastar">Tudástár</a>
+          <a href="#rag" data-page="rag">RAG</a>
+          <a href="#itf-adatlap" data-page="itf-adatlap">ITF‑Adatlap</a>
+          <a href="#iranyelvek" data-page="iranyelvek">Irányelvek</a>
         </nav>
+      </header>
 
-        <h1>T‑AI‑KB – Portál</h1>
-        <p>Üdvözlünk a Telekom AI tudásportálon. Válassz a NAVBAR‑ból vagy a sidebarból.</p>
+      <!-- CONTENT -->
+      <main class="content" id="content" tabindex="-1" aria-live="polite">
+        <!-- JS tölti be -->
+      </main>
+    </div>
+  </div>
 
-    </main>
-
+  <!-- mobil overlay (sidebar nyitásnál) -->
+  <div class="overlay" id="overlay" hidden></div>
 </body>
 </html>

@@ -1,163 +1,252 @@
-/* ───────────────────────────────────────────
-   ALAPSZÍNEK
-──────────────────────────────────────────── */
-:root {
-    --telekom-magenta: #e20074;
-    --telekom-magenta-dark: #b0005a;
-    --telekom-magenta-light: #ff5ab9;
-    --telekom-gray-100: #f5f5f5;
-    --telekom-gray-200: #e3e3e3;
-    --telekom-gray-900: #222;
-    --white: #fff;
+:root{
+  --t-magenta:#E20074;
+  --t-magenta-dark:#B0005B;
+  --bg:#ffffff;
+  --bg-soft:#fff3f8;
+  --text:#1b1b1b;
+  --muted:#666;
+  --border:#f2b3d0;
+  --shadow: 0 10px 30px rgba(0,0,0,.08);
+
+  --sidebar-w: 280px;
+  --topbar-h: 56px;
+  --radius: 14px;
+  --gap: 16px;
+
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
 }
 
-/* ───────────────────────────────────────────
-   ALAP BEÁLLÍTÁSOK
-──────────────────────────────────────────── */
-body {
-    margin: 0;
-    font-family: Segoe UI, Arial, sans-serif;
-    background: var(--telekom-gray-100);
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family:var(--font);
+  color:var(--text);
+  background:linear-gradient(180deg, var(--bg-soft), var(--bg));
 }
 
-/* ───────────────────────────────────────────
-   TOP NAV SÁV
-──────────────────────────────────────────── */
-.topnav {
-    background: var(--telekom-magenta);
-    color: #fff;
-    padding: 12px 20px;
-    font-weight: 600;
-    font-size: 20px;
+/* A11y */
+.sr-only{
+  position:absolute !important;
+  width:1px;height:1px;
+  padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);
+  white-space:nowrap;border:0;
 }
 
-/* ───────────────────────────────────────────
-   OLDALSÁV (SIDEBAR)
-──────────────────────────────────────────── */
-.sidebar {
-    position: fixed;
-    left: 0;
-    top: 60px;
-    width: 260px;
-    height: 100%;
-    background: #fff;
-    border-right: 3px solid var(--telekom-magenta);
-    padding-top: 20px;
-    box-shadow: 0 0 10px rgba(226,0,116,0.15);
+/* LAYOUT */
+.layout{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
 }
 
-.sidebar a {
-    display: block;
-    padding: 12px 20px;
-    color: var(--telekom-magenta-dark);
-    font-weight: 600;
-    text-decoration: none;
-    border-left: 5px solid transparent;
+/* SIDEBAR */
+.sidebar{
+  position:sticky;
+  top:0;
+  height:100vh;
+  background: #fff;
+  border-right: 2px solid var(--border);
+  padding: 14px;
+  display:flex;
+  flex-direction:column;
+  gap: 12px;
 }
 
-.sidebar a:hover {
-    background: var(--telekom-gray-200);
-    border-left: 5px solid var(--telekom-magenta);
+.sidebar__header{
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--t-magenta);
+  color:#fff;
+  box-shadow: var(--shadow);
 }
 
-/* ───────────────────────────────────────────
-   FŐ TARTALOM
-──────────────────────────────────────────── */
-.main-content {
-    margin-left: 350px;
-    padding: 30px;
+.brand{
+  font-weight: 800;
+  letter-spacing:.5px;
 }
 
-h1 {
-    border-bottom: 4px solid var(--telekom-magenta);
-    padding-bottom: 10px;
-    color: var(--telekom-magenta-dark);
+.sidebar__search input{
+  width:100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  outline:none;
+}
+.sidebar__search input:focus{
+  border-color: var(--t-magenta);
+  box-shadow: 0 0 0 3px rgba(226,0,116,.15);
 }
 
-/* ───────────────────────────────────────────
-   GITHUB GOMB
-──────────────────────────────────────────── */
-.btn-container {
-    text-align: left;
-    margin: 20px 0 40px;
+.sidebar__nav{
+  display:flex;
+  flex-direction:column;
+  gap: 6px;
+  padding: 6px 0;
+  overflow:auto;
 }
 
-.github-button {
-    background: var(--telekom-magenta);
-    color: #fff;
-    padding: 14px 26px;
-    font-size: 18px;
-    font-weight: 700;
-    border-radius: 6px;
-    text-decoration: none;
-    display: inline-block;
-    box-shadow: 0 4px 10px rgba(226,0,116,0.35);
-    transition: 0.2s ease-in-out;
+.sidebar__nav a{
+  text-decoration:none;
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+}
+.sidebar__nav a:hover{
+  background: var(--bg-soft);
+  border-color: var(--border);
+}
+.sidebar__nav a.is-active{
+  background: rgba(226,0,116,.10);
+  border-color: rgba(226,0,116,.35);
+  color: var(--t-magenta-dark);
+  font-weight: 700;
+}
+.nav-sep{
+  height:1px;
+  background: var(--border);
+  margin: 8px 0;
 }
 
-.github-button:hover {
-    background: var(--telekom-magenta-dark);
-    transform: translateY(-3px);
+.sidebar__footer{
+  margin-top:auto;
+  color: var(--muted);
+  padding: 8px 2px;
 }
 
-/* ───────────────────────────────────────────
-   KERESŐMEZŐ
-──────────────────────────────────────────── */
-.search-input {
-    width: 80%;
-    margin: 10px auto;
-    padding: 10px;
-    border: 2px solid var(--telekom-magenta);
-    border-radius: 6px;
-    font-size: 14px;
-    display: block;
+/* MAIN */
+.main{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
 }
 
-/* ───────────────────────────────────────────
-   KERESÉSI TALÁLATOK
-──────────────────────────────────────────── */
-.search-results {
-    margin-top: 10px;
-    max-height: 400px;
-    overflow-y: auto;
-    padding-left: 10px;
-    padding-right: 10px;
+/* TOPBAR */
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:10;
+  height: var(--topbar-h);
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--border);
+  background: #fff;
 }
 
-.search-item {
-    background: var(--telekom-gray-200);
-    padding: 10px;
-    margin: 8px 0;
-    border-left: 4px solid var(--telekom-magenta);
-    border-radius: 4px;
-    cursor: pointer;
+.icon-btn{
+  display:none;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius: 12px;
+  padding: 8px 10px;
+  cursor:pointer;
+}
+.icon-btn:hover{
+  border-color: var(--t-magenta);
 }
 
-.search-item:hover {
-    background: var(--telekom-magenta);
-    color: white;
+.topbar__title{
+  font-weight: 800;
+  color: var(--t-magenta-dark);
+  white-space:nowrap;
 }
 
-/* ───────────────────────────────────────────
-   KIEMELÉS (HIGHLIGHT)
-──────────────────────────────────────────── */
-.highlight {
-    background-color: var(--telekom-magenta-light);
-    color: white;
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-weight: 700;
+/* ✅ JAVÍTÁS: a felső menü nem fut ki a képernyőről */
+.topnav{
+  margin-left:auto;
+  display:flex;
+  gap: 8px;
+  flex-wrap: wrap;              /* wrap desktopon */
+  justify-content:flex-end;
+  align-items:center;
+  max-width: 70vw;
+}
+.topnav a{
+  text-decoration:none;
+  color: var(--t-magenta-dark);
+  border: 1px solid rgba(226,0,116,.22);
+  background: rgba(226,0,116,.06);
+  padding: 7px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.topnav a:hover{
+  background: rgba(226,0,116,.12);
+  border-color: rgba(226,0,116,.4);
+}
+.topnav a.is-active{
+  background: var(--t-magenta);
+  color:#fff;
+  border-color: var(--t-magenta);
 }
 
-/* ───────────────────────────────────────────
-   RESZPONZÍV
-──────────────────────────────────────────── */
-@media(max-width: 900px) {
-    .sidebar { width: 250px; }
-    .main-content { margin-left: 270px; }
+/* CONTENT */
+.content{
+  padding: 18px;
 }
 
-@media(max-width: 700px) {
-    .sidebar { display: none; }
-    .main-content { margin-left: 20px; }
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 16px;
+  box-shadow: var(--shadow);
+}
+
+.card h1, .card h2, .card h3{ margin: 0 0 10px 0; }
+.card p{ margin: 0 0 10px 0; color: #2a2a2a; }
+.card ul{ margin: 8px 0 0 18px; }
+.badge{
+  display:inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(226,0,116,.10);
+  border: 1px solid rgba(226,0,116,.25);
+  color: var(--t-magenta-dark);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* OVERLAY (mobil) */
+.overlay{
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,.35);
+  z-index: 20;
+}
+
+/* ✅ Mobil: sidebar becsukható + topnav görgethető */
+@media (max-width: 980px){
+  .layout{
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    transform: translateX(-110%);
+    transition: transform .2s ease;
+    z-index: 30;
+    width: min(var(--sidebar-w), 86vw);
+    box-shadow: var(--shadow);
+  }
+  .sidebar.is-open{
+    transform: translateX(0);
+  }
+
+  .icon-btn{ display:inline-flex; }
+
+  .topnav{
+    flex-wrap: nowrap;        /* mobilon ne tördeljen */
+    overflow-x: auto;         /* hanem görgethető legyen */
+    max-width: 100%;
+    padding-bottom: 4px;
+  }
+  .topnav::-webkit-scrollbar{ height: 8px; }
 }

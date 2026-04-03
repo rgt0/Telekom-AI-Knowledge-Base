@@ -276,3 +276,117 @@ if (searchBox) {
   });
 }
 buildTOC();
+// --- In-page highlight search (biztos bekötés) ---
+(() => {
+  const contentEl = document.getElementById("content");
+  const searchEl = document.getElementById("searchBox");
+  if (!contentEl || !searchEl) return;
+
+  let marks = [];
+  let active = -1;
+
+  const escapeRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+  function clearHighlights() {
+    contentEl.querySelectorAll("mark.hl").forEach(mark => {
+      mark.replaceWith(document.createTextNode(mark.textContent));
+    });
+    marks = [];
+    active = -1;
+  }
+
+  function highlight(query) {
+    const walker = document.createTreeWalker(contentEl, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        const parent = node.parentNode;
+        if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        if (parent && parent.tagName) {
+          const tag = parent.tagName.toLowerCase();
+          if (tag === "script" || tag === "style" || tag === "mark") return NodeFilter.FILTER_REJECT;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    const re = new RegExp(escapeRegExp(query), "gi");
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+
+    nodes.forEach(node => {
+      const text = node.nodeValue;
+      re.lastIndex = 0;
+      if (!re.test(text)) return;
+
+      const frag = document.createDocumentFragment();
+      let last = 0;
+      re.lastIndex = 0;
+
+      let m;
+      while ((m = re.exec(text)) !== null) {
+        const before = text.slice(last, m.index);
+        if (before) frag.appendChild(document.createTextNode(before));
+
+        const mark = document.createElement("mark");
+        mark.className = "hl";
+        mark.textContent = m[0];
+        frag.appendChild(mark);
+
+        last = m.index + m[0].length;
+      }
+
+      const after = text.slice(last);
+      if (after) frag.appendChild(document.createTextNode(after));
+
+      node.parentNode.replaceChild(frag, node);
+    });
+
+    marks = Array.from(contentEl.querySelectorAll("mark.hl"));
+    active = marks.length ? 0 : -1;
+  }
+
+  function jumpTo(idx) {
+    if (!marks.length) return;
+    if (idx < 0) idx = marks.length - 1;
+    if (idx >= marks.length) idx = 0;
+
+    marks.forEach(m => m.classList.remove("hl-active"));
+    active = idx;
+
+    const el = marks[active];
+    el.classList.add("hl-active");
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  // gépelés közben highlight
+  searchEl.addEventListener("input", () => {
+    const q = searchEl.value.trim();
+    clearHighlights();
+    if (q.length >= 2) {
+      highlight(q);
+      jumpTo(0);
+    }
+  });
+
+  // Enter = next, Shift+Enter = prev, Esc = törlés
+  searchEl.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (e.shiftKey) jumpTo(active - 1);
+      else jumpTo(active + 1);
+    }
+    if (e.key === "Escape") {
+      searchEl.value = "";
+      clearHighlights();
+    }
+  });
+
+  // oldalváltás után (loadPage) gyakran új content jön -> tisztítunk
+  window.addEventListener("hashchange", () => {
+    clearHighlights();
+    const q = searchEl.value.trim();
+    if (q.length >= 2) {
+      highlight(q);
+      jumpTo(0);
+    }
+  });
+})();

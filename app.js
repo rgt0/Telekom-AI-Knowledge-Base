@@ -4,6 +4,7 @@ const menuBtn = document.getElementById("menuBtn");
 const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
 const searchStatus = document.getElementById("searchStatus");
+const searchBox    = document.getElementById("searchBox");
 
 function getPageFromHash() {
   const hash = (location.hash || "#home").replace("#", "").trim();
@@ -252,4 +253,26 @@ function jumpTo(index){
 updateSearchStatus();
 /* indulás */
 loadPage(getPageFromHash());
+if (searchBox) {
+  searchBox.addEventListener("input", () => {
+    const q = searchBox.value.trim();
+    clearHighlights();
+    if (q.length >= 2) {
+      highlightInContent(q);
+      jumpTo(0);
+    }
+  });
+
+  searchBox.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (e.shiftKey) jumpTo(activeMark - 1);
+      else jumpTo(activeMark + 1);
+    }
+    if (e.key === "Escape") {
+      searchBox.value = "";
+      clearHighlights();
+    }
+  });
+}
 buildTOC();

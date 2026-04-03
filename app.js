@@ -1,3 +1,5 @@
+
+/* ---------- DOM elements ---------- */
 const content = document.getElementById("content");
 const toc     = document.getElementById("toc");
 const menuBtn = document.getElementById("menuBtn");
@@ -254,7 +256,12 @@ updateSearchStatus();
 /* indulás */
 loadPage(getPageFromHash());
 if (searchBox) {
+if (searchBox) {
   searchBox.addEventListener("input", () => {
+    applySearch();
+  });
+}
+/*  searchBox.addEventListener("input", () => {
     const q = searchBox.value.trim();
     clearHighlights();
     if (q.length >= 2) {
@@ -262,7 +269,11 @@ if (searchBox) {
       jumpTo(0);
     }
   });
-
+ 
+  let marks = [];
+  let active = -1;
+  let activeMark = -1;
+  
   searchBox.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -274,6 +285,7 @@ if (searchBox) {
       clearHighlights();
     }
   });
+  */
 }
 buildTOC();
 // --- In-page highlight search (biztos bekötés) ---
@@ -282,8 +294,7 @@ buildTOC();
   const searchEl = document.getElementById("searchBox");
   if (!contentEl || !searchEl) return;
 
-  let marks = [];
-  let active = -1;
+  
 
   const escapeRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
@@ -294,6 +305,36 @@ buildTOC();
     marks = [];
     active = -1;
   }
+let marks = [];
+let activeMark = -1;
+
+function setStatus(html) {
+  if (searchStatus) searchStatus.innerHTML = html || "";
+}
+
+function applySearch() {
+  if (!searchBox || !content) return;
+
+  const q = searchBox.value.trim();
+  clearHighlights();
+
+  if (q.length < 2) {
+    setStatus("");
+    return;
+  }
+
+  highlightInContent(q);
+
+  if (!marks.length) {
+    setStatus(`Nincs találat: <strong>${escapeHtml(q)}</strong>`);
+    return;
+  }
+
+  jumpTo(0);
+  setStatus(`Találat: <strong>${activeMark + 1}</strong>/<strong>${marks.length}</strong>`);
+marks = Array.from(content.querySelectorAll("mark.hl"));
+activeMark = marks.length ? 0 : -1;
+}
 
   function highlight(query) {
     const walker = document.createTreeWalker(contentEl, NodeFilter.SHOW_TEXT, {

@@ -243,7 +243,6 @@ buildTOC();
 
   
 
-  const escapeRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
   function clearHighlights() {
     content.querySelectorAll("mark.hl").forEach(mark => {
@@ -252,11 +251,6 @@ buildTOC();
   setStatus();
   }
 // Globális állapot (legyen csak egyszer!)
-
-
-function escapeRegExp(s){
-  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
 
 function highlightInContent(query){
   if (!content) return;
@@ -273,7 +267,6 @@ function highlightInContent(query){
     }
   });
 
-  const re = new RegExp(escapeRegExp(query), "gi");
   const nodes = [];
   while (walker.nextNode()) nodes.push(walker.currentNode);
 
@@ -347,8 +340,7 @@ activeMark = marks.length ? 0 : -1;
       }
     });
 
-    const re = new RegExp(escapeRegExp(query), "gi");
-    const nodes = [];
+   const nodes = [];
     while (walker.nextNode()) nodes.push(walker.currentNode);
 
     nodes.forEach(node => {

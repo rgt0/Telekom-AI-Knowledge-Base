@@ -114,5 +114,15 @@ document.querySelectorAll(".js-scroll-top").forEach(link => {
     }
   });
 });
+// Top / Vissza a tetejére (smooth)
+document.querySelectorAll(".js-scroll-top").forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    const content = document.getElementById("content");
+    if (content) content.focus({ preventScroll: true });
+  });
+});
 window.addEventListener("hashchange", () => loadPage(pageFromHash()));
 loadPage(pageFromHash());

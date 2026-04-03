@@ -313,3 +313,32 @@ mark.hl-active{
 .card strong { font-weight: 800; }
 .card em { color: var(--t-magenta-dark); font-style: normal; }
 }
+/* === Sidebar: csak a TOC legyen görgethető (B opció) === */
+
+.sidebar{
+  height: 100vh;
+  overflow: hidden;           /* a teljes sidebar ne scrollozzon */
+  display: flex;
+  flex-direction: column;
+}
+
+/* A fix részek maradjanak fixek */
+.sidebar__header,
+.sidebar__search,
+.sidebar__footer{
+  flex: 0 0 auto;
+}
+
+/* A TOC szekció legyen a rugalmas rész */
+.sidebar__section{
+  flex: 1 1 auto;
+  min-height: 0;              /* KRITIKUS: enélkül nem működik a belső scroll */
+}
+
+/* Maga a TOC görgethető */
+#toc.toc{
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;              /* KRITIKUS */
+  padding-right: 6px;         /* ne takarja a scrollbar a szöveget */
+}

@@ -273,4 +273,21 @@ body{
     padding-bottom: 4px;
   }
   .topnav::-webkit-scrollbar{ height: 8px; }
+.sidebar__section-title{
+  font-weight: 800;
+  color: var(--t-magenta-dark);
+  margin: 10px 0 6px;
+}
+
+.toc__item{
+  display:block;
+  padding: 8px 10px;
+  border-radius: 10px;
+  text-decoration:none;
+  color: var(--text);
+}
+.toc__item:hover{ background: var(--bg-soft); }
+.toc__item--sub{ padding-left: 22px; color: var(--muted); }
+
+.toc__empty{ color: var(--muted); padding: 6px 2px; }
 }

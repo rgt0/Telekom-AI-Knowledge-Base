@@ -8,7 +8,59 @@ function getPageFromHash() {
   const hash = (location.hash || "#home").replace("#", "").trim();
   return hash || "home";
 }
+function slugify(s) {
+  return String(s).toLowerCase().trim()
+    .replace(/[^\w\u00C0-\u017F]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
 
+function buildTOC() {
+  if (!toc || !content) return;
+
+  const headings = content.querySelectorAll("h2, h3");
+  if (!headings.length) {
+    toc.innerHTML = `<div class="toc__empty">Nincs cím a tartalomjegyzékhez.</div>`;
+    return;
+  }
+
+  // egyedi id-k, hogy azonos címek se ütközzenek
+  const seen = new Map();
+  const uniqueId = (title) => {
+    const base = slugify(title);
+    const n = (seen.get(base) || 0) + 1;
+    seen.set(base, n);
+    return n === 1 ? base : `${base}-${n}`;
+  };
+
+  const items = [];
+  headings.forEach(h => {
+    const text = (h.textContent || "").trim();
+    if (!text) return;
+    if (!h.id) h.id = uniqueId(text);
+
+    const isH3 = h.tagName.toLowerCase() === "h3";
+    items.push(
+      `<a href="#" data-scrollto="${h.id}" class="${isH3 ? "toc__item toc__item--sub" : "toc__item"}">${escapeHtml(text)}</a>`
+    );
+  });
+
+  toc.innerHTML = items.join("");
+
+  toc.querySelectorAll("a[data-scrollto]").forEach(a => {
+    a.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      const id = a.getAttribute("data-scrollto");
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
 /* ---------- Slug helpers (EGYEZZEN a search.js-sel) ---------- */
 function slugify(s) {
   return String(s).toLowerCase().trim()

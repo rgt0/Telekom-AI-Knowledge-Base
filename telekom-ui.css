@@ -345,3 +345,76 @@ mark.hl-active{
   overflow-x: hidden;
   padding-right: 6px;
 }
+/* === Sidebar layout: GitHub felül fix, TOC scroll, gyorslinkek alul fix === */
+
+.sidebar{
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Header fix */
+.sidebar__header{
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* GitHub felül gombként */
+.sidebar__github{
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.35);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12px;
+}
+.sidebar__github:hover{
+  background: rgba(255,255,255,.28);
+}
+
+/* Kereső fix */
+.sidebar__search{
+  flex: 0 0 auto;
+}
+
+/* TOC wrapper: ez kapja a maradék helyet */
+.sidebar__tocwrap{
+  flex: 1 1 auto;
+  min-height: 0;               /* KRITIKUS */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Maga a TOC scrollozik */
+#toc.toc{
+  flex: 1 1 auto;
+  min-height: 0;               /* KRITIKUS */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 6px;
+}
+
+/* Gyors linkek + footer fix alul */
+.sidebar__bottom,
+.sidebar__footer{
+  flex: 0 0 auto;
+}
+
+.sidebar__section-title{
+  font-weight: 800;
+  color: var(--t-magenta-dark);
+  margin: 6px 0;
+}
+
+/* Top link kicsit kiemelve */
+.sidebar__nav .js-scroll-top{
+  font-weight: 800;
+  color: var(--t-magenta-dark);
+}

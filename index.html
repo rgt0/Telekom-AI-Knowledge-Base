@@ -14,54 +14,56 @@
   <div class="layout">
 
     <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar" aria-label="Oldalsáv">
-      <div class="sidebar__header">
-        <div class="brand">T‑AI‑KB</div>
-      </div>
+<aside class="sidebar" id="sidebar" aria-label="Oldalsáv">
 
-      <div class="sidebar__search">
-        <label class="sr-only" for="searchBox">Keresés</label>
-        <input id="searchBox" type="search" placeholder="Keresés…" autocomplete="off" />
-        <div id="searchStatus" class="search-status" aria-live="polite"></div> 
-      </div>
+  <!-- FIX FELÜL: brand + GitHub -->
+  <div class="sidebar__header">
+    <div class="brand">T‑AI‑KB</div>
 
+    <a class="sidebar__github"
+       href="https://github.com/rgt0/Telekom-AI-Knowledge-Base"
+       target="_blank" rel="noopener"
+       aria-label="Ugrás a GitHub repo-ra">
+      GitHub ↗
+    </a>
+  </div>
 
-<div class="sidebar__section">
-  <div class="sidebar__section-title">Gyors linkek</div>
- <div class="sidebar__section">
-  <div class="sidebar__section-title">Tartalom</div>
-  <nav id="toc" class="toc" aria-label="Tartalomjegyzék">
-    <div class="toc__empty">Válassz egy oldalt…</div>
-  </nav>
-</div>
+  <!-- FIX FELÜL: kereső -->
+  <div class="sidebar__search">
+    <label class="sr-only" for="searchBox">Keresés</label>
+    <input id="searchBox" type="search" placeholder="Keresés…" autocomplete="off" />
+    <div id="searchStatus" class="search-status" aria-live="polite"></div>
+  </div>
 
+  <!-- SCROLL KÖZÉPEN: csak a TOC -->
+  <div class="sidebar__tocwrap">
+    <div class="sidebar__section-title">Tartalom</div>
+    <nav id="toc" class="toc" aria-label="Tartalomjegyzék">
+      <div class="toc__empty">Válassz egy oldalt…</div>
+    </nav>
+  </div>
 
-        <div class="nav-sep"></div>
+  <!-- FIX ALUL: gyors linkek -->
+  <div class="sidebar__bottom">
+    <div class="sidebar__section-title">Gyors linkek</div>
+    <nav class="sidebar__nav" aria-label="Gyors linkek">
+      <a href="#home" data-page="home">Főoldal</a>
+      <a href="#german-coaching" data-page="german-coaching">German Coaching</a>
+      <a href="#rag" data-page="rag">RAG</a>
+      <a href="#iranyelvek" data-page="iranyelvek">Irányelvek</a>
 
-        <a href="https://github.com/rgt0/Telekom-AI-Knowledge-Base" target="_blank" rel="noopener">
-          GitHub repo
-        </a>
-      </nav>
+      <div class="nav-sep"></div>
 
-      <div class="sidebar__footer">
-        <small>© 2026 Telekom AI Knowledge Base</small>
-      </div><!-- FIX alul: Gyors linkek -->
-<div class="sidebar__bottom">
-  <div class="sidebar__section-title">Gyors linkek</div>
-  <nav class="sidebar__nav" aria-label="Gyors linkek">
-    <a href="#home" data-page="home">Főoldal</a>
-    <a href="#german-coaching" data-page="german-coaching">German Coaching</a>
-    <a href="#rag" data-page="rag">RAG</a>
-    <a href="#iranyelvek" data-page="iranyelvek">Irányelvek</a>
+      <a href="#" class="js-scroll-top">Top ↑ (Vissza a tetejére)</a>
+    </nav>
+  </div>
 
-    <div class="nav-sep"></div>
+  <!-- FIX ALUL: footer -->
+  <div class="sidebar__footer">
+    <small>© 2026 Telekom AI Knowledge Base</small>
+  </div>
 
-    <a href="#" class="js-scroll-top">Top ↑ (Vissza a tetejére)</a>
-  </nav>
-</div>
-  
-    </aside>
-
+</aside>
     <!-- MAIN -->
     <div class="main">
 

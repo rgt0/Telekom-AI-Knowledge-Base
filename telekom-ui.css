@@ -313,7 +313,7 @@ mark.hl-active{
 .card strong { font-weight: 800; }
 .card em { color: var(--t-magenta-dark); font-style: normal; }
 }
-/* === Sidebar: csak a TOC legyen görgethető (B opció) === */
+/* === Sidebar: csak a TOC legyen görgethető (B opció, javított) === */
 
 .sidebar{
   height: 100vh;
@@ -322,23 +322,26 @@ mark.hl-active{
   flex-direction: column;
 }
 
-/* A fix részek maradjanak fixek */
+/* Fix részek */
 .sidebar__header,
 .sidebar__search,
 .sidebar__footer{
   flex: 0 0 auto;
 }
 
-/* A TOC szekció legyen a rugalmas rész */
+/* A TOC blokk legyen a rugalmas rész, és legyen benne egy oszlopos layout */
 .sidebar__section{
   flex: 1 1 auto;
-  min-height: 0;              /* KRITIKUS: enélkül nem működik a belső scroll */
+  min-height: 0;              /* KRITIKUS: különben nem lesz belső scroll */
+  display: flex;              /* <-- EZ HIÁNYZIK gyakran */
+  flex-direction: column;     /* <-- EZ IS */
 }
 
-/* Maga a TOC görgethető */
+/* Maga a TOC töltse ki a szabad helyet és legyen scrollozható */
 #toc.toc{
+  flex: 1 1 auto;             /* <-- EZ a lényeg */
+  min-height: 0;              /* KRITIKUS */
   overflow-y: auto;
   overflow-x: hidden;
-  min-height: 0;              /* KRITIKUS */
-  padding-right: 6px;         /* ne takarja a scrollbar a szöveget */
+  padding-right: 6px;
 }

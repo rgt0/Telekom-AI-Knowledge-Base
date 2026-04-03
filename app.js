@@ -249,8 +249,7 @@ buildTOC();
     content.querySelectorAll("mark.hl").forEach(mark => {
       mark.replaceWith(document.createTextNode(mark.textContent));
     });
-  
-    updateSearchStatus();
+  setStatus();
   }
 // Globális állapot (legyen csak egyszer!)
 
@@ -309,9 +308,6 @@ function highlightInContent(query){
   // 🔥 EZ KELL: a globális marks frissítése
   marks = Array.from(content.querySelectorAll("mark.hl"));
   activeMark = marks.length ? 0 : -1;
-}
-function setStatus(html) {
-  if (searchStatus) searchStatus.innerHTML = html || "";
 }
 
 function applySearch() {
@@ -386,15 +382,6 @@ activeMark = marks.length ? 0 : -1;
     marks = Array.from(content.querySelectorAll("mark.hl"));
     activeMark = marks.length ? 0 : -1;
   }
-function updateSearchStatus() {
-  if (!searchStatus || !searchBox) return;
-
-  const q = searchBox.value.trim();
-
-  if (!q) {
-    searchStatus.textContent = "";
-    return;
-  }
 
   if (!marks || marks.length === 0) {
     searchStatus.innerHTML = `Nincs találat: <strong>${escapeHtml(q)}</strong>`;
@@ -467,10 +454,6 @@ function updateSearchStatus() {
     return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
 
-  function setStatus(html) {
-    if (!searchStatus) return;
-    searchStatus.innerHTML = html || "";
-  }
 
   function clearHighlights(){
     content.querySelectorAll("mark.hl").forEach(mark => {

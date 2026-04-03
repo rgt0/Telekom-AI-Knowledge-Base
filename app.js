@@ -33,7 +33,32 @@ function buildTOC() {
     toc.innerHTML = `<div class="toc__empty">Nincs cím a tartalomjegyzékhez.</div>`;
     return;
   }
+// --- Keresőből érkező fejezet-ugrás + highlight ---
+(function scrollToPending() {
+  const pendingPage = sessionStorage.getItem("pendingPage");
+  const pendingAnchor = sessionStorage.getItem("pendingAnchor");
+  const pendingQuery = sessionStorage.getItem("pendingQuery");
 
+  if (pendingPage && pendingPage === pageKey && pendingAnchor) {
+    sessionStorage.removeItem("pendingPage");
+    sessionStorage.removeItem("pendingAnchor");
+
+    setTimeout(() => {
+      const el = document.getElementById(pendingAnchor);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
+  }
+
+  // opcionális: highlight az in-page keresővel
+  if (pendingQuery) {
+    sessionStorage.removeItem("pendingQuery");
+    const sb = document.getElementById("searchBox");
+    if (sb) {
+      sb.value = pendingQuery;
+      sb.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+  }
+})();
   const seen = new Map();
   const uniqueId = (title) => {
     const base = slugify(title);

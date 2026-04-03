@@ -1,8 +1,9 @@
 const content = document.getElementById("content");
-const toc = document.getElementById("toc");
+const toc     = document.getElementById("toc");
 const menuBtn = document.getElementById("menuBtn");
 const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
+const searchStatus = document.getElementById("searchStatus");
 
 function getPageFromHash() {
   const hash = (location.hash || "#home").replace("#", "").trim();
@@ -178,7 +179,28 @@ function scrollToPendingAnchor(pageKey) {
     }
   }, 60);
 }
+function setSearchStatus(html) {
+  if (!searchStatus) return;
+  searchStatus.innerHTML = html || "";
+}
 
+function updateSearchStatus() {
+  if (!searchBox) return;
+
+  const q = searchBox.value.trim();
+  if (!q) { 
+    setSearchStatus("");
+    return;
+  }
+
+  if (!marks.length) {
+    setSearchStatus(`Nincs találat: <strong>${escapeHtml(q)}</strong>`);
+    return;
+  }
+
+  // activeMark 0-alapú, ezért +1
+  setSearchStatus(`Találat: <strong>${activeMark + 1}</strong>/<strong>${marks.length}</strong>`);
+}
 /* ---------- Mobil sidebar ---------- */
 function openSidebar(){
   sidebar.classList.add("is-open");
@@ -200,7 +222,34 @@ function escapeHtml(s) {
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[c]));
 }
+searchBox.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    if (e.shiftKey) jumpTo(activeMark - 1);
+    else jumpTo(activeMark + 1);
+  }
+  if (e.key === "Escape") {
+    searchBox.value = "";
+    clearHighlights();
+    setSearchStatus("");
+  }
+});
+function jumpTo(index){
+  if(!marks.length) { updateSearchStatus(); return; }
 
+  if(index < 0) index = marks.length - 1;
+  if(index >= marks.length) index = 0;
+
+  marks.forEach(m => m.classList.remove("hl-active"));
+  activeMark = index;
+
+  const el = marks[activeMark];
+  el.classList.add("hl-active");
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+
+  updateSearchStatus();
+}
+updateSearchStatus();
 /* indulás */
 loadPage(getPageFromHash());
 buildTOC();

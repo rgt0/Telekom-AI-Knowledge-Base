@@ -418,3 +418,78 @@ mark.hl-active{
   font-weight: 800;
   color: var(--t-magenta-dark);
 }
+/* Globális kereső UI */
+.sidebar__search-global{
+  margin-top: 10px;
+}
+
+.search-modes{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top: 8px;
+}
+
+.btn{
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor:pointer;
+}
+
+.btn--active{
+  border-color: var(--t-magenta) !important;
+  background: rgba(226,0,116,.10) !important;
+  color: var(--t-magenta-dark);
+  font-weight:700;
+}
+
+.search-results{
+  margin-top: 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  overflow: auto;
+  max-height: 240px;         /* találatok görgethetőek */
+  box-shadow: var(--shadow);
+}
+
+.search-hit{
+  display:block;
+  padding: 10px 12px;
+  text-decoration:none;
+  color: var(--text);
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
+.search-hit:hover{ background: var(--bg-soft); }
+
+.search-hit__row{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+}
+.search-hit__title{ font-weight: 800; color: var(--t-magenta-dark); }
+.search-badge{
+  margin-left:auto;
+  font-size:11px;
+  padding:2px 8px;
+  border-radius:999px;
+  border:1px solid rgba(226,0,116,.25);
+  background: rgba(226,0,116,.08);
+  color: var(--t-magenta-dark);
+}
+.search-hit__section{
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.search-hit__excerpt{
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.search-empty{
+  padding: 10px 12px;
+  color: var(--muted);
+}

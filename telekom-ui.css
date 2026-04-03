@@ -308,4 +308,8 @@ mark.hl-active{
   outline: 2px solid var(--t-magenta);
   background: rgba(226,0,116,.30);
 }
+  /* Vegyes nyelvű tananyag: kis kiemelés */
+.card ul { line-height: 1.5; }
+.card strong { font-weight: 800; }
+.card em { color: var(--t-magenta-dark); font-style: normal; }
 }

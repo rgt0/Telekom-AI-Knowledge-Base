@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./telekom-ui.css">
   <script defer src="./app.js"></script>
   <script defer src="./search-inline.js"></script>
+  <script defer src="./search-global.js"></script>
 </head>
 
 <body>
@@ -34,7 +35,16 @@
     <input id="searchBox" type="search" placeholder="Keresés…" autocomplete="off" />
     <div id="searchStatus" class="search-status" aria-live="polite"></div>
   </div>
-
+<div class="sidebar__search-global">
+  <label class="sr-only" for="globalSearch">Globális keresés</label>
+  <input id="globalSearch" type="search" placeholder="Globális keresés a portálban…" autocomplete="off" />
+  <div class="search-modes">
+    <button class="btn btn--active" id="modeQuick" type="button">Gyors</button>
+    <button class="btn" id="modeFull" type="button">Teljes szöveg</button>
+    <span class="search-status" id="globalSearchStatus"></span>
+  </div>
+  <div id="globalResults" class="search-results" hidden></div>
+</div>
   <!-- SCROLL KÖZÉPEN: csak a TOC -->
   <div class="sidebar__tocwrap">
     <div class="sidebar__section-title">Tartalom</div>

@@ -299,4 +299,13 @@ body{
 .search-status strong{
   color: var(--t-magenta-dark);
 }
+  mark.hl{
+  background: rgba(226,0,116,.18);
+  border-radius: 6px;
+  padding: 0 2px;
+}
+mark.hl-active{
+  outline: 2px solid var(--t-magenta);
+  background: rgba(226,0,116,.30);
+}
 }

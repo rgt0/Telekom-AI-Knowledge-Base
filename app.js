@@ -93,6 +93,26 @@ async function loadPage(pageKey) {
     if (toc) toc.innerHTML = `<div class="toc__empty">Nincs tartalomjegyzék.</div>`;
   }
 }
+// Top / Vissza a tetejére
+document.querySelectorAll(".js-scroll-top").forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
 
+    // oldal teteje
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // opcionális: fókusz vissza a tartalomra (a11y)
+    const content = document.getElementById("content");
+    if (content) content.focus({ preventScroll: true });
+
+    // opcionális: mobilon zárjuk az oldalsávot, ha van ilyen funkciód
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    if (sidebar && sidebar.classList.contains("is-open")) {
+      sidebar.classList.remove("is-open");
+      if (overlay) overlay.hidden = true;
+    }
+  });
+});
 window.addEventListener("hashchange", () => loadPage(pageFromHash()));
 loadPage(pageFromHash());

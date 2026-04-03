@@ -151,3 +151,4 @@ function escapeHtml(s) {
 
 /* indulás */
 loadPage(getPageFromHash());
+buildTOC();

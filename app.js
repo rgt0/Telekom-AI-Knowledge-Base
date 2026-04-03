@@ -62,7 +62,7 @@ function escapeHtml(s) {
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[c]));
 }
-/* ---------- Slug helpers (EGYEZZEN a search.js-sel) ---------- */
+/* ---------- Slug helpers (EGYEZZEN a .js-sel) ---------- */
 function slugify(s) {
   return String(s).toLowerCase().trim()
     .replace(/[^\w\u00C0-\u017F]+/g, "-")
@@ -171,7 +171,7 @@ function scrollToPendingAnchor(pageKey) {
     // opcionális: betöltés után oldalon belüli highlight
     if (pendingQuery) {
       sessionStorage.removeItem("pendingQuery");
-      const inPage = document.getElementById("inPageSearch");
+      const inPage = document.getElementById("inPage");
       if (inPage) {
         inPage.value = pendingQuery;
         inPage.dispatchEvent(new Event("input", { bubbles: true }));
@@ -179,12 +179,12 @@ function scrollToPendingAnchor(pageKey) {
     }
   }, 60);
 }
-function setSearchStatus(html) {
-  if (!searchStatus) return;
-  searchStatus.innerHTML = html || "";
+function setStatus(html) {
+  if (!Status) return;
+  Status.innerHTML = html || "";
 }
 
-function updateSearchStatus() {
+function updateStatus() {
   if (!searchBox) return;
 
   const q = searchBox.value.trim();

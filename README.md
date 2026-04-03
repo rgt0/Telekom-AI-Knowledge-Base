@@ -20,7 +20,7 @@ A **Telekom AI Knowledge Base** célja egy egységes, AI‑kompatibilis tudásre
 - ✅ AIFS RAG pipeline feltöltést  
 - ✅ Modernizációs AI elemzést  
 
-A portál élő verziója:  
+A portál aktuális verziója:  
 🔗 **https://rgt0.github.io/Telekom-AI-Knowledge-Base/**
 
 ---

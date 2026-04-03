@@ -1,0 +1,30 @@
+[
+  {
+    "page": "home",
+    "file": "./pages/home.html",
+    "title": "Főoldal",
+    "excerpt": "Áttekintés és navigáció a Telekom AI Knowledge Base moduljaihoz.",
+    "tags": ["kezdes", "attekintes"]
+  },
+  {
+    "page": "german-coaching",
+    "file": "./pages/german-coaching.html",
+    "title": "German Coaching",
+    "excerpt": "DE+HU munkahelyi német: meeting, status, RAG, governance.",
+    "tags": ["german", "coaching", "meeting", "ai", "rag", "governance"]
+  },
+  {
+    "page": "rag",
+    "file": "./pages/rag.html",
+    "title": "RAG",
+    "excerpt": "Chunking, retrieval, reranking, grounding és minőségmérés.",
+    "tags": ["rag", "retrieval", "chunk", "grounding"]
+  },
+  {
+    "page": "iranyelvek",
+    "file": "./pages/iranyelvek.html",
+    "title": "Irányelvek",
+    "excerpt": "Adatvédelem, compliance, minőségi kapuk, prompt safety.",
+    "tags": ["policy", "compliance", "adatvedelem"]
+  }
+]

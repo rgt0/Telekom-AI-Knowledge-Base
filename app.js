@@ -72,7 +72,7 @@ function buildTOC() {
   });
 }
 
-  toc.innerHTML = items.join("");
+ 
 
   toc.querySelectorAll("a[data-scrollto]").forEach(a => {
     a.addEventListener("click", (ev) => {

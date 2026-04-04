@@ -1,6 +1,7 @@
 // ===== Stabil alap: page betöltés + aktív link + TOC =====
 const content = document.getElementById("content");
 const toc = document.getElementById("toc");
+const headings = content.querySelectorAll("h2, h3");
 
 function pageFromHash() {
   const h = (location.hash || "#home").slice(1).trim();
@@ -28,7 +29,7 @@ function slugify(s) {
     .replace(/[^\w\u00C0-\u017F]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
-  const headings = content.querySelectorAll("h2, h3");
+ 
 function buildTOC() {
   if (!toc || !content) return;
 

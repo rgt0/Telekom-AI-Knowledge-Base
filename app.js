@@ -33,16 +33,25 @@ function buildTOC() {
 
   const headings = content.querySelectorAll("h2, h3");
   if (!headings.length) {
-    toc.innerHTML = `<div class="toc__empty">Nincs cím a tartalomjegyzékhez.</div>`;
+    toc.innerHTML = `<div class="toc__empty">Nincs tartalomjegyzék.</div>`;
     return;
   }
 
+  // ✅ Előbb jöjjön a slug + uniqueId, és csak utána a headings.forEach
+  const seen = new Map();
 
+  function uniqueId(title) {
+    const base = slugify(title);
+    const n = (seen.get(base) || 0) + 1;
+    seen.set(base, n);
+    return n === 1 ? base : `${base}-${n}`;
+  }
 
   const items = [];
   headings.forEach(h => {
     const text = (h.textContent || "").trim();
     if (!text) return;
+
     if (!h.id) h.id = uniqueId(text);
 
     const isH3 = h.tagName.toLowerCase() === "h3";
@@ -50,6 +59,18 @@ function buildTOC() {
       `<a href="#" data-scrollto="${h.id}" class="toc__item ${isH3 ? "toc__item--sub" : ""}">${escapeHtml(text)}</a>`
     );
   });
+
+  toc.innerHTML = items.join("");
+
+  toc.querySelectorAll("a[data-scrollto]").forEach(a => {
+    a.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      const id = a.getAttribute("data-scrollto");
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+}
 
   toc.innerHTML = items.join("");
 

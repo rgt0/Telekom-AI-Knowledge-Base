@@ -13,12 +13,16 @@ function setActiveLinks(pageKey) {
   });
 }
 
+
 function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  return String(s).replace(/[&<>"']/g, (c) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
   }[c]));
 }
-
 function slugify(s) {
   return String(s).toLowerCase().trim()
     .replace(/[^\w\u00C0-\u017F]+/g, "-")
@@ -33,13 +37,45 @@ function buildTOC() {
     toc.innerHTML = `<div class="toc__empty">Nincs cím a tartalomjegyzékhez.</div>`;
     return;
   }
-// --- Keresőből érkező fejezet-ugrás + highlight ---
+
+  const seen = new Map();
+  const uniqueId = (title) => {
+    const base = slugify(title);
+    const n = (seen.get(base) || 0) + 1;
+    seen.set(base, n);
+    return n === 1 ? base : `${base}-${n}`;
+  };
+
+  const items = [];
+  headings.forEach(h => {
+    const text = (h.textContent || "").trim();
+    if (!text) return;
+    if (!h.id) h.id = uniqueId(text);
+
+    const isH3 = h.tagName.toLowerCase() === "h3";
+    items.push(
+      `<a class="toc__item ${isH3 ? "toc__item--sub" : ""}" href="#" data-scrollto="${h.id}">${escapeHtml(text)}</a>`
+    );
+  });
+
+  toc.innerHTML = items.join("");
+
+  toc.querySelectorAll("a[data-scrollto]").forEach(a => {
+    a.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      const id = a.getAttribute("data-scrollto");
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+}
+
+// --- Keresőből érkező fejezet-ugrás + highlight (GLOBÁLISAN!) ---
 function scrollToPending(currentPage) {
   const pendingPage = sessionStorage.getItem("pendingPage");
   const pendingAnchor = sessionStorage.getItem("pendingAnchor");
   const pendingQuery = sessionStorage.getItem("pendingQuery");
 
-  // Fejezet-ugrás csak akkor, ha ugyanarra az oldalra töltöttünk
   if (pendingPage && pendingPage === currentPage && pendingAnchor) {
     sessionStorage.removeItem("pendingPage");
     sessionStorage.removeItem("pendingAnchor");
@@ -50,7 +86,7 @@ function scrollToPending(currentPage) {
     }, 60);
   }
 
-  // Opcionális: a globális keresés kifejezését átadjuk az in-page highlight keresőnek
+  // opcionális: átadjuk a globális keresés query-t az in-page highlightnak
   if (pendingQuery) {
     sessionStorage.removeItem("pendingQuery");
     const sb = document.getElementById("searchBox");

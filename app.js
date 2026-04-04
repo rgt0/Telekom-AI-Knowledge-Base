@@ -96,8 +96,7 @@ function scrollToPending(currentPage) {
     return n === 1 ? base : `${base}-${n}`;
   };
 
-  const items = [];
-  headings.forEach(h => {
+   headings.forEach(h => {
     const text = (h.textContent || "").trim();
     if (!text) return;
     if (!h.id) h.id = uniqueId(text);

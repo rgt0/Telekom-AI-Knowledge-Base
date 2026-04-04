@@ -28,10 +28,10 @@ function slugify(s) {
     .replace(/[^\w\u00C0-\u017F]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
+  const headings = content.querySelectorAll("h2, h3");
 function buildTOC() {
   if (!toc || !content) return;
 
-  const headings = content.querySelectorAll("h2, h3");
   if (!headings.length) {
     toc.innerHTML = `<div class="toc__empty">Nincs tartalomjegyzék.</div>`;
     return;

@@ -28,7 +28,6 @@ function slugify(s) {
     .replace(/[^\w\u00C0-\u017F]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
-
 function buildTOC() {
   if (!toc || !content) return;
 
@@ -54,7 +53,7 @@ function buildTOC() {
 
     const isH3 = h.tagName.toLowerCase() === "h3";
     items.push(
-      `<a class="toc__item ${isH3 ? "toc__item--sub" : ""}" href="#" data-scrollto="${h.id}">${escapeHtml(text)}</a>`
+      `<a href="#" data-scrollto="${h.id}" class="toc__item ${isH3 ? "toc__item--sub" : ""}">${escapeHtml(text)}</a>`
     );
   });
 
@@ -69,7 +68,6 @@ function buildTOC() {
     });
   });
 }
-
 // --- Keresőből érkező fejezet-ugrás + highlight (GLOBÁLISAN!) ---
 function scrollToPending(currentPage) {
   const pendingPage = sessionStorage.getItem("pendingPage");

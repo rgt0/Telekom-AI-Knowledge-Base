@@ -138,7 +138,7 @@ function scrollToPending(currentPage) {
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
-}
+
 
 async function loadPage(pageKey) {
   if (!content) {

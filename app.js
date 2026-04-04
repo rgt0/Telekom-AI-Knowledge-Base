@@ -37,13 +37,7 @@ function buildTOC() {
     return;
   }
 
-  const seen = new Map();
-  const uniqueId = (title) => {
-    const base = slugify(title);
-    const n = (seen.get(base) || 0) + 1;
-    seen.set(base, n);
-    return n === 1 ? base : `${base}-${n}`;
-  };
+
 
   const items = [];
   headings.forEach(h => {

@@ -67,7 +67,7 @@ function buildTOC() {
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
-}
+
 // --- Keresőből érkező fejezet-ugrás + highlight (GLOBÁLISAN!) ---
 function scrollToPending(currentPage) {
   const pendingPage = sessionStorage.getItem("pendingPage");

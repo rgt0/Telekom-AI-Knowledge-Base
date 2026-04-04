@@ -34,12 +34,13 @@ function buildTOC() {
     return;
   }
 // --- Keresőből érkező fejezet-ugrás + highlight ---
-(function scrollToPending() {
+function scrollToPending(currentPage) {
   const pendingPage = sessionStorage.getItem("pendingPage");
   const pendingAnchor = sessionStorage.getItem("pendingAnchor");
   const pendingQuery = sessionStorage.getItem("pendingQuery");
 
-  if (pendingPage && pendingPage === pageKey && pendingAnchor) {
+  // Fejezet-ugrás csak akkor, ha ugyanarra az oldalra töltöttünk
+  if (pendingPage && pendingPage === currentPage && pendingAnchor) {
     sessionStorage.removeItem("pendingPage");
     sessionStorage.removeItem("pendingAnchor");
 
@@ -49,7 +50,7 @@ function buildTOC() {
     }, 60);
   }
 
-  // opcionális: highlight az in-page keresővel
+  // Opcionális: a globális keresés kifejezését átadjuk az in-page highlight keresőnek
   if (pendingQuery) {
     sessionStorage.removeItem("pendingQuery");
     const sb = document.getElementById("searchBox");
@@ -58,7 +59,7 @@ function buildTOC() {
       sb.dispatchEvent(new Event("input", { bubbles: true }));
     }
   }
-})();
+}
   const seen = new Map();
   const uniqueId = (title) => {
     const base = slugify(title);
@@ -108,6 +109,7 @@ async function loadPage(pageKey) {
 
     setActiveLinks(pageKey);
     buildTOC();
+    scrollToPending(pageKey);
   } catch (e) {
     content.innerHTML = `
       <section class="card">

@@ -165,3 +165,17 @@ await loadIncludes(content);
   window.addEventListener("hashchange", () => loadPage(pageFromHash()));
   loadPage(pageFromHash());
 })();
+document.querySelectorAll(".topnav-dd__menu a").forEach(a => {
+  a.addEventListener("click", () => {
+    const details = a.closest("details");
+    if (details) details.removeAttribute("open");
+  });
+});
+document.querySelectorAll(".topnav-dd").forEach(d => {
+  d.addEventListener("toggle", () => {
+    if (!d.open) return;
+    document.querySelectorAll(".topnav-dd").forEach(other => {
+      if (other !== d) other.removeAttribute("open");
+    });
+  });
+});

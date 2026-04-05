@@ -1,0 +1,62 @@
+<section class="card">
+  <h4>3.2.1 Mikor érdemes include-ot használni?</h4>
+  <ul>
+    <li>Ha ugyanaz a tartalom több oldalon is megjelenik (pl. útmutató, checklist, sablonok).</li>
+    <li>Ha egy oldal túl hosszú lenne, és „modulokra” akarod bontani.</li>
+    <li>Ha karbantarthatóság kell: 1 helyen frissíted, több helyen látszik.</li>
+  </ul>
+
+  <h4>3.2.2 Include fájl létrehozása</h4>
+  <p>Hozz létre egy fragmentet az <code>includes/</code> mappában, pl.:</p>
+  <pre><code>includes/ai-governance-checklist.html</code></pre>
+
+  <p>Példa tartalom (csak fragment – nincs &lt;html&gt; / &lt;head&gt;):</p>
+  <pre><code>&lt;section class="card"&gt;
+  &lt;h2&gt;AI Governance Checklist&lt;/h2&gt;
+
+  &lt;h3&gt;Prompt Safety&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Keine PII&lt;/li&gt;
+    &lt;li&gt;Approved sources only&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;h3&gt;Review &amp; Audit&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Quellen angeben&lt;/li&gt;
+    &lt;li&gt;Entscheidungen dokumentieren&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;</code></pre>
+
+  <h4>3.2.3 Include beágyazása egy oldalba</h4>
+  <p>A megfelelő <code>pages/*.html</code> fájlban (pl. <code>pages/ai-governance.html</code>) illeszd be ezt a placeholdert:</p>
+  <pre><code>&lt;div data-include="./includes/ai-governance-checklist.html"&gt;&lt;/div&gt;</code></pre>
+
+  <p><strong>Fontos:</strong> a <code>data-include</code> útvonal relatív és pontos legyen (kisbetű/kötőjel egyezés).</p>
+
+  <h4>3.2.4 Mire figyelj, hogy a TOC és a keresés „lássa” az include tartalmát?</h4>
+  <ol>
+    <li>
+      <strong>TOC (H2/H3)</strong>:
+      <ul>
+        <li>Az include tartalmát akkor fogja a TOC is látni, ha az include loader a betöltés után fut, <em>és a TOC építése előtt</em>.</li>
+        <li>Ha a TOC nálad csak H2/H3-at listáz, akkor az include-ban is használhatsz H2/H3-at (de ne legyen túl sok, különben hosszú lesz a TOC).</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Globális full-text kereső</strong>:
+      <ul>
+        <li>Ha a full-text indexelés a <code>pages/*.html</code> fájlokat olvassa, alapból csak a <code>&lt;div data-include="..."&gt;</code> sort látja.</li>
+        <li>Ahhoz, hogy a global full-text találjon include tartalomra is, a <code>search-global.js</code> indexelés közben töltse be és injektálja az include-okat.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h4>3.2.5 Gyors teszt (1 perc)</h4>
+  <ol>
+    <li>Nyisd meg azt az oldalt, amibe beágyaztad (pl. <code>#ai-governance</code>).</li>
+    <li>Ellenőrizd, hogy a beágyazott blokk megjelenik.</li>
+    <li>TOC: megjelennek-e az include H2/H3 címei (ha vannak)?</li>
+    <li>In-page highlight: keress rá egy szófordulatra, ami az include-ban van.</li>
+    <li>Globális full-text: ha be van kapcsolva include-feloldás indexeléskor, találja-e az include szöveget?</li>
+  </ol>
+</section>

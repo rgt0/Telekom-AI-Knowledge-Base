@@ -129,7 +129,27 @@
     const doc = new DOMParser().parseFromString(html, "text/html");
     doc.querySelectorAll("script, style, noscript").forEach(n => n.remove());
     const root = doc.body;
+// --- INCLUDE feloldás indexeléshez: [data-include] betöltése és beillesztése ---
+const includeEls = Array.from(doc.querySelectorAll("[data-include]"));
+for (const el of includeEls) {
+  const incUrl = el.getAttribute("data-include");
+  if (!incUrl) continue;
 
+  try {
+    const incRes = await fetch(incUrl, { cache: "no-store" });
+    if (!incRes.ok) continue;
+    const incHtml = await incRes.text();
+
+    // include tartalom beillesztése
+    const incDoc = new DOMParser().parseFromString(incHtml, "text/html");
+    const fragment = incDoc.body;
+
+    // az include “helyére” beöntjük a szöveget/HTML-t
+    el.innerHTML = fragment.innerHTML;
+  } catch {
+    // ignore
+  }
+}
     const headings = Array.from(root.querySelectorAll("h2, h3"));
 
     // ha nincs H2/H3: egy szekció

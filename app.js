@@ -29,7 +29,22 @@
       .replace(/[^\w\u00C0-\u017F]+/g, "-")
       .replace(/^-+|-+$/g, "");
   }
+async function loadIncludes(rootEl) {
+  const includeEls = rootEl.querySelectorAll("[data-include]");
+  for (const el of includeEls) {
+    const url = el.getAttribute("data-include");
+    if (!url) continue;
 
+    try {
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const html = await res.text();
+      el.innerHTML = html;
+    } catch (e) {
+      el.innerHTML = `<section class="card"><p><strong>Hiba:</strong> include betöltése sikertelen: <code>${url}</code></p></section>`;
+    }
+  }
+}
   // TOC (H2+H3)
   function buildTOC() {
     if (!toc || !content) return;

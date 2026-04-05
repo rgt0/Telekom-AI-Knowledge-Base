@@ -131,6 +131,9 @@ async function loadIncludes(rootEl) {
       const html = await res.text();
       content.innerHTML = html;
 
+// ✅ include-ok betöltése előbb, hogy a TOC már a beillesztett részt is lássa
+await loadIncludes(content);
+
       setActiveLinks(pageKey);
       buildTOC();
       scrollToPending(pageKey);

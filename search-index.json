@@ -6,6 +6,13 @@
     "excerpt": "Áttekintés és navigáció a Telekom AI Knowledge Base moduljaihoz.",
     "tags": ["kezdes", "attekintes"]
   },
+  {
+  "page": "portal-guide",
+  "file": "./pages/portal-guide.html",
+  "title": "Portál útmutató (DE+HU)",
+  "excerpt": "Használat: TOC, oldalon belüli highlight, globális keresés (Gyors vs Teljes szöveg), tartalom bővítése.",
+  "tags": ["portál", "útmutató", "guide", "keresés", "gyors", "teljes szöveg", "toc", "include"]
+},
 {
   "page": "portal-guide",
   "file": "./pages/portal-guide.html",

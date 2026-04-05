@@ -13,7 +13,7 @@
 
   // deepIndex: file -> [{id,title,text}]
   const deepIndex = new Map();
-  const CACHE_KEY = "kb_deep_sections_cache_v1";
+  const CACHE_KEY = "kb_deep_sections_cache_v2";
 
   function setStatus(txt) {
     if (!statusEl) return;

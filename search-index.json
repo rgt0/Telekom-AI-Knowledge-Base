@@ -13,6 +13,14 @@
   "excerpt": "Használat: TOC, oldalon belüli highlight, globális keresés (Gyors vs Teljes szöveg), tartalom bővítése.",
   "tags": ["portál", "útmutató", "guide", "keresés", "gyors", "teljes szöveg", "toc", "include"]
 },
+  {
+  "page": "portal-tech",
+  "file": "./pages/portal-tech.html",
+  "title": "Technische Dokumentation (DE)",
+  "excerpt": "Architektur, Module (app.js, TOC, Include, Suche), Debugging, Erweiterung.",
+  "tags": ["technik","dev","doku","architektur","toc","include","suche","debugging"]
+}
+,
 {
   "page": "portal-guide",
   "file": "./pages/portal-guide.html",

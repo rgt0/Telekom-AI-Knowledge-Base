@@ -493,3 +493,23 @@ mark.hl-active{
   padding: 10px 12px;
   color: var(--muted);
 }
+.cards{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+.card-link{
+  display:block;
+  border:1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px;
+  text-decoration:none;
+  color: var(--text);
+  background:#fff;
+}
+.card-link:hover{
+  background: var(--bg-soft);
+  border-color: rgba(226,0,116,.35);
+}
+.card-link small{ color: var(--muted); }

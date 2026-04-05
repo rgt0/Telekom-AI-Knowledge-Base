@@ -1,21 +1,111 @@
 <section class="card">
-  <span class="badge">Portál</span>
+  <span class="badge">Portal</span>
   <h1>Főoldal</h1>
-  <p>Üdv! Ez a Telekom AI Knowledge Base portál – modulok, sablonok, irányelvek és technikai dokumentáció egy helyen.</p>
+
+  <p>
+    Üdv! Ez a <strong>Telekom AI Knowledge Base</strong> – modulok, sablonok, irányelvek és fejlesztői dokumentáció egy helyen.
+  </p>
 
   <h2>Gyors indítás</h2>
   <ul>
-    <li>Válassz modult fent (Topbar), majd a bal oldali TOC-ban ugorj fejezetre.</li>
-    <li>„Keresés…” = oldal-on belüli kiemelés. „Globális keresés…” = teljes portál.</li>
-    <li>Részletes útmutató: <a href="#portal-guide" data-page="portal-guide">Portál útmutató</a></li>
+    <li><strong>Topbar</strong> → válassz logikai kategóriát, majd modult.</li>
+    <li><strong>Sidebar TOC</strong> → ugrás fejezetre (H2/H3).</li>
+    <li><strong>Keresés…</strong> = kiemelés az aktuális oldalon; <strong>Globális</strong> = teljes portál.</li>
   </ul>
 
-  <h2>Modulok</h2>
-  <div class="cards">
-    <a class="card-link" href="#rag" data-page="rag"><strong>RAG</strong><br><small>Chunking, retrieval, grounding</small></a>
-    <a class="card-link" href="#iranyelvek" data-page="iranyelvek"><strong>Irányelvek</strong><br><small>Compliance, PII, safety</small></a>
-    <a class="card-link" href="#german-coaching" data-page="german-coaching"><strong>German Coaching</strong><br><small>DE+HU Redemittel + AI</small></a>
-    <a class="card-link" href="#portal-guide" data-page="portal-guide"><strong>Portál útmutató</strong><br><small>Használat, bővítés</small></a>
-    <a class="card-link" href="#portal-tech" data-page="portal-tech"><strong>Technik</strong><br><small>Fejlesztői dokumentáció (DE)</small></a>
+  <div class="note note--info">
+    <strong>Tipp:</strong> Ha a “Gyors” globális kereső nem talál, válts “Teljes szöveg”-re, vagy bővítsd a <code>search-index.json</code> tageket/kivonatot.
   </div>
+</section>
+
+<section class="card">
+  <h2>Modulok – logikai oszlopok</h2>
+
+  <h3>Mentoring & Learning</h3>
+  <div class="cards">
+    <a class="card-link" href="#de-mentoring" data-page="de-mentoring">
+      <strong>DE‑Mentoring — COBOL — AI</strong><br>
+      <small>Mentoring, mainframe kontextus, AI use case-ek</small>
+    </a>
+
+    <a class="card-link" href="#german-coaching" data-page="german-coaching">
+      <strong>German Coaching</strong><br>
+      <small>DE+HU Redemittel + AI blokkok</small>
+    </a>
+
+    <a class="card-link" href="#ai-alapok" data-page="ai-alapok">
+      <strong>AI Alapok</strong><br>
+      <small>LLM alapok, fogalmak, RAG bevezetés</small>
+    </a>
+
+    <a class="card-link" href="#prompt-engineering" data-page="prompt-engineering">
+      <strong>Prompt Engineering</strong><br>
+      <small>Prompt minták, best practice, hibák</small>
+    </a>
+  </div>
+
+  <h3>Practice & Build</h3>
+  <div class="cards">
+    <a class="card-link" href="#sandbox" data-page="sandbox">
+      <strong>Sandbox</strong><br>
+      <small>Gyors próbák, kísérletezés, tesztek</small>
+    </a>
+
+    <a class="card-link" href="#aimc-explain-engine" data-page="aimc-explain-engine">
+      <strong>AIM/C Explain Engine</strong><br>
+      <small>Magyarázó motor, szemantikus bontás, elemzés</small>
+    </a>
+  </div>
+
+  <h3>Reference & Governance</h3>
+  <div class="cards">
+    <a class="card-link" href="#rag" data-page="rag">
+      <strong>RAG</strong><br>
+      <small>Chunking, retrieval, reranking, grounding</small>
+    </a>
+
+    <a class="card-link" href="#iranyelvek" data-page="iranyelvek">
+      <strong>Irányelvek</strong><br>
+      <small>Compliance, PII, safety, nyelvi irányelvek</small>
+    </a>
+
+    <a class="card-link" href="#eszkozok" data-page="eszkozok">
+      <strong>Eszközök</strong><br>
+      <small>Tooling, linkek, sablonok</small>
+    </a>
+
+    <a class="card-link" href="#tudastar" data-page="tudastar">
+      <strong>Tudástár</strong><br>
+      <small>Gyűjtő: fogalmak, hivatkozások, anyagok</small>
+    </a>
+  </div>
+
+  <h3>Portal</h3>
+  <div class="cards">
+    <a class="card-link" href="#portal-guide" data-page="portal-guide">
+      <strong>Portál útmutató</strong><br>
+      <small>Használat, bővítés, 3.1/3.2 példák</small>
+    </a>
+
+    <a class="card-link" href="#portal-tech" data-page="portal-tech">
+      <strong>Technik</strong><br>
+      <small>Fejlesztői dokumentáció (DE), kód, debug</small>
+    </a>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Mi új?</h2>
+  <ul>
+    <li><strong>Topbar kategóriák:</strong> logikai fő oszlopok dropdown menüvel.</li>
+    <li><strong>Portal Guide:</strong> 3.1 modul hozzáadás + 3.2 include példa (külön include fájlokból).</li>
+    <li><strong>Technik:</strong> fejlesztői dokumentáció bővítve (kód minták, troubleshooting).</li>
+  </ul>
+
+  <h2>Következő lépések</h2>
+  <ol>
+    <li>Válassz egy modult fent (Topbar), és használd a TOC‑ot fejezet-ugráshoz.</li>
+    <li>Ha gyorsan keresel: Globális → Gyors. Ha mélyen: Globális → Teljes szöveg.</li>
+    <li>Ha új oldalt adsz hozzá: pages/ + topbar hash link + search-index.json.</li>
+  </ol>
 </section>

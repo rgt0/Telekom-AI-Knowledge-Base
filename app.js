@@ -29,20 +29,31 @@
       .replace(/[^\w\u00C0-\u017F]+/g, "-")
       .replace(/^-+|-+$/g, "");
   }
-async function loadIncludes(rootEl) {
-  const includeEls = rootEl.querySelectorAll("[data-include]");
-  for (const el of includeEls) {
-    const url = el.getAttribute("data-include");
-    if (!url) continue;
+async function loadIncludes(rootEl, { maxDepth = 3 } = {}) {
+  // Többszintű include betöltés: portal-guide -> howto-add-module -> ...
+  for (let depth = 0; depth < maxDepth; depth++) {
+    const includeEls = Array.from(rootEl.querySelectorAll("[data-include]"));
 
-    try {
-      const res = await fetch(url, { cache: "no-store" });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const html = await res.text();
-      el.innerHTML = html;
-    } catch (e) {
-      el.innerHTML = `<section class="card"><p><strong>Hiba:</strong> include betöltése sikertelen: <code>${url}</code></p></section>`;
+    // Ha nincs több include, kész vagyunk
+    if (includeEls.length === 0) return;
+
+    // Betöltjük az aktuális szint include-jait
+    for (const el of includeEls) {
+      const url = el.getAttribute("data-include");
+      if (!url) continue;
+
+      try {
+        const res = await fetch(url, { cache: "no-store" });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const html = await res.text();
+        el.innerHTML = html;
+        el.removeAttribute("data-include"); // fontos: ne töltse újra ugyanazt
+      } catch (e) {
+        el.innerHTML = `<section class="card"><p><strong>Include hiba:</strong> <code>${url}</code></p></section>`;
+        el.removeAttribute("data-include");
+      }
     }
+    // ciklus megy tovább: ha a betöltött HTML új include-okat hozott, a következő körben betöltjük
   }
 }
   // TOC (H2+H3)

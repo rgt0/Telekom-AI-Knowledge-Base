@@ -6,25 +6,43 @@
     "excerpt": "Áttekintés és navigáció a Telekom AI Knowledge Base moduljaihoz.",
     "tags": ["kezdes", "attekintes"]
   },
-  {
-    "page": "german-coaching",
-    "file": "./pages/german-coaching.html",
-    "title": "German Coaching",
-    "excerpt": "DE+HU munkahelyi német: meeting, status, RAG, governance.",
-    "tags": ["german", "coaching", "meeting", "ai", "rag", "governance"]
+ {
+  "page": "german-coaching",
+  "file": "./pages/german-coaching.html",
+  "title": "German Coaching (DE + HU)",
+  "excerpt": "Meeting-Redemittel, Status Update, Nachfragen, Zusammenfassen, Übungen. AI/GenAI: Prompting, RAG, Governance, Halluzination, Quellen. (HU+DE)",
+  "tags": [
+    "german","coaching","de","hu",
+    "meeting","redemittel","status","status update",
+    "nachfragen","zusammenfassen","übung","uebung","übungen","uebungen",
+    "ai","genai","llm","prompt","prompting",
+    "rag","retrieval","chunk","grounding","quellen","sources",
+    "governance","compliance","pii","datenschutz",
+    "halluzination","hallucination"
+  ]
+}
+,
+  { 
+  "page": "rag",
+  "file": "./pages/rag.html",
+  "title": "RAG",
+  "excerpt": "Chunking, retrieval (top-k), reranking, grounding/források, minőségmérés (recall/precision, faithfulness).",
+  "tags": [
+    "rag","retrieval","top-k","reranking","chunk","chunking",
+    "embedding","vector","index","metadata","grounding","source","forrás",
+    "recall","precision","faithfulness","latency"
+  ]
   },
   {
-    "page": "rag",
-    "file": "./pages/rag.html",
-    "title": "RAG",
-    "excerpt": "Chunking, retrieval, reranking, grounding és minőségmérés.",
-    "tags": ["rag", "retrieval", "chunk", "grounding"]
-  },
-  {
-    "page": "iranyelvek",
-    "file": "./pages/iranyelvek.html",
-    "title": "Irányelvek",
-    "excerpt": "Adatvédelem, compliance, minőségi kapuk, prompt safety.",
-    "tags": ["policy", "compliance", "adatvedelem"]
+  "page": "iranyelvek",
+  "file": "./pages/iranyelvek.html",
+  "title": "Irányelvek",
+  "excerpt": "Adatvédelem, compliance, prompt safety, jóváhagyott források, PII/maszkolás, audit és felelősségi körök.",
+  "tags": [
+    "irányelvek","policy","compliance","adatvédelem","datenschutz",
+    "pii","masking","redaction","audit","governance","risk","safety",
+    "approved sources","jóváhagyott forrás","confidential"
+  ]
+
   }
 ]

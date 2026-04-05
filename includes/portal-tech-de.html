@@ -1,21 +1,29 @@
 /* portal-tech-de.html ist Fragment: nincs <!doctype>, nincs <html>, csak tartalom */
 <section class="card">
   <span class="badge">Dev Docs</span>
-  <h1>Technische Dokumentation – Telekom AI Knowledge Base Portal (DE)</h1>
-  <p><strong>Zielgruppe:</strong> Entwickler:innen & Maintainer des statischen Portals.</p>
-  <p><strong>Ziel:</strong> Architektur verstehen, Module sicher erweitern, typische Fehler schnell beheben.</p>
+  <h1>Technische Entwickler-Dokumentation (DE) – Telekom AI Knowledge Base Portal</h1>
+  <p><strong>Zweck:</strong> Dieses Dokument erklärt Architektur, Module, Erweiterungen und Troubleshooting – mit vollständigen Code-Beispielen.</p>
+  <p><strong>Prinzip:</strong> Stabiler Kern (app.js) + additiven Features (search-inline.js, search-global.js) + Wiederverwendung über includes/.</p>
 
-  <h2>1. Überblick: Was ist dieses Portal?</h2>
-  <p>Das Portal ist eine statische GitHub-Pages-Seite mit clientseitigem Routing (<code>#hash</code>) und dynamischem Nachladen von HTML-Fragmenten aus dem Ordner <code>pages/</code>.
-  Zusätzlich unterstützt es:</p>
+  <h2>0) Quickstart: Was muss funktionieren?</h2>
+  <ol>
+    <li><strong>Routing:</strong> <code>#home</code> lädt <code>pages/home.html</code> in <code>#content</code>.</li>
+    <li><strong>TOC:</strong> Sidebar zeigt H2/H3 aus der geladenen Seite.</li>
+    <li><strong>In-page Search:</strong> Highlight-Suche markiert Treffer auf der aktuellen Seite.</li>
+    <li><strong>Global Search:</strong> Schnell (Index) + Volltext (Seiteninhalte) inkl. Section-Sprung.</li>
+  </ol>
+
+  <h2>1) Architekturüberblick</h2>
   <ul>
-    <li>automatisches Inhaltsverzeichnis (TOC) aus <code>H2/H3</code>,</li>
-    <li>Seiten-internes Highlight-Suchen,</li>
-    <li>globale Suche (Schnell-Index + Volltext).</li>
+    <li><strong>index.html</strong> = Shell (Layout, Sidebar, Topbar, Content-Container).</li>
+    <li><strong>app.js</strong> = Kern: Hash-Routing + Fetch + Render + TOC + Pending-Jump.</li>
+    <li><strong>search-inline.js</strong> = Seiteninterne Highlight-Suche (nur aktueller Content).</li>
+    <li><strong>search-global.js</strong> = Globale Suche: Schnell-Index + Volltext (H2/H3 Sections).</li>
+    <li><strong>search-index.json</strong> = Index-Daten für Schnell-Suche.</li>
+    <li><strong>includes/</strong> = wiederverwendbare Fragmente (z. B. Portal Guide, Tech Docs).</li>
   </ul>
 
-  <h2>2. Repository-Struktur (Module)</h2>
-  <p>Empfohlene Struktur:</p>
+  <h2>2) Repository-Struktur (empfohlen)</h2>
   <pre><code>/
 ├─ index.html
 ├─ telekom-ui.css
@@ -32,142 +40,449 @@
    ├─ portal-tech.html
    ├─ german-coaching.html
    ├─ rag.html
-   ├─ iranyelvek.html
-   └─ ... weitere Seiten ...</code></pre>
+   └─ iranyelvek.html</code></pre>
 
-  <h2>3. Core-Modul: index.html (Shell)</h2>
-  <p><strong>index.html</strong> ist die Shell: Layout, Sidebar, Topbar, Content-Container.</p>
+  <h2>3) index.html – Shell, IDs, Script-Reihenfolge</h2>
+  <h3>3.1 Pflicht-IDs (einmalig!)</h3>
   <ul>
-    <li><strong>Wichtig:</strong> <code>id="content"</code> darf genau <em>einmal</em> existieren (Ziel für das Nachladen).</li>
-    <li><strong>Wichtig:</strong> <code>id="toc"</code> existiert, damit das TOC gefüllt werden kann.</li>
-    <li><strong>Wichtig:</strong> Suchfelder müssen per ID eindeutig sein (z. B. <code>searchBox</code>, <code>globalSearch</code>).</li>
+    <li><code>id="content"</code> – Zielcontainer fürs Nachladen (genau einmal).</li>
+    <li><code>id="toc"</code> – Container für das Inhaltsverzeichnis.</li>
+    <li><code>id="searchBox"</code> – Input für Seiten-Highlight.</li>
+    <li><code>id="globalSearch"</code>, <code>id="globalResults"</code> – Globale Suche.</li>
   </ul>
 
-  <h3>3.1 Script-Reihenfolge</h3>
-  <p>Empfohlene Reihenfolge (damit Basissystem immer stabil bleibt):</p>
+  <h3>3.2 Script-Reihenfolge (stabil)</h3>
+  <p>Empfohlene Reihenfolge: Kern zuerst, Features danach.</p>
   <pre><code>&lt;script defer src="./app.js"&gt;&lt;/script&gt;
 &lt;script defer src="./search-inline.js"&gt;&lt;/script&gt;
 &lt;script defer src="./search-global.js"&gt;&lt;/script&gt;</code></pre>
-  <p><strong>Prinzip:</strong> <code>app.js</code> darf nie vom Suchcode abhängig sein. Suche ist additiv.</p>
 
-  <h2>4. Core-Modul: app.js (Routing + Load + TOC + Jump)</h2>
-  <p><strong>app.js</strong> ist das Herz: es lädt Seiten aus <code>pages/</code> anhand des Hashes.</p>
+  <h2>4) app.js – Vollständiger Kern (Routing + Load + TOC + Pending Jump)</h2>
+  <p><strong>Regel:</strong> app.js enthält keine Highlight- oder globale Suchlogik, nur Basis-Mechanik.</p>
 
-  <h3>4.1 Hash-Routing</h3>
-  <ul>
-    <li><code>#home</code> ⇒ <code>./pages/home.html</code></li>
-    <li><code>#portal-tech</code> ⇒ <code>./pages/portal-tech.html</code></li>
-  </ul>
-  <p>Wenn kein Hash gesetzt ist, wird standardmäßig <code>#home</code> gesetzt.</p>
+  <h3>4.1 app.js (vollständig, empfohlen)</h3>
+  <p>Kopierfertig (als Referenz):</p>
+  <pre><code>// app.js — Core: routing + load + TOC + pending jump
+(() =&gt; {
+  const content = document.getElementById("content");
+  const toc = document.getElementById("toc");
 
-  <h3>4.2 Seiten-Ladefluss (Load Pipeline)</h3>
-  <ol>
-    <li><strong>Fetch</strong> der Seite: <code>fetch("./pages/${pageKey}.html")</code></li>
-    <li><strong>Render</strong> in <code>#content</code></li>
-    <li><strong>Includes</strong> laden (optional, siehe Abschnitt 5)</li>
-    <li><strong>Active Links</strong> markieren (Topbar/Quicklinks)</li>
-    <li><strong>TOC</strong> bauen (H2/H3)</li>
-    <li><strong>Pending Jump</strong> (wenn globale Suche eine Section-Anchor übergibt)</li>
-  </ol>
+  function pageFromHash() {
+    const h = (location.hash || "#home").slice(1).trim();
+    return h || "home";
+  }
 
-  <h3>4.3 TOC: H2/H3 → Sidebar</h3>
-  <p>Das TOC wird aus <code>H2</code> und <code>H3</code> generiert. Für jeden Heading wird (falls nötig) ein eindeutiges <code>id</code> erstellt.</p>
-  <p><strong>Best Practice:</strong> Nutze klare, kurze H2/H3-Titel, damit TOC und Volltext-Suche gut funktionieren.</p>
+  function setActiveLinks(pageKey) {
+    document.querySelectorAll("a[data-page]").forEach(a =&gt; {
+      a.classList.toggle("is-active", a.getAttribute("data-page") === pageKey);
+    });
+  }
 
-  <h3>4.4 Pending Jump (Abschnitt-Ansprung)</h3>
-  <p>Die globale Suche kann beim Klick <code>sessionStorage</code> setzen:</p>
-  <pre><code>pendingPage, pendingAnchor, pendingQuery</code></pre>
-  <p><code>app.js</code> scrollt nach dem Laden (und nach dem TOC-Bau) zur Section und kann optional die Query an die Highlight-Suche übergeben.</p>
+  function escapeHtml(s) {
+    return String(s).replace(/[&amp;&lt;&gt;"']/g, c =&gt; ({
+      "&amp;":"&amp;amp;", "&lt;":"&amp;lt;", "&gt;":"&amp;gt;", "\"":"&amp;quot;", "'":"&amp;#39;"
+    }[c]));
+  }
 
-  <h2>5. Includes: Gemeinsame Fragmente wiederverwenden</h2>
-  <p>Um Inhalte nicht zu duplizieren, werden Fragmente in <code>includes/</code> gepflegt und per Platzhalter eingebunden:</p>
+  function slugify(s) {
+    return String(s).toLowerCase().trim()
+      .replace(/[^\w\u00C0-\u017F]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  // ---- TOC (H2+H3) ----
+  function buildTOC() {
+    if (!toc || !content) return;
+
+    const headings = content.querySelectorAll("h2, h3");
+    if (!headings.length) {
+      toc.innerHTML = `&lt;div class="toc__empty"&gt;Nincs tartalomjegyzék.&lt;/div&gt;`;
+      return;
+    }
+
+    const seen = new Map();
+    function uniqueId(title) {
+      const base = slugify(title);
+      const n = (seen.get(base) || 0) + 1;
+      seen.set(base, n);
+      return n === 1 ? base : `${base}-${n}`;
+    }
+
+    const items = [];
+    headings.forEach(h =&gt; {
+      const text = (h.textContent || "").trim();
+      if (!text) return;
+      if (!h.id) h.id = uniqueId(text);
+
+      const isH3 = h.tagName.toLowerCase() === "h3";
+      items.push(
+        `&lt;a href="#" data-scrollto="${h.id}" class="toc__item ${isH3 ? "toc__item--sub" : ""}"&gt;${escapeHtml(text)}&lt;/a&gt;`
+      );
+    });
+
+    toc.innerHTML = items.join("");
+
+    toc.querySelectorAll("a[data-scrollto]").forEach(a =&gt; {
+      a.addEventListener("click", (ev) =&gt; {
+        ev.preventDefault();
+        const id = a.getAttribute("data-scrollto");
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  }
+
+  // ---- Pending jump + optional highlight transfer ----
+  function scrollToPending(currentPage) {
+    const pendingPage = sessionStorage.getItem("pendingPage");
+    const pendingAnchor = sessionStorage.getItem("pendingAnchor");
+    const pendingQuery = sessionStorage.getItem("pendingQuery");
+
+    if (pendingPage &amp;&amp; pendingPage === currentPage &amp;&amp; pendingAnchor) {
+      sessionStorage.removeItem("pendingPage");
+      sessionStorage.removeItem("pendingAnchor");
+      setTimeout(() =&gt; {
+        const el = document.getElementById(pendingAnchor);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 60);
+    }
+
+    if (pendingQuery) {
+      sessionStorage.removeItem("pendingQuery");
+      const sb = document.getElementById("searchBox");
+      if (sb) {
+        sb.value = pendingQuery;
+        sb.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+    }
+  }
+
+  // ---- OPTIONAL: include loader (see section 5) ----
+  async function loadIncludes(rootEl) {
+    const includeEls = rootEl.querySelectorAll("[data-include]");
+    for (const el of includeEls) {
+      const url = el.getAttribute("data-include");
+      if (!url) continue;
+      try {
+        const res = await fetch(url, { cache: "no-store" });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        el.innerHTML = await res.text();
+      } catch (e) {
+        el.innerHTML = `&lt;section class="card"&gt;&lt;p&gt;&lt;strong&gt;Include error:&lt;/strong&gt; ${escapeHtml(url)}&lt;/p&gt;&lt;/section&gt;`;
+      }
+    }
+  }
+
+  async function loadPage(pageKey) {
+    if (!content) return;
+    const url = `./pages/${pageKey}.html`;
+
+    try {
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      content.innerHTML = await res.text();
+
+      // If you use includes:
+      await loadIncludes(content);
+
+      setActiveLinks(pageKey);
+      buildTOC();
+      scrollToPending(pageKey);
+    } catch (e) {
+      content.innerHTML = `&lt;section class="card"&gt;
+        &lt;h2&gt;Hiba&lt;/h2&gt;
+        &lt;p&gt;Nem sikerült betölteni: &lt;code&gt;${escapeHtml(url)}&lt;/code&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;small&gt;${escapeHtml(String(e))}&lt;/small&gt;&lt;/p&gt;
+      &lt;/section&gt;`;
+      if (toc) toc.innerHTML = `&lt;div class="toc__empty"&gt;Nincs tartalomjegyzék.&lt;/div&gt;`;
+    }
+  }
+
+  if (!location.hash) location.hash = "#home";
+  window.addEventListener("hashchange", () =&gt; loadPage(pageFromHash()));
+  loadPage(pageFromHash());
+})();</code></pre>
+  <p><strong>Hinweis:</strong> Im echten <code>app.js</code> darf der Code nicht HTML-escaped sein (kein <code>&amp;lt;</code>, <code>&amp;gt;</code>, <code>&amp;amp;</code>). Das hier ist nur für die Anzeige in HTML.</p>
+
+  <h2>5) Includes – Wiederverwendung (vollständiger Loader)</h2>
+  <p>Includes erlauben: Ein Inhalt, mehrere Einbindungen.</p>
+
+  <h3>5.1 Platzhalter in einer Seite</h3>
   <pre><code>&lt;div data-include="./includes/portal-guide.html"&gt;&lt;/div&gt;</code></pre>
 
-  <h3>5.1 Include-Loader (Empfehlung)</h3>
-  <p>Damit TOC und Volltext-Suche Includes „sehen“, sollte der Include-Loader in der Load-Pipeline vor dem TOC laufen.</p>
-  <p><strong>Hinweis:</strong> Bei Volltext-Suche muss auch <code>search-global.js</code> die Includes beim Indexieren auflösen (siehe Abschnitt 8.3).</p>
+  <h3>5.2 Include-Loader (vollständig, robust)</h3>
+  <pre><code>async function loadIncludes(rootEl, { onError } = {}) {
+  const includeEls = rootEl.querySelectorAll("[data-include]");
+  for (const el of includeEls) {
+    const url = el.getAttribute("data-include");
+    if (!url) continue;
 
-  <h2>6. UI/CSS: Sidebar-Scrolling (nur TOC scrollt)</h2>
-  <p>Das Layout nutzt Flexbox. Header/Search/Quicklinks bleiben fix, nur der TOC-Bereich ist scrollbar.</p>
-  <p><strong>Kritisch:</strong> <code>min-height: 0</code> in Flex-Containern, sonst funktioniert inneres Scrolling nicht.</p>
-
-  <h2>7. Modul: search-inline.js (Seiten-internes Highlight)</h2>
-  <p>Diese Suche arbeitet <em>nur</em> im aktuellen <code>#content</code> und markiert Treffer per <code>&lt;mark class="hl"&gt;</code>.</p>
-
-  <h3>7.1 Bedienung</h3>
-  <ul>
-    <li>Tippen: highlight</li>
-    <li><code>Enter</code>: nächster Treffer</li>
-    <li><code>Shift+Enter</code>: vorheriger Treffer</li>
-    <li><code>Esc</code>: löschen</li>
-  </ul>
-
-  <h3>7.2 Robustheit</h3>
-  <p>Der Code sollte in einem IIFE laufen (<code>(() =&gt; { ... })()</code>), um Namenskollisionen zu verhindern.</p>
-
-  <h2>8. Modul: search-global.js (Globale Suche)</h2>
-  <p>Die globale Suche hat zwei Modi:</p>
-  <ul>
-    <li><strong>Schnell</strong>: nutzt <code>search-index.json</code> (title/tags/excerpt)</li>
-    <li><strong>Volltext</strong>: lädt HTML-Seiten, zerlegt in H2/H3-Sektionen, sucht in Abschnittstexten</li>
-  </ul>
-
-  <h3>8.1 search-index.json pflegen (Schnell-Modus)</h3>
-  <p>Für gute Treffer: <strong>DE+HU</strong> Tags und Synonyme ergänzen (z. B. <em>Übung</em> + <em>Uebung</em>).</p>
-  <p>Beispiel:</p>
-  <pre><code>{
-  "page": "german-coaching",
-  "file": "./pages/german-coaching.html",
-  "title": "German Coaching (DE+HU)",
-  "excerpt": "Meeting, Status, Nachfragen, RAG, Governance...",
-  "tags": ["meeting","nachfragen","uebug","übung","rag","governance"]
+    try {
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const html = await res.text();
+      el.innerHTML = html;
+    } catch (e) {
+      if (onError) onError(url, e);
+      el.innerHTML = `&lt;section class="card"&gt;
+        &lt;p&gt;&lt;strong&gt;Include failed:&lt;/strong&gt; ${url}&lt;/p&gt;
+      &lt;/section&gt;`;
+    }
+  }
 }</code></pre>
 
-  <h3>8.2 Volltext: Section-Index</h3>
-  <p>Volltext baut einen Abschnitt-Index (H2/H3). Treffer enthalten:</p>
+  <h2>6) search-inline.js – kompletter Highlight-Code (mit Navigation)</h2>
+  <p><strong>Ziel:</strong> Auf der aktuellen Seite suchen und Treffer markieren.</p>
+
+  <h3>6.1 search-inline.js (vollständig)</h3>
+  <pre><code>(() =&gt; {
+  const content = document.getElementById("content");
+  const searchBox = document.getElementById("searchBox");
+  const searchStatus = document.getElementById("searchStatus");
+  if (!content || !searchBox) return;
+
+  let marks = [];
+  let activeMark = -1;
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&amp;&lt;&gt;"']/g, c =&gt; ({
+      "&amp;":"&amp;amp;", "&lt;":"&amp;lt;", "&gt;":"&amp;gt;", "\"":"&amp;quot;", "'":"&amp;#39;"
+    }[c]));
+  }
+
+  function escapeRegExp(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&amp;");
+  }
+
+  function setStatus(html) {
+    if (!searchStatus) return;
+    searchStatus.innerHTML = html || "";
+  }
+
+  function clearHighlights() {
+    content.querySelectorAll("mark.hl").forEach(mark =&gt; {
+      mark.replaceWith(document.createTextNode(mark.textContent));
+    });
+    marks = [];
+    activeMark = -1;
+    setStatus("");
+  }
+
+  function highlightInContent(query) {
+    const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        const p = node.parentNode;
+        if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        if (p &amp;&amp; p.tagName) {
+          const tag = p.tagName.toLowerCase();
+          if (tag === "script" || tag === "style" || tag === "mark") return NodeFilter.FILTER_REJECT;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    const re = new RegExp(escapeRegExp(query), "gi");
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+
+    nodes.forEach(node =&gt; {
+      const text = node.nodeValue;
+      re.lastIndex = 0;
+      if (!re.test(text)) return;
+
+      const frag = document.createDocumentFragment();
+      let last = 0;
+      re.lastIndex = 0;
+
+      let m;
+      while ((m = re.exec(text)) !== null) {
+        const before = text.slice(last, m.index);
+        if (before) frag.appendChild(document.createTextNode(before));
+
+        const mark = document.createElement("mark");
+        mark.className = "hl";
+        mark.textContent = m[0];
+        frag.appendChild(mark);
+
+        last = m.index + m[0].length;
+      }
+
+      const after = text.slice(last);
+      if (after) frag.appendChild(document.createTextNode(after));
+      node.parentNode.replaceChild(frag, node);
+    });
+
+    marks = Array.from(content.querySelectorAll("mark.hl"));
+    activeMark = marks.length ? 0 : -1;
+  }
+
+  function jumpTo(index) {
+    if (!marks.length) return;
+
+    if (index &lt; 0) index = marks.length - 1;
+    if (index &gt;= marks.length) index = 0;
+
+    marks.forEach(m =&gt; m.classList.remove("hl-active"));
+    activeMark = index;
+
+    const el = marks[activeMark];
+    el.classList.add("hl-active");
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+
+    setStatus(`Találat: &lt;strong&gt;${activeMark + 1}&lt;/strong&gt;/&lt;strong&gt;${marks.length}&lt;/strong&gt;`);
+  }
+
+  function applySearch() {
+    const q = searchBox.value.trim();
+    clearHighlights();
+
+    if (q.length &lt; 2) return;
+
+    highlightInContent(q);
+
+    if (!marks.length) {
+      setStatus(`Nincs találat: &lt;strong&gt;${escapeHtml(q)}&lt;/strong&gt;`);
+      return;
+    }
+    jumpTo(0);
+  }
+
+  searchBox.addEventListener("input", applySearch);
+
+  searchBox.addEventListener("keydown", (e) =&gt; {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (e.shiftKey) jumpTo(activeMark - 1);
+      else jumpTo(activeMark + 1);
+    }
+    if (e.key === "Escape") {
+      searchBox.value = "";
+      clearHighlights();
+    }
+  });
+
+  window.addEventListener("hashchange", () =&gt; {
+    if (searchBox.value.trim().length &gt;= 2) applySearch();
+  });
+})();</code></pre>
+
+  <p><strong>Hinweis:</strong> In der realen <code>search-inline.js</code> Datei dürfen die Zeichen nicht HTML-escaped sein (kein <code>&amp;lt;</code> usw.).</p>
+
+  <h2>7) search-global.js – Volltext-Indexer (mit Include-Auflösung)</h2>
+  <p>Dieser Abschnitt zeigt die kritischen Teile: Section-Index + Include-Auflösung + Cache.</p>
+
+  <h3>7.1 fetchSections(file) – mit Include-Auflösung</h3>
+  <pre><code>async function fetchSections(file) {
+  const res = await fetch(file, { cache: "no-store" });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const html = await res.text();
+
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  doc.querySelectorAll("script, style, noscript").forEach(n =&gt; n.remove());
+
+  // Include-Auflösung: [data-include] nachladen und injizieren
+  const includeEls = Array.from(doc.querySelectorAll("[data-include]"));
+  for (const el of includeEls) {
+    const incUrl = el.getAttribute("data-include");
+    if (!incUrl) continue;
+    try {
+      const incRes = await fetch(incUrl, { cache: "no-store" });
+      if (!incRes.ok) continue;
+      const incHtml = await incRes.text();
+      const incDoc = new DOMParser().parseFromString(incHtml, "text/html");
+      el.innerHTML = incDoc.body.innerHTML;
+    } catch {
+      // ignore
+    }
+  }
+
+  const root = doc.body;
+  const headings = Array.from(root.querySelectorAll("h2, h3"));
+
+  // Fallback: wenn keine headings, gesamte Seite als 1 Section
+  if (!headings.length) {
+    const text = (root.innerText || "").replace(/\s+/g, " ").trim();
+    return [{ id: "top", title: "Tartalom", text }];
+  }
+
+  // Section-Bildung: heading + nachfolgende Inhalte bis zum nächsten heading
+  const slugMap = new Map();
+  const uniqueSlug = (title) =&gt; {
+    const base = title.toLowerCase().trim().replace(/[^\w\u00C0-\u017F]+/g, "-").replace(/^-+|-+$/g, "");
+    const n = (slugMap.get(base) || 0) + 1;
+    slugMap.set(base, n);
+    return n === 1 ? base : `${base}-${n}`;
+  };
+
+  const sections = [];
+  for (let i = 0; i &lt; headings.length; i++) {
+    const h = headings[i];
+    const title = (h.textContent || "").trim();
+    const id = uniqueSlug(title || "section");
+
+    let textParts = [];
+    let cur = h.nextSibling;
+    while (cur) {
+      if (cur.nodeType === 1) {
+        const tag = cur.tagName.toLowerCase();
+        if (tag === "h2" || tag === "h3") break;
+        const t = (cur.innerText || "").trim();
+        if (t) textParts.push(t);
+      } else if (cur.nodeType === 3) {
+        const t = (cur.nodeValue || "").trim();
+        if (t) textParts.push(t);
+      }
+      cur = cur.nextSibling;
+    }
+
+    const text = textParts.join(" ").replace(/\s+/g, " ").trim();
+    sections.push({ id, title, text });
+  }
+
+  return sections;
+}</code></pre>
+
+  <h3>7.2 Cache-Versionierung (wichtig bei Änderungen)</h3>
+  <p>Wenn du die Indexlogik änderst, erhöhe die Cache-Version:</p>
+  <pre><code>const CACHE_KEY = "kb_deep_sections_cache_v2";</code></pre>
+
+  <h2>8) Troubleshooting Playbook (Fehler → Ursache → Fix)</h2>
+
+  <h3>8.1 Seite bleibt leer</h3>
   <ul>
-    <li>Seite (<code>page</code>)</li>
-    <li>Section-Anker (<code>anchor</code>)</li>
-    <li>Section-Titel</li>
-    <li>Snippet</li>
+    <li><strong>Ursache:</strong> SyntaxError stoppt app.js.</li>
+    <li><strong>Fix:</strong> Console prüfen; Klammern/duplizierte Deklarationen entfernen; Hard reload.</li>
   </ul>
 
-  <h3>8.3 Includes in Volltext berücksichtigen</h3>
-  <p>Wenn Seiten <code>data-include</code> verwenden, muss der Volltext-Indexer diese Includes beim Parsen nachladen und in den DOM injizieren,
-  sonst findet die Volltext-Suche Inhalte nur in <code>pages/</code>, nicht aus <code>includes/</code>.</p>
-
-  <h2>9. Debugging & typische Fehler</h2>
-
-  <h3>9.1 Seite bleibt leer</h3>
+  <h3>8.2 „Identifier already declared“</h3>
   <ul>
-    <li>Console prüfen: SyntaxError/ReferenceError stoppt die Skriptausführung.</li>
-    <li>Network prüfen: wird <code>pages/home.html</code> geladen?</li>
-    <li>Hash prüfen: ohne Hash muss <code>#home</code> gesetzt werden.</li>
+    <li><strong>Ursache:</strong> gleiche Funktion/Variable mehrfach im globalen Scope.</li>
+    <li><strong>Fix:</strong> Suchmodule in eigene Dateien/IIFE verschieben; Duplikate löschen.</li>
   </ul>
 
-  <h3>9.2 „Identifier already declared“ / „Unexpected token }“</h3>
+  <h3>8.3 „Cannot access X before initialization“</h3>
   <ul>
-    <li>Duplizierte Funktionen/Variablen in globalem Scope.</li>
-    <li>Falsche Klammerung beim Copy/Paste.</li>
-    <li>Entitäten im JS (<code>&amp;lt;</code>, <code>&amp;gt;</code>) – unbedingt entfernen!</li>
+    <li><strong>Ursache:</strong> const/let wird vor Deklaration verwendet.</li>
+    <li><strong>Fix:</strong> Deklaration vor Nutzung; oder in function umwandeln.</li>
   </ul>
 
-  <h3>9.3 Unicode/Look-alike Zeichen</h3>
-  <p>Copy/Paste aus PDFs kann „ähnliche“ Zeichen erzeugen. Dann findet die Suche einen Begriff nur beim Copy/Paste, nicht beim Tippen.
-  Empfehlung: erst in Plain Text (Notepad/VS Code) einfügen.</p>
+  <h3>8.4 Volltext findet Includes nicht</h3>
+  <ul>
+    <li><strong>Ursache:</strong> Indexer liest nur pages/*.html und sieht data-include Placeholder.</li>
+    <li><strong>Fix:</strong> Include-Auflösung in fetchSections() ergänzen + Cache-Key erhöhen.</li>
+  </ul>
 
-  <h2>10. Erweiterung: neues Modul hinzufügen (Checkliste)</h2>
+  <h2>9) Erweiterung: Neues Modul hinzufügen (Step-by-step)</h2>
   <ol>
-    <li>Neue Seite erstellen: <code>pages/neues-modul.html</code></li>
-    <li>Topbar-Link ergänzen: <code>#neues-modul</code> (<code>data-page="neues-modul"</code>)</li>
-    <li>H2/H3-Struktur nutzen (TOC + Volltext)</li>
-    <li><code>search-index.json</code> ergänzen (Schnell-Modus)</li>
-    <li>Optional: Inhalte als Include auslagern (<code>includes/</code>)</li>
+    <li>Seite erstellen: <code>pages/my-topic.html</code> (H2/H3 Struktur).</li>
+    <li>Topbar Link: <code>#my-topic</code> (mit <code>data-page</code>).</li>
+    <li>Index: <code>search-index.json</code> ergänzen (Schnell-Suche).</li>
+    <li>Optional: gemeinsame Teile nach <code>includes/</code> auslagern.</li>
   </ol>
 
-  <h2>11. Lokales Testen (Empfehlung)</h2>
-  <p>Für lokale Tests empfehle ich einen einfachen HTTP-Server (weil <code>fetch</code> unter <code>file://</code> oft blockiert wird):</p>
+  <h2>10) Lokales Testen</h2>
+  <p>Für lokale Tests brauchst du einen HTTP-Server (fetch funktioniert unter file:// oft nicht):</p>
   <pre><code>python -m http.server 8000</code></pre>
-  <p>Dann im Browser öffnen: <code>http://localhost:8000/</code></p>
-
+  <p>Öffne: <code>http://localhost:8000/</code></p>
 </section>

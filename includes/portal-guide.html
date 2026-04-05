@@ -1,25 +1,46 @@
-/*  (csak fragment, nem teljes HTML dokumentum) */
-<section class="card"> 
-  <h2>Portál útmutató (DE+HU)</h2>
- (csak fragment, nem teljes HTML dokumentum)
-  <h3>Mire való a portál?</h3>
-  <p><strong>DE:</strong> Kompakte Wissensbasis für AI-/RAG-/Governance-Themen.</p>
-  <p><strong>HU:</strong> Gyors tájékozódás + sablonok + irányelvek egy helyen.</p>
+<section class="card">
+  <h2>1. Használat</h2>
 
-  <h3>Keresés: oldalon belüli vs globális</h3>
+  <h3>Navigáció (Topbar + Sidebar)</h3>
   <ul>
-    <li><strong>DE:</strong> Seitenintern = Highlight a jelenlegi oldalon.</li>
-    <li><strong>DE:</strong> Global: „Schnell” = index (title/tags/excerpt), „Volltext” = oldalak tartalma (H2/H3).</li>
+    <li><strong>Topbar</strong>: fő modulok (pl. RAG, Irányelvek, German Coaching, Portál, Technik).</li>
+    <li><strong>Sidebar</strong>: Tartalomjegyzék (TOC) H2/H3 alapján + keresés + gyors linkek + „Top”.</li>
   </ul>
 
-  <h3>Hogyan adj hozzá új tartalmat?</h3>
+  <h3>Keresés – kétféle</h3>
+  <ul>
+    <li><strong>Oldalon belüli keresés (Highlight)</strong>: a bal oldali „Keresés…” mező csak az aktuális oldalon keres és kiemeli a találatokat.</li>
+    <li><strong>Globális keresés</strong>: az egész portálban keres.
+      <ul>
+        <li><strong>Gyors</strong>: title/tags/excerpt alapján (search-index.json)</li>
+        <li><strong>Teljes szöveg</strong>: a pages/*.html tartalmában (H2/H3 szekciókra bontva)</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Hogyan adj hozzá új tartalmat? (rövid)</h3>
   <ol>
     <li>Új fájl: <code>pages/uj-tema.html</code></li>
-    <li>Menü-link: <code>#uj-tema</code></li>
+    <li>Menü-link (hash): <code>#uj-tema</code></li>
     <li>H2/H3 tagolás (TOC + fulltext miatt)</li>
     <li><code>search-index.json</code> bővítés (Gyors keresőhöz)</li>
   </ol>
-  <section class="card">
+</section>
+
+<section class="card">
+  <h2>2. Technik (fejlesztői dokumentáció)</h2>
+
+  <p>A portál technikai működéséről, modulokról, kódról és hibakeresésről a <strong>Technik</strong> oldalon találsz részletes dokumentációt.</p>
+
+  <ul>
+    <li>Menüpont a Topbarban: <strong>Technik</strong> (<code>#portal-tech</code>)</li>
+    <li>Tartalma: architektúra, fájlstruktúra, app.js, include-ok, globális kereső, hibakeresési playbook</li>
+  </ul>
+
+  <p><strong>Tip:</strong> ha új fejlesztést csinálsz (include, kereső, TOC), előbb nézd meg a Technik oldalt.</p>
+</section>
+
+<section class="card">
   <h2>3. Bővítés</h2>
 
   <h3>Mit kell frissíteni bővítéskor?</h3>
@@ -32,8 +53,7 @@
 
   <h3>3.1 Modul hozzáadás (példa)</h3>
   <div data-include="./includes/howto-add-module.html"></div>
-</section>
 
   <h3>3.2 Új include hozzáadás (példa)</h3>
-<div data-include="./includes/howto-add-include.html"></div>
+  <div data-include="./includes/howto-add-include.html"></div>
 </section>

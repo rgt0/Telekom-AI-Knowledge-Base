@@ -75,4 +75,11 @@
   "excerpt": "DE‑domináns mentoring: COBOL kontextus, AI use case-ek, prompt minták, gyakorlatok.",
   "tags": ["de","mentoring","cobol","mainframe","ai","prompt","use case","übung","uebung","gyakorlat"]
 }
+  {
+  "page": "sandbox",
+  "file": "./pages/sandbox.html",
+  "title": "Sandbox",
+  "excerpt": "Kísérletezés: promptok, minták, tesztek, gyors próbák.",
+  "tags": ["sandbox","kiserlet","prompt","test","gyakorlat"]
+}
 ]

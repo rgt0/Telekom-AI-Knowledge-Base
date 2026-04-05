@@ -1,0 +1,47 @@
+<section class="card">
+  <h4>3.1.1 Tartalomfájl (pages/)</h4>
+  <p>Példa: új modul neve <strong>AI Governance</strong>, slug: <code>ai-governance</code>.</p>
+  <p>Hozd létre: <code>pages/ai-governance.html</code></p>
+
+  <pre><code>&lt;section class="card"&gt;
+  &lt;span class="badge"&gt;AI&lt;/span&gt;
+  &lt;h1&gt;AI Governance&lt;/h1&gt;
+
+  &lt;h2&gt;Überblick&lt;/h2&gt;
+  &lt;p&gt;Kurze Einführung: Regeln, Risiken, Verantwortlichkeiten.&lt;/p&gt;
+
+  &lt;h2&gt;Do / Don't&lt;/h2&gt;
+  &lt;h3&gt;PII / Datenschutz&lt;/h3&gt;
+  &lt;p&gt;Keine personenbezogenen Daten in Prompts...&lt;/p&gt;
+
+  &lt;h3&gt;Freigegebene Quellen&lt;/h3&gt;
+  &lt;p&gt;Nur freigegebene Datenquellen verwenden...&lt;/p&gt;
+
+  &lt;h2&gt;Audit &amp; Nachvollziehbarkeit&lt;/h2&gt;
+  &lt;p&gt;Logging, Versionierung, Verantwortlichkeiten...&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+
+  <h4>3.1.2 Topbar menü (hash link)</h4>
+  <p>Az <code>index.html</code> topnav részébe add hozzá (hash-es link, ne útvonal!):</p>
+
+  <pre><code>&lt;a href="#ai-governance" data-page="ai-governance"&gt;AI Governance&lt;/a&gt;</code></pre>
+
+  <h4>3.1.3 Gyors kereső index (search-index.json)</h4>
+  <p>A <code>search-index.json</code>-ba add hozzá, hogy a „Gyors” mód is találjon:</p>
+
+  <pre><code>{
+  "page": "ai-governance",
+  "file": "./pages/ai-governance.html",
+  "title": "AI Governance",
+  "excerpt": "Regeln, Datenschutz (PII), freigegebene Quellen, Audit, Verantwortlichkeiten.",
+  "tags": ["ai","governance","policy","compliance","datenschutz","pii","audit","risk"]
+}</code></pre>
+
+  <h4>3.1.4 Gyors teszt (1 perc)</h4>
+  <ol>
+    <li>Nyisd meg: <code>#ai-governance</code> → betölt-e?</li>
+    <li>Bal oldali TOC-ben megjelennek-e a H2/H3 pontok?</li>
+    <li>Globális kereső „Gyors” módban talál-e <code>governance</code>-ra?</li>
+    <li>„Teljes szöveg” módban talál-e <code>Datenschutz</code>-ra?</li>
+  </ol>
+</section>

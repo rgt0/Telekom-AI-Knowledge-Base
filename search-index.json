@@ -68,4 +68,11 @@
   ]
 
   }
+{
+  "page": "de-mentoring",
+  "file": "./pages/de-mentoring.html",
+  "title": "DE‑Mentoring — COBOL — AI",
+  "excerpt": "DE‑domináns mentoring: COBOL kontextus, AI use case-ek, prompt minták, gyakorlatok.",
+  "tags": ["de","mentoring","cobol","mainframe","ai","prompt","use case","übung","uebung","gyakorlat"]
+}
 ]

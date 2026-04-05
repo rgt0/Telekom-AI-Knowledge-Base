@@ -1,0 +1,173 @@
+portal-tech-de.html ist Fragment: nincs <!doctype>, nincs <html>, csak tartalom.
+<section class="card">
+  <span class="badge">Dev Docs</span>
+  <h1>Technische Dokumentation – Telekom AI Knowledge Base Portal (DE)</h1>
+  <p><strong>Zielgruppe:</strong> Entwickler:innen & Maintainer des statischen Portals.</p>
+  <p><strong>Ziel:</strong> Architektur verstehen, Module sicher erweitern, typische Fehler schnell beheben.</p>
+
+  <h2>1. Überblick: Was ist dieses Portal?</h2>
+  <p>Das Portal ist eine statische GitHub-Pages-Seite mit clientseitigem Routing (<code>#hash</code>) und dynamischem Nachladen von HTML-Fragmenten aus dem Ordner <code>pages/</code>.
+  Zusätzlich unterstützt es:</p>
+  <ul>
+    <li>automatisches Inhaltsverzeichnis (TOC) aus <code>H2/H3</code>,</li>
+    <li>Seiten-internes Highlight-Suchen,</li>
+    <li>globale Suche (Schnell-Index + Volltext).</li>
+  </ul>
+
+  <h2>2. Repository-Struktur (Module)</h2>
+  <p>Empfohlene Struktur:</p>
+  <pre><code>/
+├─ index.html
+├─ telekom-ui.css
+├─ app.js
+├─ search-inline.js
+├─ search-global.js
+├─ search-index.json
+├─ includes/
+│  ├─ portal-guide.html
+│  └─ portal-tech-de.html
+└─ pages/
+   ├─ home.html
+   ├─ portal-guide.html
+   ├─ portal-tech.html
+   ├─ german-coaching.html
+   ├─ rag.html
+   ├─ iranyelvek.html
+   └─ ... weitere Seiten ...</code></pre>
+
+  <h2>3. Core-Modul: index.html (Shell)</h2>
+  <p><strong>index.html</strong> ist die Shell: Layout, Sidebar, Topbar, Content-Container.</p>
+  <ul>
+    <li><strong>Wichtig:</strong> <code>id="content"</code> darf genau <em>einmal</em> existieren (Ziel für das Nachladen).</li>
+    <li><strong>Wichtig:</strong> <code>id="toc"</code> existiert, damit das TOC gefüllt werden kann.</li>
+    <li><strong>Wichtig:</strong> Suchfelder müssen per ID eindeutig sein (z. B. <code>searchBox</code>, <code>globalSearch</code>).</li>
+  </ul>
+
+  <h3>3.1 Script-Reihenfolge</h3>
+  <p>Empfohlene Reihenfolge (damit Basissystem immer stabil bleibt):</p>
+  <pre><code>&lt;script defer src="./app.js"&gt;&lt;/script&gt;
+&lt;script defer src="./search-inline.js"&gt;&lt;/script&gt;
+&lt;script defer src="./search-global.js"&gt;&lt;/script&gt;</code></pre>
+  <p><strong>Prinzip:</strong> <code>app.js</code> darf nie vom Suchcode abhängig sein. Suche ist additiv.</p>
+
+  <h2>4. Core-Modul: app.js (Routing + Load + TOC + Jump)</h2>
+  <p><strong>app.js</strong> ist das Herz: es lädt Seiten aus <code>pages/</code> anhand des Hashes.</p>
+
+  <h3>4.1 Hash-Routing</h3>
+  <ul>
+    <li><code>#home</code> ⇒ <code>./pages/home.html</code></li>
+    <li><code>#portal-tech</code> ⇒ <code>./pages/portal-tech.html</code></li>
+  </ul>
+  <p>Wenn kein Hash gesetzt ist, wird standardmäßig <code>#home</code> gesetzt.</p>
+
+  <h3>4.2 Seiten-Ladefluss (Load Pipeline)</h3>
+  <ol>
+    <li><strong>Fetch</strong> der Seite: <code>fetch("./pages/${pageKey}.html")</code></li>
+    <li><strong>Render</strong> in <code>#content</code></li>
+    <li><strong>Includes</strong> laden (optional, siehe Abschnitt 5)</li>
+    <li><strong>Active Links</strong> markieren (Topbar/Quicklinks)</li>
+    <li><strong>TOC</strong> bauen (H2/H3)</li>
+    <li><strong>Pending Jump</strong> (wenn globale Suche eine Section-Anchor übergibt)</li>
+  </ol>
+
+  <h3>4.3 TOC: H2/H3 → Sidebar</h3>
+  <p>Das TOC wird aus <code>H2</code> und <code>H3</code> generiert. Für jeden Heading wird (falls nötig) ein eindeutiges <code>id</code> erstellt.</p>
+  <p><strong>Best Practice:</strong> Nutze klare, kurze H2/H3-Titel, damit TOC und Volltext-Suche gut funktionieren.</p>
+
+  <h3>4.4 Pending Jump (Abschnitt-Ansprung)</h3>
+  <p>Die globale Suche kann beim Klick <code>sessionStorage</code> setzen:</p>
+  <pre><code>pendingPage, pendingAnchor, pendingQuery</code></pre>
+  <p><code>app.js</code> scrollt nach dem Laden (und nach dem TOC-Bau) zur Section und kann optional die Query an die Highlight-Suche übergeben.</p>
+
+  <h2>5. Includes: Gemeinsame Fragmente wiederverwenden</h2>
+  <p>Um Inhalte nicht zu duplizieren, werden Fragmente in <code>includes/</code> gepflegt und per Platzhalter eingebunden:</p>
+  <pre><code>&lt;div data-include="./includes/portal-guide.html"&gt;&lt;/div&gt;</code></pre>
+
+  <h3>5.1 Include-Loader (Empfehlung)</h3>
+  <p>Damit TOC und Volltext-Suche Includes „sehen“, sollte der Include-Loader in der Load-Pipeline vor dem TOC laufen.</p>
+  <p><strong>Hinweis:</strong> Bei Volltext-Suche muss auch <code>search-global.js</code> die Includes beim Indexieren auflösen (siehe Abschnitt 8.3).</p>
+
+  <h2>6. UI/CSS: Sidebar-Scrolling (nur TOC scrollt)</h2>
+  <p>Das Layout nutzt Flexbox. Header/Search/Quicklinks bleiben fix, nur der TOC-Bereich ist scrollbar.</p>
+  <p><strong>Kritisch:</strong> <code>min-height: 0</code> in Flex-Containern, sonst funktioniert inneres Scrolling nicht.</p>
+
+  <h2>7. Modul: search-inline.js (Seiten-internes Highlight)</h2>
+  <p>Diese Suche arbeitet <em>nur</em> im aktuellen <code>#content</code> und markiert Treffer per <code>&lt;mark class="hl"&gt;</code>.</p>
+
+  <h3>7.1 Bedienung</h3>
+  <ul>
+    <li>Tippen: highlight</li>
+    <li><code>Enter</code>: nächster Treffer</li>
+    <li><code>Shift+Enter</code>: vorheriger Treffer</li>
+    <li><code>Esc</code>: löschen</li>
+  </ul>
+
+  <h3>7.2 Robustheit</h3>
+  <p>Der Code sollte in einem IIFE laufen (<code>(() =&gt; { ... })()</code>), um Namenskollisionen zu verhindern.</p>
+
+  <h2>8. Modul: search-global.js (Globale Suche)</h2>
+  <p>Die globale Suche hat zwei Modi:</p>
+  <ul>
+    <li><strong>Schnell</strong>: nutzt <code>search-index.json</code> (title/tags/excerpt)</li>
+    <li><strong>Volltext</strong>: lädt HTML-Seiten, zerlegt in H2/H3-Sektionen, sucht in Abschnittstexten</li>
+  </ul>
+
+  <h3>8.1 search-index.json pflegen (Schnell-Modus)</h3>
+  <p>Für gute Treffer: <strong>DE+HU</strong> Tags und Synonyme ergänzen (z. B. <em>Übung</em> + <em>Uebung</em>).</p>
+  <p>Beispiel:</p>
+  <pre><code>{
+  "page": "german-coaching",
+  "file": "./pages/german-coaching.html",
+  "title": "German Coaching (DE+HU)",
+  "excerpt": "Meeting, Status, Nachfragen, RAG, Governance...",
+  "tags": ["meeting","nachfragen","uebug","übung","rag","governance"]
+}</code></pre>
+
+  <h3>8.2 Volltext: Section-Index</h3>
+  <p>Volltext baut einen Abschnitt-Index (H2/H3). Treffer enthalten:</p>
+  <ul>
+    <li>Seite (<code>page</code>)</li>
+    <li>Section-Anker (<code>anchor</code>)</li>
+    <li>Section-Titel</li>
+    <li>Snippet</li>
+  </ul>
+
+  <h3>8.3 Includes in Volltext berücksichtigen</h3>
+  <p>Wenn Seiten <code>data-include</code> verwenden, muss der Volltext-Indexer diese Includes beim Parsen nachladen und in den DOM injizieren,
+  sonst findet die Volltext-Suche Inhalte nur in <code>pages/</code>, nicht aus <code>includes/</code>.</p>
+
+  <h2>9. Debugging & typische Fehler</h2>
+
+  <h3>9.1 Seite bleibt leer</h3>
+  <ul>
+    <li>Console prüfen: SyntaxError/ReferenceError stoppt die Skriptausführung.</li>
+    <li>Network prüfen: wird <code>pages/home.html</code> geladen?</li>
+    <li>Hash prüfen: ohne Hash muss <code>#home</code> gesetzt werden.</li>
+  </ul>
+
+  <h3>9.2 „Identifier already declared“ / „Unexpected token }“</h3>
+  <ul>
+    <li>Duplizierte Funktionen/Variablen in globalem Scope.</li>
+    <li>Falsche Klammerung beim Copy/Paste.</li>
+    <li>Entitäten im JS (<code>&amp;lt;</code>, <code>&amp;gt;</code>) – unbedingt entfernen!</li>
+  </ul>
+
+  <h3>9.3 Unicode/Look-alike Zeichen</h3>
+  <p>Copy/Paste aus PDFs kann „ähnliche“ Zeichen erzeugen. Dann findet die Suche einen Begriff nur beim Copy/Paste, nicht beim Tippen.
+  Empfehlung: erst in Plain Text (Notepad/VS Code) einfügen.</p>
+
+  <h2>10. Erweiterung: neues Modul hinzufügen (Checkliste)</h2>
+  <ol>
+    <li>Neue Seite erstellen: <code>pages/neues-modul.html</code></li>
+    <li>Topbar-Link ergänzen: <code>#neues-modul</code> (<code>data-page="neues-modul"</code>)</li>
+    <li>H2/H3-Struktur nutzen (TOC + Volltext)</li>
+    <li><code>search-index.json</code> ergänzen (Schnell-Modus)</li>
+    <li>Optional: Inhalte als Include auslagern (<code>includes/</code>)</li>
+  </ol>
+
+  <h2>11. Lokales Testen (Empfehlung)</h2>
+  <p>Für lokale Tests empfehle ich einen einfachen HTTP-Server (weil <code>fetch</code> unter <code>file://</code> oft blockiert wird):</p>
+  <pre><code>python -m http.server 8000</code></pre>
+  <p>Dann im Browser öffnen: <code>http://localhost:8000/</code></p>
+
+</section>

@@ -1,59 +1,64 @@
 <section class="card">
-  <h2>1. Használat</h2>
+  <h2>1. Nutzung (Használat)</h2>
 
-  <h3>Navigáció (Topbar + Sidebar)</h3>
-  <ul>
-    <li><strong>Topbar</strong>: fő modulok (pl. RAG, Irányelvek, German Coaching, Portál, Technik).</li>
-    <li><strong>Sidebar</strong>: Tartalomjegyzék (TOC) H2/H3 alapján + keresés + gyors linkek + „Top”.</li>
-  </ul>
+  <h3>Navigation (Topbar + Sidebar)</h3>
+  <p><strong>DE:</strong> Die <em>Topbar</em> enthält die Hauptmodule (z. B. RAG, Irányelvek, German Coaching, Portal, Technik). Die <em>Sidebar</em> zeigt das Inhaltsverzeichnis (TOC) der aktuellen Seite und bietet Suche, Schnelllinks und „Top”.</p>
 
-  <h3>Keresés – kétféle</h3>
+  <div class="note note--info">
+    <strong>HU megjegyzés:</strong> A Topbar a fő modulok, a bal oldali Sidebar pedig az aktuális oldal TOC-ja (H2/H3) + keresők + gyors linkek.
+  </div>
+
+  <h3>Suche (zwei Arten)</h3>
   <ul>
-    <li><strong>Oldalon belüli keresés (Highlight)</strong>: a bal oldali „Keresés…” mező csak az aktuális oldalon keres és kiemeli a találatokat.</li>
-    <li><strong>Globális keresés</strong>: az egész portálban keres.
+    <li><strong>DE:</strong> <em>Seitenintern (Highlight)</em> – sucht nur auf der aktuellen Seite und markiert Treffer.</li>
+    <li><strong>DE:</strong> <em>Global</em> – sucht im gesamten Portal:
       <ul>
-        <li><strong>Gyors</strong>: title/tags/excerpt alapján (search-index.json)</li>
-        <li><strong>Teljes szöveg</strong>: a pages/*.html tartalmában (H2/H3 szekciókra bontva)</li>
+        <li><strong>DE:</strong> <em>Schnell</em>: Index (title/tags/excerpt) aus <code>search-index.json</code>.</li>
+        <li><strong>DE:</strong> <em>Volltext</em>: durchsucht Seiteninhalte (H2/H3 Sections) und springt direkt zum Abschnitt.</li>
       </ul>
     </li>
   </ul>
 
-  <h3>Hogyan adj hozzá új tartalmat? (rövid)</h3>
+  <div class="note note--info">
+    <strong>HU megjegyzés:</strong> A „Gyors” kereső az indexből dolgozik (title/tags/excerpt), a „Teljes szöveg” a pages/*.html tartalmából.
+  </div>
+
+  <h3>Content finden – schnelle Routine</h3>
   <ol>
-    <li>Új fájl: <code>pages/uj-tema.html</code></li>
-    <li>Menü-link (hash): <code>#uj-tema</code></li>
-    <li>H2/H3 tagolás (TOC + fulltext miatt)</li>
-    <li><code>search-index.json</code> bővítés (Gyors keresőhöz)</li>
+    <li><strong>DE:</strong> Öffne ein Modul in der Topbar.</li>
+    <li><strong>DE:</strong> Nutze die Sidebar-TOC für Abschnittssprünge (H2/H3).</li>
+    <li><strong>DE:</strong> Wenn Schnell nicht reicht: Volltext nutzen.</li>
   </ol>
 </section>
 
 <section class="card">
-  <h2>2. Technik (fejlesztői dokumentáció)</h2>
+  <h2>2. Technik (Link zur Entwickler-Doku)</h2>
 
-  <p>A portál technikai működéséről, modulokról, kódról és hibakeresésről a <strong>Technik</strong> oldalon találsz részletes dokumentációt.</p>
+  <p><strong>DE:</strong> Für Architektur, Module, Code-Beispiele, Debugging und Erweiterung: öffne <strong>Technik</strong> in der Topbar (<code>#portal-tech</code>).</p>
 
-  <ul>
-    <li>Menüpont a Topbarban: <strong>Technik</strong> (<code>#portal-tech</code>)</li>
-    <li>Tartalma: architektúra, fájlstruktúra, app.js, include-ok, globális kereső, hibakeresési playbook</li>
-  </ul>
-
-  <p><strong>Tip:</strong> ha új fejlesztést csinálsz (include, kereső, TOC), előbb nézd meg a Technik oldalt.</p>
+  <div class="note note--info">
+    <strong>HU megjegyzés:</strong> A Technik oldal a fejlesztői dokumentáció (app.js, include-ok, kereső, hibakeresés).
+  </div>
 </section>
 
 <section class="card">
-  <h2>3. Bővítés</h2>
+  <h2>3. Erweiterung (Bővítés)</h2>
 
-  <h3>Mit kell frissíteni bővítéskor?</h3>
+  <h3>Checkliste: Was muss ich anpassen?</h3>
   <ol>
-    <li><strong>Új oldal</strong> a <code>pages/</code> alatt</li>
-    <li><strong>Topbar menü</strong> (hash link)</li>
-    <li><strong>search-index.json</strong> (Gyors keresőhöz)</li>
-    <li>(opcionális) include használata, ha nem akarod duplikálni a szöveget</li>
+    <li><strong>DE:</strong> Neue Seite unter <code>pages/</code> anlegen (Fragment, H2/H3 Struktur).</li>
+    <li><strong>DE:</strong> Topbar-Link hinzufügen: <code>href="#slug"</code> + <code>data-page="slug"</code>.</li>
+    <li><strong>DE:</strong> <code>search-index.json</code> pflegen (für Schnell-Suche).</li>
+    <li><strong>DE:</strong> Optional: wiederverwendbare Teile als Include in <code>includes/</code>.</li>
   </ol>
 
-  <h3>3.1 Modul hozzáadás (példa)</h3>
+  <div class="note note--info">
+    <strong>HU megjegyzés:</strong> Új oldal + topbar hash link + search-index.json + (opcionális) include.
+  </div>
+
+  <h3>3.1 Modul hinzufügen (Beispiel)</h3>
   <div data-include="./includes/howto-add-module.html"></div>
 
-  <h3>3.2 Új include hozzáadás (példa)</h3>
+  <h3>3.2 Neues Include hinzufügen (Beispiel)</h3>
   <div data-include="./includes/howto-add-include.html"></div>
 </section>

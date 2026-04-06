@@ -529,3 +529,104 @@ mark.hl-active{
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   font-size: 12px;
 }
+/* === LAYOUT: sidebar + main === */
+
+.layout{
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: var(--sidebar-w, 280px) 1fr;
+}
+
+/* jobb oszlop */
+.main{
+  min-width: 0;              /* KRITIKUS: hosszú sorok ne nyomják szét a gridet */
+  display: flex;
+  flex-direction: column;
+}
+
+/* tartalom terület */
+.content{
+  padding: 18px;
+}
+
+/* === TOPBAR === */
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: var(--topbar-h, 56px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--border);
+  background: #fff;
+}
+
+/* === SIDEBAR: fix részek + csak TOC scroll === */
+.sidebar{
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;          /* teljes sidebar ne scrollozzon */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  background: #fff;
+  border-right: 2px solid var(--border);
+}
+
+/* fix részek (brand/search/footer/quicklinks) */
+.sidebar__header,
+.sidebar__search,
+.sidebar__bottom,
+.sidebar__footer{
+  flex: 0 0 auto;
+}
+
+/* TOC wrapper kapja a maradék helyet */
+.sidebar__tocwrap{
+  flex: 1 1 auto;
+  min-height: 0;             /* KRITIKUS: különben nem működik a belső scroll */
+  display: flex;
+  flex-direction: column;
+}
+
+/* a TOC maga scrollozik */
+#toc.toc{
+  flex: 1 1 auto;
+  min-height: 0;             /* KRITIKUS */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 6px;        /* scrollbar ne takarja a szöveget */
+}
+
+/* === RESPONSIVE (mobil) === */
+@media (max-width: 980px){
+  .layout{
+    grid-template-columns: 1fr;
+  }
+
+  /* mobilon a sidebar lehet fixed overlay (ha ezt használod) */
+  .sidebar{
+    position: fixed;
+    left: 0;
+    top: 0;
+    transform: translateX(-105%);
+    transition: transform .2s ease;
+    width: min(90vw, 320px);
+    z-index: 40;
+  }
+  .sidebar.is-open{
+    transform: translateX(0);
+  }
+
+  .overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    z-index: 35;
+  }
+}
+``

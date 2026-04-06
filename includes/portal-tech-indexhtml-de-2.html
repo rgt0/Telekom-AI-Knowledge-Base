@@ -57,6 +57,64 @@
 }</code></pre>
 
   <h3>Typische Fehler</h3>
+  <section class="card">
+  <h2>Layout CSS (DE) – Grid + Flex, Sticky Topbar, Sidebar-Scroll (nur TOC)</h2>
+
+  <h3>1) Layout-Prinzip: Grid (Shell) + Flex (Innenstruktur)</h3>
+  <p><strong>DE:</strong> Wir kombinieren <em>CSS Grid</em> für die zwei Hauptspalten (Sidebar + Main) und <em>Flexbox</em> innerhalb der Spalten:</p>
+  <ul>
+    <li><strong>.layout</strong> = Grid: <code>sidebar</code> links + <code>main</code> rechts</li>
+    <li><strong>.main</strong> = Flex: oben Topbar (sticky), darunter Content</li>
+    <li><strong>.sidebar</strong> = Flex: fixe Teile (Header/Search/Quicklinks) + nur TOC scrollbar</li>
+  </ul>
+
+  <h3>2) Copy-Paste: empfohlener Layout-CSS Block (telekom-ui.css)</h3>
+  <p><strong>DE:</strong> Dieser Block ist die “stabile Basis”. Er löst typische Probleme wie horizontales Overflow, fehlendes Sidebar-Scrolling und Sticky-Header-Überdeckung.</p>
+
+  <pre><code>/* === LAYOUT: sidebar + main === */
+.layout{
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: var(--sidebar-w, 280px) 1fr;
+}
+
+/* rechte Spalte */
+.main{
+  min-width: 0;              /* KRITISCH: verhindert horizontales "Layout sprengen" */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Content-Container */
+.content{
+  padding: 18px;
+}
+
+/* === TOPBAR === */
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: var(--topbar-h, 56px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--border);
+  background: #fff;
+}
+
+/* === SIDEBAR: fix + nur TOC scrollt === */
+.sidebar{
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;          /* ganze Sidebar scrollt NICHT */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+
   <ul>
     <li><strong>DE:</strong> Kein Scroll in Sidebar → <code>min-height:0</code> fehlt im Flex-Container.</li>
     <li><strong>DE:</strong> Layout wird „breit“ → <code>min-width:0</code> fehlt auf <code>.main</code>.</li>

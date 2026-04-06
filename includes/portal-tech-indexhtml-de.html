@@ -1,0 +1,83 @@
+<section class="card">
+  <h2>index.html – Aufbau & Rollen (Shell/Template)</h2>
+  <p><strong>DE:</strong> <code>index.html</code> ist die <em>Shell</em> (Layout + Navigation + Content-Container). Inhalte kommen dynamisch aus <code>pages/*.html</code> und werden in <code>#content</code> geladen.</p>
+
+  <h3>1) MAIN-Bereich („rechte Spalte“)</h3>
+  <p><strong>DE:</strong> <code>&lt;div class="main"&gt;</code> ist der Container für Topbar + Content. Layout: Sidebar links, Main rechts.</p>
+
+  <h3>2) TOPBAR („Felső navigáció“)</h3>
+  <p><strong>DE:</strong> <code>&lt;header class="topbar"&gt;</code> enthält: Menübutton (mobil), Titel, Hauptnavigation (Topbar-Kategorien).</p>
+
+  <h4>2.1 Menübutton (Mobil)</h4>
+  <p><strong>DE:</strong> Der Button <code>#menuBtn</code> steuert das Sidebar-Overlay (auf schmalen Viewports).</p>
+  <ul>
+    <li><code>aria-controls="sidebar"</code>: welcher Bereich gesteuert wird</li>
+    <li><code>aria-expanded</code>: Zustand (offen/zu) – sollte von JS aktualisiert werden</li>
+  </ul>
+
+  <h4>2.2 Topbar Titel</h4>
+  <p><strong>DE:</strong> <code>.topbar__title</code> ist rein visuell („Wo bin ich?“).</p>
+
+  <h3>3) Top Navigation: Kategorien mit Dropdown (details/summary)</h3>
+  <p><strong>DE:</strong> Die Hauptnavigation nutzt <code>&lt;details&gt;&lt;summary&gt;</code> – das ist ein nativer Dropdown ohne extra JS.</p>
+  <p><strong>DE:</strong> Jede Kategorie enthält Links auf Hash-Routes (z. B. <code>#rag</code>), damit GitHub Pages keine „echten“ Pfade (404) erwartet.</p>
+
+  <h4>3.1 Warum href="#..." (Hash Routing)?</h4>
+  <ul>
+    <li><strong>DE:</strong> <code>href="#rag"</code> setzt nur den Hash der URL.</li>
+    <li><strong>DE:</strong> <code>app.js</code> reagiert auf <code>hashchange</code> und lädt <code>./pages/rag.html</code> in <code>#content</code>.</li>
+    <li><strong>DE:</strong> Ein Pfad wie <code>/rag</code> würde GitHub Pages als Datei/Ordner interpretieren (→ 404), deshalb vermeiden wir das.</li>
+  </ul>
+
+  <h4>3.2 data-page</h4>
+  <p><strong>DE:</strong> <code>data-page="rag"</code> ist für den JS-Status (Active-Link-Markierung). JS setzt z. B. <code>.is-active</code> auf das passende <code>a[data-page]</code>.</p>
+
+  <h3>4) Content-Container (einziges Ziel für dynamische Inhalte)</h3>
+  <p><strong>DE:</strong> Dieser Block muss exakt einmal existieren – hier wird HTML aus <code>pages/*.html</code> hineingerendert:</p>
+  <pre><code>&lt;main class="content" id="content" tabindex="-1" aria-live="polite"&gt;&lt;/main&gt;</code></pre>
+  <ul>
+    <li><code>id="content"</code>: Ziel für <code>document.getElementById("content")</code></li>
+    <li><code>tabindex="-1"</code>: ermöglicht Fokus-Setzen via JS (A11y)</li>
+    <li><code>aria-live="polite"</code>: Screenreader-Hinweis „Inhalt aktualisiert sich“</li>
+  </ul>
+
+  <h3>5) Kommentierte Beispielstruktur (aus dem Portal)</h3>
+  <p><strong>DE:</strong> Auszug (kommentiert):</p>
+  <pre><code>&lt;!-- MAIN --&gt;
+&lt;div class="main"&gt;
+
+  &lt;!-- TOPBAR --&gt;
+  &lt;header class="topbar" aria-label="Felső navigáció"&gt;
+
+    &lt;!-- Mobile menu toggle --&gt;
+    &lt;button class="icon-btn" id="menuBtn"
+            aria-label="Menü"
+            aria-controls="sidebar"
+            aria-expanded="false"&gt;☰&lt;/button&gt;
+
+    &lt;div class="topbar__title"&gt;Telekom AI Knowledge Base&lt;/div&gt;
+
+    &lt;nav class="topnav" id="topNav" aria-label="Fő navigáció"&gt;
+      &lt;details class="topnav-dd"&gt;
+        &lt;summary&gt;Mentoring &amp;amp; Learning&lt;/summary&gt;
+        &lt;div class="topnav-dd__menu"&gt;
+          &lt;a href="#de-mentoring" data-page="de-mentoring"&gt;DE‑Mentoring — COBOL — AI&lt;/a&gt;
+          ...
+        &lt;/div&gt;
+      &lt;/details&gt;
+      ...
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;!-- EINZIGER Content Target --&gt;
+  &lt;main class="content" id="content" tabindex="-1" aria-live="polite"&gt;&lt;/main&gt;
+
+&lt;/div&gt;</code></pre>
+
+  <h3>6) Praktische Regeln (damit es stabil bleibt)</h3>
+  <ol>
+    <li><strong>DE:</strong> <code>#content</code> darf nur einmal vorkommen (sonst lädt JS in das falsche Element).</li>
+    <li><strong>DE:</strong> Interne Links immer als <code>href="#slug"</code> (keine Pfade wie <code>href="portal-tech"</code>).</li>
+    <li><strong>DE:</strong> H2/H3 sauber nutzen → TOC + Volltext-Suche funktionieren automatisch.</li>
+  </ol>
+</section>

@@ -1,0 +1,65 @@
+<section class="card">
+  <h2>Layout CSS (DE): Grid + Sidebar-Scroll + Sticky Topbar</h2>
+
+  <h3>Warum Grid + Flex?</h3>
+  <ul>
+    <li><strong>DE:</strong> <code>.layout</code> nutzt CSS Grid für zwei Spalten: Sidebar + Main.</li>
+    <li><strong>DE:</strong> <code>.main</code> nutzt Flex für Topbar (sticky) + Content darunter.</li>
+    <li><strong>DE:</strong> Sidebar nutzt Flex: fixe Teile + nur TOC ist scrollbar.</li>
+  </ul>
+
+  <h3>CSS (Beispiel)</h3>
+  <pre><code>.layout{
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: var(--sidebar-w, 280px) 1fr;
+}
+
+.main{
+  min-width: 0; /* wichtig gegen horizontales Overflow */
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: var(--topbar-h, 56px);
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  background: #fff;
+  border-bottom: 2px solid var(--border);
+}
+
+.sidebar{
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden; /* Sidebar als Ganzes scrollt nicht */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar__tocwrap{
+  flex: 1 1 auto;
+  min-height: 0; /* KRITISCH: damit inneres Scrollen funktioniert */
+  display: flex;
+  flex-direction: column;
+}
+
+#toc.toc{
+  flex: 1 1 auto;
+  min-height: 0; /* KRITISCH */
+  overflow-y: auto;
+}</code></pre>
+
+  <h3>Typische Fehler</h3>
+  <ul>
+    <li><strong>DE:</strong> Kein Scroll in Sidebar → <code>min-height:0</code> fehlt im Flex-Container.</li>
+    <li><strong>DE:</strong> Layout wird „breit“ → <code>min-width:0</code> fehlt auf <code>.main</code>.</li>
+    <li><strong>DE:</strong> Sticky Topbar überdeckt Inhalt → Padding/Offset anpassen oder <code>scrollIntoView</code> mit <code>block:"start"</code>.</li>
+  </ul>
+</section>

@@ -81,3 +81,63 @@
     <li><strong>DE:</strong> H2/H3 sauber nutzen → TOC + Volltext-Suche funktionieren automatisch.</li>
   </ol>
 </section>
+<section class="card">
+  <h2>Fortsetzung: index.html – Sidebar, Suche, Overlay, IDs (DE)</h2>
+
+  <h3>7) Sidebar: Struktur & Verantwortung</h3>
+  <p><strong>DE:</strong> Die Sidebar ist (a) Navigation/Tools und (b) dynamisches Inhaltsverzeichnis (TOC) für die aktuell geladene Seite.</p>
+
+  <h4>7.1 Empfohlene Sidebar-Bausteine</h4>
+  <ul>
+    <li><strong>Header</strong>: Brand + optional GitHub-Link</li>
+    <li><strong>Search (Seitenintern)</strong>: Highlight-Suche innerhalb von <code>#content</code></li>
+    <li><strong>Global Search</strong>: Suche im gesamten Portal (Schnell/Volltext)</li>
+    <li><strong>TOC (scrollbar)</strong>: dynamisch aus H2/H3 der aktuellen Seite</li>
+    <li><strong>Quicklinks + Top</strong>: feste Links (z. B. Home, RAG, Irányelvek)</li>
+    <li><strong>Footer</strong>: Copyright</li>
+  </ul>
+
+  <h4>7.2 Beispiel: Sidebar-HTML (vereinfachter Auszug)</h4>
+  <pre><code>&lt;aside class="sidebar" id="sidebar" aria-label="Oldalsáv"&gt;
+
+  &lt;!-- FIX oben: Header/Brand --&gt;
+  &lt;div class="sidebar__header"&gt;
+    &lt;div class="brand"&gt;T‑AI‑KB&lt;/div&gt;
+    &lt;a class="sidebar__github" href="https://github.com/..." target="_blank" rel="noopener"&gt;GitHub ↗&lt;/a&gt;
+  &lt;/div&gt;
+
+  &lt;!-- FIX oben: Seiteninterne Suche (Highlight) --&gt;
+  &lt;div class="sidebar__search"&gt;
+    &lt;input id="searchBox" type="search" placeholder="Keresés…" /&gt;
+    &lt;div id="searchStatus" class="search-status" aria-live="polite"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- FIX oben: Globale Suche --&gt;
+  &lt;div class="sidebar__search-global"&gt;
+    &lt;input id="globalSearch" type="search" placeholder="Globális keresés a portálban…" /&gt;
+    &lt;button id="modeQuick" type="button"&gt;Gyors&lt;/button&gt;
+    &lt;button id="modeFull" type="button"&gt;Teljes szöveg&lt;/button&gt;
+    &lt;span id="globalSearchStatus"&gt;&lt;/span&gt;
+    &lt;div id="globalResults" hidden&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- SCROLL: nur TOC scrollt --&gt;
+  &lt;div class="sidebar__tocwrap"&gt;
+    &lt;div class="sidebar__section-title"&gt;Tartalom&lt;/div&gt;
+    &lt;nav id="toc" class="toc" aria-label="Tartalomjegyzék"&gt;&lt;/nav&gt;
+  &lt;/div&gt;
+
+  &lt;!-- FIX unten: Quicklinks --&gt;
+  &lt;div class="sidebar__bottom"&gt;
+    &lt;div class="sidebar__section-title"&gt;Gyors linkek&lt;/div&gt;
+    &lt;nav class="sidebar__nav"&gt;
+      &lt;a href="#home" data-page="home"&gt;Főoldal&lt;/a&gt;
+      &lt;a href="#rag" data-page="rag"&gt;RAG&lt;/a&gt;
+      &lt;a href="#iranyelvek" data-page="iranyelvek"&gt;Irányelvek&lt;/a&gt;
+      &lt;a href="#" class="js-scroll-top"&gt;Top ↑&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+
+  &lt;div class="sidebar__footer"&gt;...&lt;/div&gt;
+&lt;/aside&gt;</code></pre>
+</section>

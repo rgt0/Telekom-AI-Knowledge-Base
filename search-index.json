@@ -82,4 +82,24 @@
   "excerpt": "Kísérletezés: promptok, minták, tesztek, gyors próbák.",
   "tags": ["sandbox","kiserlet","prompt","test","gyakorlat"]
 }
+  {
+  "page": "itf-aimc-szinergia",
+  "file": "./pages/itf-aimc-szinergia.html",
+  "title": "ITF × AIMC – Közös AI‑alapú tudásrendszer",
+  "excerpt": "MI‑DOK és AIMC közös AI‑alaparchitektúra: strukturált + narratív feldolgozás, minőségkapu, iteratív fejlődés. Lean fázisban A‑út + B‑út smoke + validáció demonstráció.",
+  "tags": [
+    "mi-dok",
+    "aimc",
+    "synergy",
+    "ai tapasztalat",
+    "quality gate",
+    "human in the loop",
+    "A-út",
+    "B-út",
+    "lean",
+    "oktatás",
+    "tudásrendszer"
+  ]
+}
+``
 ]

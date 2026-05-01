@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Telekom AI Knowledge Base</title>
+
+  <link rel="stylesheet" href="./telekom-ui.css">
+  <script defer src="./app.js"></script>
+  <script defer src="./search-inline.js"></script>
+  <script defer src="./search-global.js"></script>
+
+</head>
+
+<body>
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar" aria-label="Oldalsáv">
+
+  <!-- FIX FELÜL: brand + GitHub -->
+  <div class="sidebar__header">
+    <div class="brand">T‑AI‑KB</div>
+
+    <a class="sidebar__github"
+       href="https://github.com/rgt0/Telekom-AI-Knowledge-Base"
+       target="_blank" rel="noopener"
+       aria-label="Ugrás a GitHub repo-ra">
+      GitHub ↗
+    </a>
+  </div>
+
+  <!-- FIX FELÜL: kereső -->
+  <div class="sidebar__search">
+    <label class="sr-only" for="searchBox">Keresés</label>
+    <input id="searchBox" type="search" placeholder="Keresés…" autocomplete="off" />
+    <div id="searchStatus" class="search-status" aria-live="polite"></div>
+  </div>
+<div class="sidebar__search-global">
+  <label class="sr-only" for="globalSearch">Globális keresés</label>
+  <input id="globalSearch" type="search" placeholder="Globális keresés a portálban…" autocomplete="off" />
+  <div class="search-modes">
+    <button class="btn btn--active" id="modeQuick" type="button">Gyors</button>
+    <button class="btn" id="modeFull" type="button">Teljes szöveg</button>
+    <span class="search-status" id="globalSearchStatus"></span>
+  </div>
+  <div id="globalResults" class="search-results" hidden></div>
+</div>
+  <!-- SCROLL KÖZÉPEN: csak a TOC -->
+  <div class="sidebar__tocwrap">
+    <div class="sidebar__section-title">Tartalom</div>
+    <nav id="toc" class="toc" aria-label="Tartalomjegyzék">
+      <div class="toc__empty">Válassz egy oldalt…</div>
+    </nav>
+  </div>
+
+  <!-- FIX ALUL: gyors linkek -->
+  <div class="sidebar__bottom">
+    <div class="sidebar__section-title">Gyors linkek</div>
+    <nav class="sidebar__nav" aria-label="Gyors linkek">
+      <a href="#home" data-page="home">Főoldal</a>
+      <a href="#german-coaching" data-page="german-coaching">German Coaching</a>
+      <a href="#rag" data-page="rag">RAG</a>
+      <a href="#iranyelvek" data-page="iranyelvek">Irányelvek</a>
+
+      <div class="nav-sep"></div>
+
+      <a href="#" class="js-scroll-top">Top ↑ (Vissza a tetejére)</a>
+    </nav>
+  </div>
+
+  <!-- FIX ALUL: footer -->
+  <div class="sidebar__footer">
+    <small>© 2026 Telekom AI Knowledge Base</small>
+  </div>
+
+</aside>
+ 
+    <!-- MAIN -->
+    <div class="main">
+
+      <!-- TOPBAR -->
+      <header class="topbar" aria-label="Felső navigáció">
+        <button class="icon-btn" id="menuBtn"
+                aria-label="Menü"
+                aria-controls="sidebar"
+                aria-expanded="false">☰</button>
+
+        <div class="topbar__title">Telekom AI Knowledge Base</div>
+
+       <nav class="topnav" id="topNav" aria-label="Fő navigáció">
+
+  <details class="topnav-dd">
+    <summary>Mentoring & Learning</summary>
+    <div class="topnav-dd__menu" role="menu" aria-label="Mentoring & Learning">
+      <a role="menuitem" href="#de-mentoring" data-page="de-mentoring">DE‑Mentoring — COBOL — AI</a>
+      <a role="menuitem" href="#german-coaching" data-page="german-coaching">German Coaching</a>
+      <a role="menuitem" href="#ai-alapok" data-page="ai-alapok">AI Alapok</a>
+      <a role="menuitem" href="#prompt-engineering" data-page="prompt-engineering">Prompt Engineering</a>
+    </div>
+  </details>
+
+  <details class="topnav-dd">
+    <summary>Practice & Build</summary>
+    <div class="topnav-dd__menu" role="menu" aria-label="Practice & Build">
+      <a role="menuitem" href="#sandbox" data-page="sandbox">Sandbox</a>
+      <a role="menuitem" href="#aimc-explain-engine" data-page="aimc-explain-engine">AIM/C Explain Engine</a>
+    </div>
+  </details>
+
+  <details class="topnav-dd">
+    <summary>Reference & Governance</summary>
+    <div class="topnav-dd__menu" role="menu" aria-label="Reference & Governance">
+      <a role="menuitem" href="#rag" data-page="rag">RAG</a>
+      <a role="menuitem" href="#iranyelvek" data-page="iranyelvek">Irányelvek</a>
+      <a role="menuitem" href="#eszkozok" data-page="eszkozok">Eszközök</a>
+      <a role="menuitem" href="#tudastar" data-page="tudastar">Tudástár</a>
+    </div>
+  </details>
+
+  <details class="topnav-dd">
+    <summary>Portal</summary>
+    <div class="topnav-dd__menu" role="menu" aria-label="Portal">
+      <a role="menuitem" href="#portal-guide" data-page="portal-guide">Portál útmutató</a>
+      <a role="menuitem" href="#portal-tech" data-page="portal-tech">Technik</a>
+    </div>
+  </details>
+
+</nav>
+      </header>
+
+      <!-- ✅ EGYETLEN tartalom célpont -->
+      <main class="content" id="content" tabindex="-1" aria-live="polite"></main>
+
+    </div>
+  </div>
+
+  <!-- mobil overlay (sidebar nyitásnál) -->
+  <div class="overlay" id="overlay" hidden></div>
+</body>
+</html>

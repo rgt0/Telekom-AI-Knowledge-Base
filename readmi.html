@@ -5,135 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>T‑AI‑KB – Dokumentáció</title>
 
-  <!-- Portál közös stílus -->
-  <link rel="stylesheet" href="./telekom-ui.css">
-
- 
-</head>
-
-<body>
-  <!-- HTML TARTALOM ITT KEZDŐDIK -->
-
- <nav class="doc-nav">
-  <a href="./index.html#home">🏠 Főoldal</a>
-  <a href="./readmi.html">📘 Dokumentáció</a>
-  <a href="https://github.com/rgt0/Telekom-AI-Knowledge-Base"
-     target="_blank" rel="noopener">
-    GitHub ↗
-  </a>
-</nav>
-<header class="doc-topbar">
-  <div class="doc-title">
-    📘 Telekom AI Knowledge Base – Dokumentáció
-  </div>
-
-</header>
-  <p class="doc-context">
-  Ez az oldal a <strong>Telekom AI Knowledge Base</strong>
-  részletes dokumentációját tartalmazza.
-  A könnyebb navigációért használhatod a portál főoldalát,
-  itt a részletes leírások és struktúrák érhetők el.
-</p>
-
-<main class="content">
-  <h1>T‑AI‑KB – Dokumentáció</h1>
-
-  <p>
-    Ez az oldal a <strong>Telekom AI Knowledge Base</strong>
-    részletes dokumentációját tartalmazza.
-    A portál főoldalán inkább navigálsz, itt olvasol.
-  </p>
-
-  <!-- IDE JÖN a teljes dokumentáció -->
-</main>
-
-
-
-<script>
-/* Ugyanaz a működő script, mint az indexben */
-
-let kbData = [];
-
-async function loadData() {
-    const sources = [
-        'MASTER_RAG_FULL.json',
-        'MASTER_entities.json',
-        'MASTER_relations.json'
-    ];
-
-    try {
-        for (let src of sources) {
-            const res = await fetch(src);
-            if (res.ok) kbData = kbData.concat(await res.json());
-        }
-    } catch (e) {
-        console.warn("JSON betöltési hiba:", e);
-    }
-}
-
-function highlightText(text, query) {
-    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const regex = new RegExp(escaped, "gi");
-    return text.replace(regex,
-        m => `<span class="highlight">${m}</span>`);
-}
-
-function runSearch(query) {
-    const box = document.getElementById("searchResults");
-
-    if (!query || query.length < 2) {
-        box.innerHTML = "";
-        return;
+  <!-- Közös portál CSS -->
+  <link rel="stylesheet" href="./ntáció-specifikus CSS -->
+  <style>
+    .doc-nav {
+      display: flex;
+      gap: 16px;
+      padding: 12px 16px;
     }
 
-    const q = query.toLowerCase();
-
-    const matches = kbData.filter(item =>
-        JSON.stringify(item).toLowerCase().includes(q)
-    ).slice(0, 20);
-
-    box.innerHTML = matches.map(m => {
-        const raw = JSON.stringify(m).substring(0, 150);
-        const highlighted = highlightText(raw, query);
-
-        return `
-            <div class="search-item">
-                <strong>${m.chunk_id || m.entity || "Találat"}</strong><br>
-                <small>${highlighted}...</small>
-            </div>
-        `;
-    }).join("");
-}
-
-loadData();
-</script>
-  <head>
-<style>
-.doc-link {
-  font-weight: 600;
-  text-decoration: none;
-}
-.doc-topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-  border-bottom: 1px solid #eee;
-}
-.doc-title {
-  font-weight: 700;
-  font-size: 1rem;
-}
-.doc-nav {
-  display: flex;
-  gap: 16px;
-}
-
-.doc-nav a {
-  text-decoration: none;
-  font-weight: 600;
-}
-   <!-- ✅ DOKUMENTÁCIÓ SPECIFIKUS CSS – IDE -->
+    .doc-nav a {
+      text-decoration: none;
+      font-weight: 600;
+    }
 
     .doc-topbar {
       display: flex;
@@ -143,12 +27,54 @@ loadData();
       border-bottom: 1px solid #eee;
     }
 
-    .doc-back {
-      text-decoration: none;
-      font-weight: 600;
+    .doc-title {
+      font-weight: 700;
+      font-size: 1rem;
     }
- 
-</style>
-  </head>
+  </style>
+</head>
+
+<body>
+
+  <!-- Dokumentáció fejléc -->
+  <header class="doc-topbar">
+    <div class="doc-title">📘 Telekom AI Knowledge Base – Dokumentáció</div>
+    <nav class="doc-nav">
+      <a href="./index.html#home">🏠 Főoldal</a>
+      <a href="./readmi.html">📘 Dokumentáció</a>
+      <a href="https://github.com/rgt0/Telekom-AI-Knowledge-Base" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <!-- Tartalom -->
+  <main class="content">
+    <h1>T‑AI‑KB – Dokumentáció</h1>
+
+    <p>
+      Ez az oldal a <strong>Telekom AI Knowledge Base</strong>
+      részletes dokumentációját tartalmazza.
+      A portál főoldalán inkább navigálsz, itt olvasol.
+    </p>
+
+    <!-- IDE JÖN A TELJES DOKUMENTÁCIÓ -->
+  </main>
+
+  <!-- Script -->
+  <script>
+    let kbData = [];
+    async function loadData() {
+      const sources = [
+        'MASTER_RAG_FULL.json',
+        'MASTER_entities.json',
+        'MASTER_relations.json'
+      ];
+      for (let src of sources) {
+        const res = await fetch(src);
+        if (res.ok) kbData = kbData.concat(await res.json());
+      }
+    }
+    loadData();
+  </script>
+
 </body>
 </html>

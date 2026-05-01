@@ -247,16 +247,14 @@ body{
   }
 
   .sidebar{
-    position:fixed;
-    left:0;
-    top:0;
-    transform: translateX(-110%);
-    transition: transform .2s ease;
-    z-index: 30;
-    width: min(var(--sidebar-w), 86vw);
-    box-shadow: var(--shadow);
-  }
-  .sidebar.is-open{
+    position:sticky; /* NEM fixed */
+  top: 0;                    /* mindig a viewport tetejétől */
+  height: 100vh;             /* teljes magasság */
+  overflow-y: auto;          /* belső scroll */
+  align-self: flex-start;    /* layout stabilitás */
+}
+
+   .sidebar.is-open{
     transform: translateX(0);
   }
 .search-hit__section{

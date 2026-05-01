@@ -25,6 +25,20 @@ A portál aktuális verziója:
 
 ---
 
+## Relationship to AIM / AIMC
+
+The Telekom AI Knowledge Base is a **public, read‑only knowledge layer**
+of a broader internal initiative called **AIM (AI Mindset & Competence)**.
+
+AIM is an internal, governed program focusing on:
+- AI literacy and education
+- Responsible AI usage
+- Structured experimentation
+- STRIVE‑compliant tool usage
+
+This repository intentionally contains **no private project artifacts**.
+Operational components (pipelines, AI runtimes, governance) are managed
+in a **separate, private AIM project repository and environments**.
 ## 📂 Könyvtárstruktúra
 
 A tudásbázis három fő dokumentumkategóriára épül:

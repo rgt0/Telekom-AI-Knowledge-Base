@@ -46,13 +46,13 @@ body{
 
 /* SIDEBAR */
 .sidebar {
-  position: fixed;        /* 👈 STICKY HELYETT */
-  top: 64px;              /* topbar magasság */
+  position: fixed;
+  top: 64px;
   left: 0;
-  width: 320px;           /* a jelenlegi sidebar szélességed */
+  width: 320px;
   height: calc(100vh - 64px);
-
-  z-index: 10;
+  overflow-y: auto;       /* ✅ CSAK ITT */
+  z-index: 100;
 }
 
 .sidebar__header{
@@ -628,5 +628,19 @@ mark.hl-active{
     background: rgba(0,0,0,.35);
     z-index: 35;
   }
+  /* ===== FINAL SCROLL FIX ===== */
+
+html, body {
+  height: auto !important;
+  overflow-y: auto !important;
+}
+
+/* TILOS, hogy ezek scrollozzanak */
+.layout,
+.main,
+.content {
+  height: auto !important;
+  overflow: visible !important;
+}
 }
 ``

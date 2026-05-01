@@ -119,6 +119,23 @@ A portál automatikusan épül és frissül a `main` branch alapján.
 - Telekom logós fejléc  
 - Interaktív tudásgráf nézet  
 
+---## How to engage with the AIM initiative
+
+If you are interested in this topic, there are different engagement paths:
+
+- **Explore**  
+  Browse this repository and portal to understand concepts and models.
+
+- **Learn**  
+  Join AIMC sessions and use curated materials based on this Knowledge Base.
+
+- **Contribute**  
+  Contribution to the private AIM project is role‑based and requires
+  onboarding and governance approval.
+
+Please note: direct access to internal AI runtimes (AIO/AIE),
+STRIVE environments or pipelines is **not granted via this repository**.
+
 ---
 
 ## © 2026 Telekom AI Knowledge Base

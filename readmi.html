@@ -10,23 +10,19 @@
 </head>
  
 <body>
-<header class="topbar">
-  <div class="topbar__title">
+<header class="doc-topbar">
+  <div class="doc-title">
     📘 Telekom AI Knowledge Base – Dokumentáció
   </div>
 
- <nav class="doc-nav">
-  <a href="./index.html#home" class="doc-link">🏠 Főoldal</a>
-  <a href="./readmi.html" class="doc-link">📘 Dokumentáció</a>
-  <a href="https://github.com/rgt0/Telekom-AI-Knowledge-Base"
-     target="_blank" rel="noopener"
-     class="doc-link">GitHub ↗</a>
-</nav>
-  
-  <nav class="topnav">
-    <a href="./index.html#home">← Vissza a portálra</a>
+  <nav class="doc-nav">
+    ./index.html#home🏠 Főoldal</a>
+    ./readmi.html📘 Dokumentáció</a>
+    https://github.com/rgt0/Telekom-AI-Knowledge-Base
+       target="_blank" rel="noopener">
+      GitHub ↗
+    </a>
   </nav>
-
 </header>
   <p class="doc-context">
   Ez az oldal a <strong>Telekom AI Knowledge Base</strong>
@@ -133,17 +129,31 @@ function runSearch(query) {
 
 loadData();
 </script>
-
-.doc-nav {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
+<style>
 .doc-link {
   font-weight: 600;
   text-decoration: none;
 }
+.doc-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+}
+.doc-title {
+  font-weight: 700;
+  font-size: 1rem;
+}
+.doc-nav {
+  display: flex;
+  gap: 16px;
+}
 
+.doc-nav a {
+  text-decoration: none;
+  font-weight: 600;
+}
+</style>
 </body>
 </html>

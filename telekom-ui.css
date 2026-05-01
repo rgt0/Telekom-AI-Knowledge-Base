@@ -628,13 +628,20 @@ mark.hl-active{
     background: rgba(0,0,0,.35);
     z-index: 35;
   }
-  /* ===== FINAL SCROLL FIX ===== */
+/* ===== FINAL HARD STOP FOR INTERNAL SCROLL ===== */
 
 html, body {
   height: auto !important;
   overflow-y: auto !important;
 }
 
+/* SEMMI MÁS NEM SCROLLOZHAT */
+.layout,
+.main,
+.content {
+  height: auto !important;
+  overflow: visible !important;
+}
 /* TILOS, hogy ezek scrollozzanak */
 .layout,
 .main,

@@ -52,7 +52,6 @@ kerülnek kezelésre.
 A Knowledge Base az AIM koncepciók és artefaktumok
 elsődleges belépési pontja.
 ``
-## 📂 Könyvtárstruktúra
 
 ## 📂 Könyvtárstruktúra
 

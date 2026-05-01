@@ -14,7 +14,17 @@
 
 <body>
   <div class="layout">
+<div class="doc-topbar">
+  <a href="./index.html#home" class="doc-back">
+    ← Vissza a portálra
+  </a>
 
+  <span class="doc-title">
+    📘 Telekom AI Knowledge Base – Dokumentáció
+  </span>
+</div>
+``
+    
     <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar" aria-label="Oldalsáv">
 
@@ -35,6 +45,9 @@
     <label class="sr-only" for="searchBox">Keresés</label>
     <input id="searchBox" type="search" placeholder="Keresés…" autocomplete="off" />
     <div id="searchStatus" class="search-status" aria-live="polite"></div>
+<a href="./readmi.html">
+  📘 Dokumentáció
+</a>
   </div>
 <div class="sidebar__search-global">
   <label class="sr-only" for="globalSearch">Globális keresés</label>
@@ -123,6 +136,7 @@
     <div class="topnav-dd__menu" role="menu" aria-label="Portal">
       <a role="menuitem" href="#portal-guide" data-page="portal-guide">Portál útmutató</a>
       <a role="menuitem" href="#portal-tech" data-page="portal-tech">Technik</a>
+      <a href="./readmi.html">   📘 Dokumentáció </a>
     </div>
   </details>
 
@@ -134,7 +148,19 @@
 
     </div>
   </div>
+.doc-topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+}
 
+.doc-back {
+  text-decoration: none;
+  font-weight: 600;
+}
+  
   <!-- mobil overlay (sidebar nyitásnál) -->
   <div class="overlay" id="overlay" hidden></div>
 </body>

@@ -50,9 +50,10 @@ body{
   top: 64px;
   left: 0;
   width: 320px;
-  height: calc(100vh - 64px);
   overflow-y: auto;       /* ✅ CSAK ITT */
   z-index: 100;
+
+  height: calc(100vh - 64px - 48px); /* 👈 footerrel is számol */
 }
 
 .sidebar__header{
@@ -648,6 +649,15 @@ html, body {
 .content {
   height: auto !important;
   overflow: visible !important;
+  
+ margin-left: 320px;           /* sidebar szélesség */
+  padding-top: 64px;            /* topbar magasság */
+  padding-bottom: 48px;         /* footer ütközés elleni védelem */
 }
+
+.footer {
+  position: static;
+}
+
 }
 ``

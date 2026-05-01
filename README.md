@@ -57,35 +57,38 @@ elsődleges belépési pontja.
 
 A Telekom AI Knowledge Base három fő tartalmi rétegre épül,
 amelyek az AI tudás életciklusának eltérő szerepeit támogatják.
+## 📂 Könyvtárstruktúra
+
+A Telekom AI Knowledge Base három fő tartalmi rétegre épül,
+amelyek az AI tudás életciklusának eltérő szerepeit támogatják.
+
 ### 🟦 00_MASTER – Kanonikus tudásalap
 Hiteles, konszolidált referencia tartalom,
 amely az AI feldolgozás elsődleges bemenete.
+
+```text
 00_MASTER/
- └── DOCUMENTS/
-     ├── AI_Knowledge_Package_Master_with_APPENDIX.docx
-     ├── MASTER_RAG_FULL.json
-     ├── MASTER_entities.json
-     ├── MASTER_relations.json
-     ├── LibraryIndex_MASTER.xlsx
-     └── Meta_MASTER.txt
-### 🟨 01_WHITEPAPER – Magyarázó és koncepcionális anyagok
-Narratív, értelmező és kontextusteremtő tartalmak,
-a master rétegből származtatva.
+└── DOCUMENTS/
+    ├── AI_Knowledge_Package_Master_with_APPENDIX.docx
+    ├── MASTER_RAG_FULL.json
+    ├── MASTER_entities.json
+    ├── MASTER_relations.json
+    ├── LibraryIndex_MASTER.xlsx
+    └── Meta_MASTER.txt
+``
 01_WHITEPAPER/
- ├── Whitepaper_RAG.json
- ├── Whitepaper_entities.json
- ├── Whitepaper_relations.json
- ├── LibraryIndex_WHITEPAPER.xlsx
- └── Meta_WHITEPAPER.txt
-### 🟩 02_TOOLS – Eszköz- és képességfókusz
-Az AI eszközökre, platformokra és képességekre
-fókuszáló tudástér.
+├── Whitepaper_RAG.json
+├── Whitepaper_entities.json
+├── Whitepaper_relations.json
+├── LibraryIndex_WHITEPAPER.xlsx
+└── Meta_WHITEPAPER.txt
+
 02_TOOLS/
- ├── Tools_RAG.json
- ├── Tools_entities.json
- ├── Tools_relations.json
- ├── LibraryIndex_TOOLS.xlsx
- └── Meta_TOOLS.txt
+├── Tools_RAG.json
+├── Tools_entities.json
+├── Tools_relations.json
+├── LibraryIndex_TOOLS.xlsx
+└── Meta_TOOLS.txt 
 
 ### Hogyan érdemes olvasni a struktúrát?
 

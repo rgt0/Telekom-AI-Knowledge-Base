@@ -44,11 +44,12 @@ body{
 /* SIDEBAR */
 .sidebar{
   position:sticky;
-  top:0;
-  height:100vh;
+  top:64;
+  height: calc(100vh - 64px);
   background: #fff;
   border-right: 2px solid var(--border);
   padding: 14px;
+  overflow-y: auto;
   display:flex;
   flex-direction:column;
   gap: 12px;

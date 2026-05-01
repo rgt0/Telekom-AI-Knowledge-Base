@@ -135,17 +135,30 @@ body{
 
 /* MAIN */
 .main{
-  min-width:0;
-  display:flex;
-  flex-direction:column;
-  margin-left: 320px;
+  
+margin-left: 320px;     /* sidebar */
+  padding: 64px 24px 48px;
+  width: calc(100% - 320px);  /* 👈 EZ A HIÁNYZÓ DARAB */
+  box-sizing: border-box;
+
 }
 
 
 .content{
   padding:18px;
+  
+  width: 100%;
+  max-width: none;        /* 👈 kritikus */
+  box-sizing: border-box;
 }
+.page{
+  padding:18px;
+  
+ width: 100%;
+  max-width: none;        /* 👈 kritikus */
+  box-sizing: border-box;
 
+}
 /* TOPBAR */
 .topbar{
   position:sticky;
@@ -186,7 +199,7 @@ body{
   flex-wrap: wrap;              /* wrap desktopon */
   justify-content:flex-end;
   align-items:center;
-  max-width: 70vw;
+
 }
 .topnav a{
   text-decoration:none;
@@ -270,7 +283,7 @@ body{
   .topnav{
     flex-wrap: nowrap;        /* mobilon ne tördeljen */
     overflow-x: auto;         /* hanem görgethető legyen */
-    max-width: 100%;
+   
     padding-bottom: 4px;
   }
   .topnav::-webkit-scrollbar{ height: 8px; }

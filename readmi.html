@@ -15,9 +15,18 @@
     📘 Telekom AI Knowledge Base – Dokumentáció
   </div>
 
+ <nav class="doc-nav">
+  <a href="./index.html#home" class="doc-link">🏠 Főoldal</a>
+  <a href="./readmi.html" class="doc-link">📘 Dokumentáció</a>
+  <a href="https://github.com/rgt0/Telekom-AI-Knowledge-Base"
+     target="_blank" rel="noopener"
+     class="doc-link">GitHub ↗</a>
+</nav>
+  
   <nav class="topnav">
     <a href="./index.html#home">← Vissza a portálra</a>
   </nav>
+
 </header>
   <p class="doc-context">
   Ez az oldal a <strong>Telekom AI Knowledge Base</strong>
@@ -124,6 +133,17 @@ function runSearch(query) {
 
 loadData();
 </script>
+
+.doc-nav {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.doc-link {
+  font-weight: 600;
+  text-decoration: none;
+}
 
 </body>
 </html>

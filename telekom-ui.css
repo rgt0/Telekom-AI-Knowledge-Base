@@ -73,6 +73,7 @@ html, body{
   display:flex;
   gap: 8px;
   align-items:center;
+   position: relative;
 }
 
 .topnav a{

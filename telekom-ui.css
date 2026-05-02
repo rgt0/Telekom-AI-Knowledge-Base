@@ -154,7 +154,14 @@ details.topnav-dd {
   justify-content: space-between;
   align-items:center;
 }
+/* === TOC olvasható sorokra tördelése === */
 
+.toc__item {
+  white-space: normal;          /* ne egy sorba kényszerítse */
+  word-break: break-word;       /* hosszú szavak törhetők */
+  overflow-wrap: anywhere;      /* modern, biztos törés */
+  line-height: 1.35;            /* jobb olvashatóság */
+}
 .brand{
   font-weight:800;
   letter-spacing:.5px;

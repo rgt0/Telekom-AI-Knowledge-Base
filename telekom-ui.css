@@ -75,7 +75,25 @@ html, body{
   align-items:center;
    position: relative;
 }
+.topnav-dd__menu {
+  position: absolute;      /* ← A LÉNYEG */
+  top: 100%;
+  right: 0;
 
+  min-width: 220px;
+  max-width: 90vw;
+
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 8px;
+
+  z-index: 50;
+}
+details.topnav-dd {
+  position: relative;
+}
 .topnav a{
   text-decoration:none;
   font-size:13px;

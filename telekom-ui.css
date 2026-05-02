@@ -191,3 +191,9 @@ details.topnav-dd {
   width:100%;
   padding: 10px 12px;
   border-radius: 12px;
+   /* TOC és gyors linkek: oszlopos listák */
+#toc,
+.sidebar__nav {
+  display: block;          /* ❗ ne flex */
+}
+

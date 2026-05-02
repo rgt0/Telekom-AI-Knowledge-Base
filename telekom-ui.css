@@ -113,21 +113,28 @@ details.topnav-dd {
 /* ======================================================
    SIDEBAR – FIX (DESKTOP)
    ====================================================== */
-.sidebar{
+/* ================================
+   SIDEBAR – DESKTOP
+   ================================ */
+
+.sidebar {
   position: fixed;
   top: var(--topbar-h);
   left: 0;
   width: var(--sidebar-w);
   height: calc(100vh - var(--topbar-h));
-  background:#fff;
+  background: #fff;
   border-right: 2px solid var(--border);
   z-index: 100;
 
-  display:flex;
+  display: flex;
   flex-direction: column;
   gap: 12px;
   padding: 14px;
+
+  overflow: hidden; /* A sidebar maga NE scrollozzon */
 }
+``
 
 /* SIDEBAR – FIX ELEMEK */
 .sidebar__header,

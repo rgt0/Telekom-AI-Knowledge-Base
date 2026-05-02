@@ -106,7 +106,10 @@ details.topnav-dd {
 .topnav a:hover{
   background: rgba(226,0,116,.12);
 }
-
+.content {
+  margin-left: var(--sidebar-w);
+  padding-top: 0;   /* ← ne ide számold a topbart */
+}
 /* ======================================================
    SIDEBAR – FIX (DESKTOP)
    ====================================================== */

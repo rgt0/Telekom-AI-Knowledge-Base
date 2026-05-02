@@ -162,6 +162,10 @@ details.topnav-dd {
   overflow-wrap: anywhere;      /* modern, biztos törés */
   line-height: 1.35;            /* jobb olvashatóság */
 }
+.toc__item {
+  margin-bottom: 4px;
+  padding: 6px 8px;
+}
 .brand{
   font-weight:800;
   letter-spacing:.5px;

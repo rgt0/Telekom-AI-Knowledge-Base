@@ -48,13 +48,14 @@ body{
 /* SIDEBAR */
 .sidebar {
   position: fixed;
-  top: 64px;
+  top: var(--topbar-h);
   left: 0;
-  width: 320px;
-  overflow-y: auto;       /* ✅ CSAK ITT */
+  width: var(--sidebar-w);
+  height: calc(100vh - var(--topbar-h));
+  overflow-y: auto;
+  background: #fff;
+  border-right: 2px solid var(--border);
   z-index: 100;
-
-  height: calc(100vh - 64px - 48px); /* 👈 footerrel is számol */
 }
 
 .sidebar__header{
@@ -135,23 +136,22 @@ body{
 }
 
 /* MAIN */
-.main{
-  
-margin-left: 320px;     /* sidebar */
-  padding: 64px 24px 48px;
-  width: calc(100% - 320px);  /* 👈 EZ A HIÁNYZÓ DARAB */
+.main {
+  margin-left: var(--sidebar-w);
+  padding-top: var(--topbar-h);
+  padding-bottom: 48px;
+  width: calc(100% - var(--sidebar-w));
   box-sizing: border-box;
-
 }
 
 
-.content{
-  padding:18px;
-  
+
+.content {
+  max-width: none;
   width: 100%;
-  max-width: none;        /* 👈 kritikus */
-  box-sizing: border-box;
+  padding: 18px;
 }
+
 .page{
   padding:18px;
   
@@ -645,10 +645,16 @@ mark.hl-active{
   }
 /* ===== FINAL HARD STOP FOR INTERNAL SCROLL ===== */
 
+
 html, body {
-  height: auto !important;
-  overflow-y: auto !important;
+  height: auto;
+  overflow-y: auto;
 }
+
+body {
+  overflow-x: hidden;
+}
+
 
 /* SEMMI MÁS NEM SCROLLOZHAT */
 .layout,

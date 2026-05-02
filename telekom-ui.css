@@ -134,7 +134,10 @@ details.topnav-dd {
 
   overflow: hidden; /* A sidebar maga NE scrollozzon */
 }
-``
+.sidebar__nav a {
+  display: block;        /* ← EZ TESZI ÚJ SORBA */
+  margin-bottom: 6px;    /* opcionális térköz */
+}
 
 /* SIDEBAR – FIX ELEMEK */
 .sidebar__header,

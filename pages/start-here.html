@@ -1,131 +1,178 @@
-<section class="card">
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Telekom AI Knowledge Base</title>
 
-  <h1>🚀 Kezdd itt</h1>
+  <link rel="stylesheet" href="./telekom-ui.css">
+  <script defer src="./app.js"></script>
+  <script defer src="./search-inline.js"></script>
+  <script defer src="./search-global.js"></script>
 
-  <p>
-    Üdvözlünk a Telekom AI Knowledge Base portálon!
-  </p>
+</head>
 
-  <p>
-    Ez a portál a Telekom AI ökoszisztémájának nyilvános
-    orientációs és tudásmegosztó felülete.
-    Célja, hogy közérthetően bemutassa az AI alapfogalmait,
-    a Telekom AI megközelítését, a kapcsolódó eszközöket
-    és a jövőbeni fejlődési irányokat.
-  </p>
+<body>
+  <div class="layout">
+<div class="doc-topbar">
+  <a href="./index.html#home" class="doc-back">
+    ← Vissza a portálra
+  </a>
 
-</section>
+  <span class="doc-title">
+    📘 Telekom AI Knowledge Base – Dokumentáció
+  </span>
+</div>
 
-<section class="card">
+<div class="card">
+  <h3>📘 Dokumentáció</h3>
+  <p>Részletes struktúra, pipeline, tudásrétegek.</p>
+  <a href="./readmi.html">Megnyitás →</a>
+</div>    
+    <!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar" aria-label="Oldalsáv">
 
-  <h2>🎯 Kinek szól ez a portál?</h2>
+  <!-- FIX FELÜL: brand + GitHub -->
+  <div class="sidebar__header">
+    <div class="brand">T‑AI‑KB</div>
 
-  <ul>
-    <li>AI iránt érdeklődőknek</li>
-    <li>Telekom kollégáknak</li>
-    <li>Fejlesztőknek</li>
-    <li>Üzleti szakértőknek</li>
-    <li>Projektvezetőknek</li>
-    <li>AIM és AIM/C résztvevőknek</li>
-  </ul>
+    <a class="sidebar__github"
+       href="https://github.com/rgt0/Telekom-AI-Knowledge-Base"
+       target="_blank" rel="noopener"
+       aria-label="Ugrás a GitHub repo-ra">
+      GitHub ↗
+    </a>
+  </div>
 
-</section>
+  <!-- FIX FELÜL: kereső -->
+  <div class="sidebar__search">
+    <label class="sr-only" for="searchBox">Keresés</label>
+    <input id="searchBox" type="search" placeholder="Keresés…" autocomplete="off" />
+    <div id="searchStatus" class="search-status" aria-live="polite"></div>
+<a href="./readmi.html">
+  📘 Dokumentáció
+</a>
+  </div>
+<div class="sidebar__search-global">
+  <label class="sr-only" for="globalSearch">Globális keresés</label>
+  <input id="globalSearch" type="search" placeholder="Globális keresés a portálban…" autocomplete="off" />
+  <div class="search-modes">
+    <button class="btn btn--active" id="modeQuick" type="button">Gyors</button>
+    <button class="btn" id="modeFull" type="button">Teljes szöveg</button>
+    <span class="search-status" id="globalSearchStatus"></span>
+  </div>
+  <div id="globalResults" class="search-results" hidden></div>
+</div>
+  <!-- SCROLL KÖZÉPEN: csak a TOC -->
+  <div class="sidebar__tocwrap">
+    <div class="sidebar__section-title">Tartalom</div>
+    <nav id="toc" class="toc" aria-label="Tartalomjegyzék">
+      <div class="toc__empty">Válassz egy oldalt…</div>
+    </nav>
+  </div>
 
-<section class="card">
+  <!-- FIX ALUL: gyors linkek -->
+  <div class="sidebar__bottom">
+    <div class="sidebar__section-title">Gyors linkek</div>
+   <nav class="sidebar__nav" aria-label="Gyors linkek">
+  <a href="#home" data-page="home">Főoldal</a>
+  <a href="#ai-alapok" data-page="ai-alapok">AI Alapok</a>
+  <a href="#iranyelvek" data-page="iranyelvek">Irányelvek</a>
+  <a href="#rag" data-page="rag">RAG</a>
 
-  <h2>🗺 Javasolt tanulási útvonal</h2>
+  <div class="nav-sep"></div>
 
-  <ol>
-    <li><strong>AI Alapok</strong> – az alapfogalmak megismerése</li>
-    <li><strong>RAG</strong> – tudásalapú AI rendszerek működése</li>
-    <li><strong>Telekom AI</strong> – Telekom AI környezet és megközelítés</li>
-    <li><strong>Eszközök</strong> – platformok és megoldások</li>
-    <li><strong>Jövőkép</strong> – merre fejlődhet a tudásbázis</li>
-  </ol>
+  <a href="#" class="js-scroll-top">Top ↑ (Vissza a tetejére)</a>
+</nav>
+  </div>
 
-</section>
+  <!-- FIX ALUL: footer -->
+  <div class="sidebar__footer">
+    <small>© 2026 Telekom AI Knowledge Base</small>
+  </div>
 
-<section class="card">
+</aside>
+ 
+    <!-- MAIN -->
+    <div class="main">
 
-  <h2>📚 Mit találsz itt?</h2>
+      <!-- TOPBAR -->
+      <header class="topbar" aria-label="Felső navigáció">
+        <button class="icon-btn" id="menuBtn"
+                aria-label="Menü"
+                aria-controls="sidebar"
+                aria-expanded="false">☰</button>
 
-  <h3>AI Alapok</h3>
-  <p>
-    Az AI, LLM, Prompt Engineering, RAG, Embedding,
-    Vector Search és Knowledge Graph fogalmak áttekintése.
-  </p>
+        <div class="topbar__title">Telekom AI Knowledge Base</div>
 
-  <h3>Telekom AI</h3>
-  <p>
-    Telekom környezetben használt AI megközelítések,
-    tudáskezelési elvek és kezdeményezések.
-  </p>
+       <nav class="topnav" id="topNav" aria-label="Fő navigáció">
 
-  <h3>Eszközök</h3>
-  <p>
-    AI platformok, tudásforrások és kapcsolódó megoldások.
-  </p>
+<!--
+<div class="topbar">
+  <
 
-  <h3>Tudáskezelés</h3>
-  <p>
-    Dokumentumok, RAG, entitások, relációk és tudásgráfok.
-  </p>
+  <details class="topnav-dd">
+    <summary>Mentoring & Learning</summary>
+    <div class="topnav-dd__menu" role="menu" aria-label="Mentoring & Learning">
+      <a role="menuitem" href="#de-mentoring" data-page="de-mentoring">DE‑Mentoring — COBOL — AI</a>
+      <a role="menuitem" href="#german-coaching" data-page="german-coaching">German Coaching</a>
+      <a role="menuitem" href="#ai-alapok" data-page="ai-alapok">AI Alapok</a>
+      <a role="menuitem" href="#prompt-engineering" data-page="prompt-engineering">Prompt Engineering</a>
+    </div>
+  </details>
 
-</section>
+  <details class="topnav-dd">
+    <summary>Practice & Build</summary>
+    <div class="topnav-dd__menu" role="menu" aria-label="Practice & Build">
+      <a role="menuitem" href="#sandbox" data-page="sandbox">Sandbox</a>
+      <a role="menuitem" href="#aimc-explain-engine" data-page="aimc-explain-engine">AIM/C Explain Engine</a>
+    </div>
+  </details>
 
-<section class="card">
+  <details class="topnav-dd">
+    <summary>Reference & Governance</summary>
+    <div class="topnav-dd__menu" role="menu" aria-label="Reference & Governance">
+      <a role="menuitem" href="#rag" data-page="rag">RAG</a>
+      <a role="menuitem" href="#iranyelvek" data-page="iranyelvek">Irányelvek</a>
+      <a role="menuitem" href="#eszkozok" data-page="eszkozok">Eszközök</a>
+      <a role="menuitem" href="#tudastar" data-page="tudastar">Tudástár</a>
+    </div>
+  </details>
 
-  <h2>🏢 Kapcsolat az AIM kezdeményezéssel</h2>
+  <details class="topnav-dd">
+    <summary>Portal</summary>
+    <div class="topnav-dd__menu" role="menu" aria-label="Portal">
+      <a role="menuitem" href="#portal-guide" data-page="portal-guide">Portál útmutató</a>
+      <a role="menuitem" href="#portal-tech" data-page="portal-tech">Technik</a>
+      <a href="./readmi.html">   📘 Dokumentáció </a>
+    </div>
+  </details>
 
-  <p>
-    A Telekom AI Knowledge Base kapcsolódik az AIM
-    (AI Mindset & Competence) kezdeményezéshez.
-  </p>
+</nav>
 
-  <p>
-    Az AIM célja az AI műveltség fejlesztése,
-    a közös tudásépítés támogatása és a felelős AI
-    használatának elősegítése.
-  </p>
+      <!-- ✅ EGYETLEN tartalom célpont -->
+      <main class="content" id="content" tabindex="-1" aria-live="polite"></main>
 
-</section>
+    </div>
+         -->
+  </div>
+<style>
+  
 
-<section class="card">
+  .doc-topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+}
 
-  <h2>🔭 Hová tartunk?</h2>
-
-  <pre>
-Dokumentumok
-      ↓
-RAG
-      ↓
-Entitások
-      ↓
-Kapcsolatok
-      ↓
-Tudásgráf
-      ↓
-Agentek
-      ↓
-AI Kompetencia Platform
-  </pre>
-
-  <p>
-    A jelenlegi tudásbázis célja, hogy hosszabb távon
-    egy összekapcsolt AI tudástér alapját biztosítsa.
-  </p>
-
-</section>
-
-<section class="card">
-
-  <h2>✅ Mi legyen a következő lépés?</h2>
-
-  <ul>
-    <li>Ha most ismerkedsz az AI-val: <strong>AI Alapok</strong></li>
-    <li>Ha a tudáskezelés érdekel: <strong>RAG</strong></li>
-    <li>Ha a Telekom AI környezet érdekel: <strong>Telekom AI</strong></li>
-    <li>Ha a jövőképet szeretnéd megérteni: <strong>Jövőkép</strong></li>
-  </ul>
-
-</section>
+.doc-back {
+  text-decoration: none;
+  font-weight: 600;
+}
+</style>  
+  <!-- mobil overlay (sidebar nyitásnál) -->
+  <div class="overlay" id="overlay" hidden></div>
+</body>
+</html>

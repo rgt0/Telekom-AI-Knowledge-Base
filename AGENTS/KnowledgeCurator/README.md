@@ -17,6 +17,18 @@ The Knowledge Curator Agent transforms documents into
 Telekom AI Knowledge Base assets.
 Its goal is not document storage.
 Its goal is knowledge transformation.
+
+## Files
+
+- **README.md** – Agent overview
+
+- **AgentWorkflow.md** – Processing workflow
+
+- **HtmlGeneration.md** – HTML generation process
+
+- **SystemPrompt.md** – Agent instructions
+
+
 ## High Level Workflow
 ```text
 Document

@@ -1,7 +1,8 @@
 Knowledge Curator Agent
  
- #Repository Structure
-text
+ ## Repository Structure
+
+'''text
 AGENTS/
 └── KnowledgeCurator/
     ├── README.md

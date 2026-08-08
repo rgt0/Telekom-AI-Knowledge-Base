@@ -11,6 +11,11 @@ AGENTS/
     ├── SystemPrompt.md   
     └── Examples/
         └── BrowserAI.md
+    └── Documentation
+         └──AgentWorkflow.md
+         └──HtmlGeneration.md
+         └──SystemPrompt.md
+         └──Examples/BrowserAI.md
 ```
 ## Purpose
 The Knowledge Curator Agent transforms documents into

@@ -11,7 +11,7 @@ AGENTS/
     ├── SystemPrompt.md   
     └── Examples/
         └── BrowserAI.md
-##Purpose
+## Purpose
 The Knowledge Curator Agent transforms documents into
 Telekom AI Knowledge Base assets.
 Its goal is not document storage.

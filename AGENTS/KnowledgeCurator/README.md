@@ -1,5 +1,13 @@
 Knowledge Curator Agent
-
+Structure
+AGENTS/
+└── KnowledgeCurator/
+    ├── README.md
+    ├── AgentWorkflow.md
+    ├── HtmlGeneration.md
+    ├── SystemPrompt.md   ← EZ KÖVETKEZIK
+    └── Examples/
+        └── BrowserAI.md
 Purpose
 
 Transform documents into Telekom AI Knowledge Base assets.

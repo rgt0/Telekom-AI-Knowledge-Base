@@ -1,39 +1,60 @@
----
+## Example: HTML Page Generation
 
-# Example: Browser AI Document
-
-## Source Document
+### Source Document
 
 ```text
-Browser AI User Manual.docx
+AI Tool User Guide.docx
 ```
 
-## Agent Analysis
+### Agent Analysis
 
-The agent reads the document and identifies:
+The agent reads the source document and extracts:
 
-- Topic: Browser AI
-- Category: Tool
-- Audience: Telekom Employees
-- Domain: Automation
+- title
+- purpose
+- audience
+- key concepts
+- structure
 
-Key concepts:
+Example:
 
-- Browser AI
-- Marketplace
-- Skill Builder
-- Chrome Extension
-- Edge Extension
-- Automation
+```yaml
+title: Browser AI
+category: Tool
+audience: Employees
+topic: Automation
+```
 
 ---
 
-## Generated Knowledge Structure
+### Knowledge Transformation
+
+The agent does not copy the document.
+
+Instead, it transforms the document into Knowledge Base content.
 
 ```text
-What is Browser AI?
+Source Document
+        ↓
+Document Analysis
+        ↓
+Knowledge Extraction
+        ↓
+Page Structure Selection
+        ↓
+HTML Generation
+```
 
-Why is it useful?
+---
+
+### Selected Page Template
+
+For a document classified as a Tool:
+
+```text
+Introduction
+
+Purpose
 
 Key Capabilities
 
@@ -46,15 +67,7 @@ Related Concepts
 
 ---
 
-## Generated HTML Page
-
-Target:
-
-```text
-pages/tools-browser-ai.html
-```
-
-Generated page structure:
+### Generated HTML Structure
 
 ```html
 <section class="card">
@@ -82,7 +95,7 @@ Generated page structure:
 
 ---
 
-## Generated Repository Assets
+### Generated Repository Assets
 
 ```text
 pages/tools-browser-ai.html
@@ -98,52 +111,31 @@ Meta_BrowserAI.txt
 
 ---
 
-## Generated Relationships
+### Result
 
 ```text
-Browser AI
-      ↓ supports
-Automation
+Input
 
-Browser AI
-      ↓ includes
-Marketplace
-
-Browser AI
-      ↓ includes
-Skill Builder
-```
-
----
-
-## Value Created
-
-The original document is transformed into:
-
-- human-readable content
-- structured Knowledge Base content
-- RAG-compatible assets
-- Knowledge Graph building blocks
-- reusable AI knowledge
-
----
-
-## Transformation Summary
-
-```text
 BrowserAI_UserManual.docx
-                ↓
+
+        ↓
+
 Knowledge Curator Agent
-                ↓
-Document Analysis
-                ↓
-Knowledge Extraction
-                ↓
-HTML Page Generation
-                ↓
-Knowledge Base
+
+        ↓
+
+Output
+
+Knowledge Base Page
+
+RAG Artifacts
+
+Entity List
+
+Relationship List
 ```
 
-The generated page is no longer a document copy.
+The output is no longer a document.
 
-It becomes a reusable Telekom AI Knowledge Base asset.
+The output becomes a reusable Telekom AI Knowledge Base asset.
+``

@@ -1,6 +1,6 @@
 Knowledge Curator Agent
-Structure
-AGENTS/
+#Structure
+##AGENTS/
 └── KnowledgeCurator/
     ├── README.md
     ├── AgentWorkflow.md

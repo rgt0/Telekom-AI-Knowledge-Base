@@ -464,4 +464,15 @@ Could not resolve host: github.com
 ```
 
 A repository azonban már készen áll a későbbi feltöltésre egy privát gépről.
+<img width="1424" height="814" alt="image" src="https://github.com/user-attachments/assets/fae52159-276f-48ee-bd3b-3b4e892cee8a" />
 
+
+2 setting
+Confirm access
+@r-g-01
+Signed in as @r-g-01
+
+Enter the verification code sent to g*************@gmail.com. If it doesn’t appear within a few minutes, check your spam folder.
+
+XXXXXXXX
+Tip: You are entering sudo mode. After you've performed a sudo-protected action, you'll only be asked to re-authenticate again after a few hours of inactivity.

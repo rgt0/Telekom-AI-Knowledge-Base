@@ -287,3 +287,181 @@ A nap végére:
 A mai nap legfontosabb eredménye nem egy technikai hiba megoldása volt.
 
 A legfontosabb eredmény annak felismerése volt, hogy a valódi érték a saját tudásvagyon, amelyet most először kezdtem el tudatosan leválasztani a vállalati környezetről és egy önálló szakmai platform irányába szervezni.
+# GitHub Repository migráció
+
+## Kiinduló helyzet
+
+Rendelkeztem egy nyilvános GitHub repositoryval:
+
+```text
+rgt0/Telekom-AI-Knowledge-Base
+```
+
+A cél az volt, hogy a repository a saját, hosszú távra tervezett privát GitHub accountomba kerüljön:
+
+```text
+r-g-01
+```
+
+---
+
+## Repository Import
+
+A migrációhoz a GitHub beépített Import Repository funkcióját használtam.
+
+Lépések:
+
+1. Bejelentkezés a cél accountba:
+
+```text
+r-g-01
+```
+
+2. Repository import indítása:
+
+```text
+https://github.com/new/import
+```
+
+3. Forrás repository:
+
+```text
+https://github.com/rgt0/Telekom-AI-Knowledge-Base.git
+```
+
+4. Cél repository neve:
+
+```text
+Telekom-AI-Knowledge-Base
+```
+
+5. Import indítása.
+
+---
+
+## Eredmény
+
+A migráció sikeresen lefutott.
+
+Megmaradt:
+
+- a teljes Git történet
+- a commitok
+- az ágak (branches)
+- a fájlstruktúra
+- a repository tartalma
+
+A repository már az új account alatt jelent meg:
+
+```text
+r-g-01/Telekom-AI-Knowledge-Base
+```
+
+---
+
+# Repository láthatóságának módosítása
+
+Az import után a repository továbbra is nyilvános (Public) maradt.
+
+Mivel a cél egy személyes tudásbázis kialakítása, a repositoryt priváttá kellett tenni.
+
+---
+
+## Public → Private
+
+Lépések:
+
+1. Repository megnyitása:
+
+```text
+r-g-01/Telekom-AI-Knowledge-Base
+```
+
+2. Settings fül.
+
+3. Az oldal alján:
+
+```text
+Danger Zone
+```
+
+4. Kiválasztás:
+
+```text
+Change repository visibility
+```
+
+5. Opció:
+
+```text
+Make private
+```
+
+6. Megerősítés a repository nevének beírásával:
+
+```text
+Telekom-AI-Knowledge-Base
+```
+
+---
+
+## Eredmény
+
+A repository ezután:
+
+```text
+Private
+```
+
+állapotba került.
+
+A tartalomhoz csak a repository tulajdonosa és a meghívott felhasználók férhetnek hozzá.
+
+---
+
+# Tanulság
+
+A GitHub account váltása nem a fájlok mozgatásáról szólt.
+
+A folyamat célja a személyes tudás és a személyes szakmai identitás fokozatos leválasztása volt a korábbi vállalati környezetről.
+
+Átkerült:
+
+```text
+rgt0
+↓
+r-g-01
+```
+
+és ezzel megkezdődött egy új, saját tulajdonú tudásplatform kialakítása.
+
+---
+
+# Kapcsolódás a knowledge-behind projekthez
+
+A következő cél:
+
+```text
+r-g-01/knowledge-behind
+```
+
+Ennek előkészítése már megtörtént:
+
+✅ Obsidian Vault azonosítva
+
+✅ Git repository létrehozva
+
+✅ első commit elkészült
+
+✅ remote beállítva
+
+✅ GitHub repository létrehozva
+
+A végső push jelenleg a Telekom VPN/DNS környezet miatt blokkolt:
+
+```text
+Could not resolve host: github.com
+```
+
+A repository azonban már készen áll a későbbi feltöltésre egy privát gépről.
+
